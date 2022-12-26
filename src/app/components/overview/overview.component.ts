@@ -11,19 +11,18 @@ import { OverviewDataSourceService } from 'src/app/services/overview-data-source
 })
 export class OverviewComponent implements AfterViewInit, OnInit {
   public name: string;
-  public pageSize: number = 5;
+  public pageSize: number = 100;
   public displayedColumns: Array<string> = ['image', 'name'];
-  public pageSizeOptions: Array<number> = [5, 10, 25, 100];
   @ViewChild(MatPaginator)
   private paginator: MatPaginator;
 
   constructor(public dataSource: OverviewDataSourceService) {}
 
-  ngOnInit(): void {
-    this.dataSource.loadPage(0);
+  public ngOnInit(): void {
+    this.dataSource.loadPage(0, this.pageSize);
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 }
