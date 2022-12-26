@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { OverviewDataSourceService } from 'src/app/services/overview-data-source.service';
 
 @Component({
@@ -9,16 +10,14 @@ import { OverviewDataSourceService } from 'src/app/services/overview-data-source
   styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent implements AfterViewInit, OnInit {
-  public pageSize = 5;
+  public name: string;
+  public pageSize: number = 5;
   public displayedColumns: Array<string> = ['image', 'name'];
   public pageSizeOptions: Array<number> = [5, 10, 25, 100];
   @ViewChild(MatPaginator)
-  public paginator!: MatPaginator;
+  private paginator: MatPaginator;
 
-  constructor(
-    public _httpClient: HttpClient,
-    public dataSource: OverviewDataSourceService
-  ) {}
+  constructor(public dataSource: OverviewDataSourceService) {}
 
   ngOnInit(): void {
     this.dataSource.loadPage(0);

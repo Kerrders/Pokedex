@@ -10,7 +10,7 @@
 
     <mat-form-field class="m-3 col-md-6">
       <mat-label>Pokemon Name</mat-label>
-      <input matInput />
+      <input matInput [(ngModel)]="name" />
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSource">
@@ -30,7 +30,11 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        [routerLink]="['/pokemon/', row.name]"
+      ></tr>
     </table>
 
     <mat-paginator
