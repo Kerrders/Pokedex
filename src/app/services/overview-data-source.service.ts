@@ -24,7 +24,7 @@ export class OverviewDataSourceService extends MatTableDataSource<PokemonList> {
     this._httpClient
       .get<PokemonPaginatedList>(
         `https://pokeapi.co/api/v2/pokemon/?limit=${pageSize}&offset=${
-          page > 1 ? pageSize * page : 0
+          page >= 1 ? pageSize * page : 0
         }`
       )
       .subscribe((result: PokemonPaginatedList) => {

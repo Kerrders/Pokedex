@@ -21,7 +21,7 @@ export class OverviewComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dataSource.loadPage(1);
+    this.dataSource.loadPage(0);
   }
 
   ngAfterViewInit() {
