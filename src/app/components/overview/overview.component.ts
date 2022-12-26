@@ -6,7 +6,7 @@ import { OverviewDataSourceService } from 'src/app/services/overview-data-source
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss']
+  styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent implements AfterViewInit, OnInit {
   public pageSize = 20;
@@ -15,7 +15,10 @@ export class OverviewComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator)
   public paginator!: MatPaginator;
 
-  constructor(public _httpClient: HttpClient, public dataSource: OverviewDataSourceService) {}
+  constructor(
+    public _httpClient: HttpClient,
+    public dataSource: OverviewDataSourceService
+  ) {}
 
   ngOnInit(): void {
     this.dataSource.loadPage(1);

@@ -1,4 +1,4 @@
-import { PokemonList } from "./PokemonList.interface";
+import { PokemonList } from './PokemonList.interface';
 
 export interface PokemonPaginatedList {
   count: number;

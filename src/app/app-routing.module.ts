@@ -4,12 +4,12 @@ import { DetailsComponent } from './components/details/details.component';
 import { OverviewComponent } from './components/overview/overview.component';
 
 const routes: Routes = [
-  {path: '', component: OverviewComponent},
-  {path: 'pokemon/:name', component: DetailsComponent}
+  { path: '', component: OverviewComponent },
+  { path: 'pokemon/:name', component: DetailsComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

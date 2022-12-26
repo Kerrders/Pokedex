@@ -6,23 +6,19 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { DetailsComponent } from './components/details/details.component';
-import { OverviewComponent } from './components/overview/overview.component'
+import { OverviewComponent } from './components/overview/overview.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DetailsComponent,
-    OverviewComponent,
-  ],
+  declarations: [AppComponent, DetailsComponent, OverviewComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
