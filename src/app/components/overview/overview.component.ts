@@ -9,7 +9,7 @@ import { OverviewDataSourceService } from 'src/app/services/overview-data-source
   styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent implements AfterViewInit, OnInit {
-  public pageSize = 20;
+  public pageSize = 10;
   public displayedColumns: Array<string> = ['name'];
   public pageSizeOptions: Array<number> = [5, 10, 25, 100];
   @ViewChild(MatPaginator)
