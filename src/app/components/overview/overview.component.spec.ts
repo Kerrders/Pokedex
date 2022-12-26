@@ -10,7 +10,7 @@ describe('OverviewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [OverviewComponent],
-      imports: [AppModule]
+      imports: [AppModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(OverviewComponent);

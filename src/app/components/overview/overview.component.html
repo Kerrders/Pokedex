@@ -1,24 +1,45 @@
-<mat-progress-bar
-  mode="indeterminate"
-  *ngIf="dataSource.isLoading"
-></mat-progress-bar>
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Übersicht</mat-card-title>
+    </mat-card-header>
+    <mat-progress-bar
+      mode="indeterminate"
+      *ngIf="dataSource.isLoading"
+    ></mat-progress-bar>
 
-<table mat-table [dataSource]="dataSource">
-  <!-- Number Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let row">{{ row.name }}</td>
-  </ng-container>
+    <mat-form-field class="m-3 col-md-6">
+      <mat-label>Pokemon Name</mat-label>
+      <input matInput />
+    </mat-form-field>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>Bild</th>
+        <td mat-cell *matCellDef="let row">
+          <img
+            *ngIf="(row.url | pokemonImageByUrl).length"
+            [src]="row.url | pokemonImageByUrl"
+          />
+        </td>
+      </ng-container>
 
-<mat-paginator
-  #paginator
-  [pageSize]="pageSize"
-  [pageSizeOptions]="pageSizeOptions"
-  (page)="dataSource.onPaginationChange($event)"
-  aria-label="Select page"
->
-</mat-paginator>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      #paginator
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="dataSource.onPaginationChange($event)"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </mat-card>
+</div>

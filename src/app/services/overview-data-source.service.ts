@@ -20,7 +20,8 @@ export class OverviewDataSourceService extends MatTableDataSource<PokemonList> {
     this.loadPage(e.pageIndex, e.pageSize);
   }
 
-  public loadPage(page: number, pageSize = 10): void {
+  public loadPage(page: number, pageSize = 5): void {
+    this.isLoading = true;
     this._httpClient
       .get<PokemonPaginatedList>(
         `https://pokeapi.co/api/v2/pokemon/?limit=${pageSize}&offset=${
