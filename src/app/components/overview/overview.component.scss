@@ -1,0 +1,8 @@
+.pokemon-card {
+  cursor: pointer;
+  transition: all ease-in-out 250ms;
+}
+
+.pokemon-card:hover {
+  background-color: var(--bs-code-color, transparent);
+}

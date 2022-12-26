@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
+  public isLoading: boolean = true;
   public pokemonData: any;
   private name: string;
 
@@ -24,10 +25,12 @@ export class DetailsComponent implements OnInit {
   }
 
   private loadData(): void {
+    this.isLoading = true;
     this._httpClient
       .get<any>(`https://pokeapi.co/api/v2/pokemon/${this.name}`)
       .subscribe((result: any) => {
         this.pokemonData = result;
+        this.isLoading = false;
       });
   }
 }

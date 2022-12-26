@@ -1,12 +1,11 @@
 <div class="container">
   <div class="row">
+    <div *ngIf="isLoading">
+      <mat-spinner></mat-spinner>
+    </div>
     <mat-grid-list cols="10" rowHeight="100px">
-      <mat-grid-tile
-        *ngFor="let row of dataSource.data"
-        [colspan]="1"
-        [rowspan]="2"
-      >
-        <mat-card class="" [routerLink]="['/pokemon/', row.name]">
+      <mat-grid-tile *ngFor="let row of data" [colspan]="1" [rowspan]="2">
+        <mat-card class="pokemon-card" [routerLink]="['/pokemon/', row.name]">
           <mat-card-header>
             <mat-card-subtitle>{{ row.name | titlecase }}</mat-card-subtitle>
           </mat-card-header>
