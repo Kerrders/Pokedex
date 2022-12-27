@@ -3,12 +3,14 @@
     <div *ngIf="isLoading">
       <mat-spinner class="pt-3 pb-3" style="margin: 0px auto"></mat-spinner>
     </div>
-    <cdk-virtual-scroll-viewport
-      style="height: 90vh"
-      itemSize="35"
-      class="mt-2"
-    >
-      <ng-container *cdkVirtualFor="let row of data">
+
+    <mat-form-field class="mt-2">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="name" (ngModelChange)="onNameChange()" />
+    </mat-form-field>
+
+    <cdk-virtual-scroll-viewport style="height: 80vh" itemSize="30">
+      <ng-container *cdkVirtualFor="let row of filteredData">
         <div class="m-2">
           <mat-card class="pokemon-card" [routerLink]="['/pokemon/', row.name]">
             <mat-card-header>

@@ -12,6 +12,7 @@ export class OverviewComponent implements OnInit {
   public isLoading: boolean = true;
   public name: string;
   public data: Array<PokemonList> = [];
+  public filteredData: Array<PokemonList> = [];
 
   constructor(private _pokeApiService: PokeApiService) {}
 
@@ -21,6 +22,15 @@ export class OverviewComponent implements OnInit {
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading = false;
         this.data = result.results;
+        this.filteredData = this.data;
       });
+  }
+
+  public onNameChange(): void {
+    this.filteredData = this.data.filter((pokemon: PokemonList) => {
+      return pokemon.name
+        .toLocaleLowerCase()
+        .includes(this.name.toLocaleLowerCase());
+    });
   }
 }
