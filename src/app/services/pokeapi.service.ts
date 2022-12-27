@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { PokemonPaginatedList } from '../interfaces/PokemonPaginatedList.interface';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PokemonDetails } from '../interfaces/PokemonDetails.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,8 @@ export class PokeApiService {
     );
   }
 
-  public getPokemon(name: string): Observable<any> {
-    return this._httpClient.get<PokemonPaginatedList>(
+  public getPokemon(name: string): Observable<PokemonDetails> {
+    return this._httpClient.get<PokemonDetails>(
       `${this.baseUrl}/pokemon/${name}`
     );
   }

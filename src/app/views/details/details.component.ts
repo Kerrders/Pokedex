@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PokemonDetails } from 'src/app/interfaces/PokemonDetails.interface';
+import { PokeApiService } from 'src/app/services/pokeapi.service';
 
 @Component({
   selector: 'app-details',
@@ -9,11 +10,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsComponent implements OnInit {
   public isLoading: boolean;
-  public pokemonData: any;
+  public pokemonData: PokemonDetails;
   private name: string;
 
   constructor(
-    private _httpClient: HttpClient,
+    private _pokeApiService: PokeApiService,
     private _route: ActivatedRoute
   ) {}
 
@@ -26,11 +27,9 @@ export class DetailsComponent implements OnInit {
 
   private loadData(): void {
     this.isLoading = true;
-    this._httpClient
-      .get<any>(`https://pokeapi.co/api/v2/pokemon/${this.name}`)
-      .subscribe((result: any) => {
-        this.pokemonData = result;
-        this.isLoading = false;
-      });
+    this._pokeApiService.getPokemon(this.name).subscribe((result: any) => {
+      this.pokemonData = result;
+      this.isLoading = false;
+    });
   }
 }
