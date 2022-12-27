@@ -1,5 +1,5 @@
 export interface PokemonSprite {
-  other: any;
+  other: { [key: string]: any };
   back_default: string;
   front_default: string;
 

@@ -27,9 +27,11 @@ export class DetailsComponent implements OnInit {
 
   private loadData(): void {
     this.isLoading = true;
-    this._pokeApiService.getPokemon(this.name).subscribe((result: any) => {
-      this.pokemonData = result;
-      this.isLoading = false;
-    });
+    this._pokeApiService
+      .getPokemon(this.name)
+      .subscribe((result: PokemonDetails) => {
+        this.pokemonData = result;
+        this.isLoading = false;
+      });
   }
 }
