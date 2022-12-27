@@ -21,7 +21,6 @@ export class OverviewComponent implements OnInit {
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading = false;
         this.data = result.results;
-        console.log(this.data);
       });
   }
 }

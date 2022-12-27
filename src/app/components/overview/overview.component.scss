@@ -6,3 +6,10 @@
 .pokemon-card:hover {
   background-color: var(--bs-code-color, transparent);
 }
+
+::ng-deep {
+  .cdk-virtual-scroll-content-wrapper {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+  }
+}
