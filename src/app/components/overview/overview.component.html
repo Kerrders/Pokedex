@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div *ngIf="isLoading">
-      <mat-spinner></mat-spinner>
+      <mat-spinner class="pt-3 pb-3" style="margin: 0px auto"></mat-spinner>
     </div>
     <mat-grid-list cols="10" rowHeight="100px">
       <mat-grid-tile *ngFor="let row of data" [colspan]="1" [rowspan]="2">
