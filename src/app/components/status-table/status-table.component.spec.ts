@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MaterialModule } from 'src/app/material-module';
 
 import { StatusTableComponent } from './status-table.component';
 
@@ -8,9 +9,9 @@ describe('StatusTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StatusTableComponent ]
-    })
-    .compileComponents();
+      declarations: [StatusTableComponent],
+      imports: [MaterialModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(StatusTableComponent);
     component = fixture.componentInstance;

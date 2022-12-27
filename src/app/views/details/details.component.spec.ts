@@ -1,4 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MaterialModule } from 'src/app/material-module';
 
 import { DetailsComponent } from './details.component';
 
@@ -9,6 +12,7 @@ describe('DetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DetailsComponent],
+      imports: [MaterialModule, HttpClientModule, RouterTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DetailsComponent);
