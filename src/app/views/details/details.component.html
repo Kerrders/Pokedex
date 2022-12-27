@@ -9,14 +9,8 @@
           <mat-card-content>
             <mat-tab-group>
               <mat-tab label="Status">
-                <mat-list role="list">
-                  <mat-list-item
-                    role="listitem"
-                    *ngFor="let stat of pokemonData.stats"
-                  >
-                    {{ stat.stat.name }} : {{ stat.base_stat }}
-                  </mat-list-item>
-                </mat-list>
+                <pokemon-status-table [pokemonStats]="pokemonData.stats">
+                </pokemon-status-table>
               </mat-tab>
               <mat-tab label="Second"> Content 2 </mat-tab>
               <mat-tab label="Third"> Content 3 </mat-tab>
