@@ -9,7 +9,7 @@ import { PokeApiService } from 'src/app/services/pokeapi.service';
   styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent implements OnInit {
-  public isLoading: boolean = true;
+  public isLoading = true;
   public name: string;
   public data: Array<PokemonList> = [];
   public filteredData: Array<PokemonList> = [];
