@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div *ngIf="isLoading">
-      <mat-spinner class="pt-3 pb-3" style="margin: 0px auto"></mat-spinner>
+      <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
     </div>
 
     <mat-form-field class="mt-2">
@@ -20,7 +20,8 @@
               <img
                 *ngIf="(row.url | pokemonImageByUrl).length"
                 [src]="row.url | pokemonImageByUrl"
-                style="max-width: 96px; margin: 0px auto; text-align: center"
+                style="max-width: 96px"
+                class="center text-center"
               />
             </mat-card-content>
           </mat-card>
