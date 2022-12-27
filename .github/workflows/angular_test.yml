@@ -7,7 +7,7 @@ on:
     branches: ["**"]
 jobs:
   test:
-    name: Run eslint scanning
+    name: Run angular tests
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -20,5 +20,4 @@ jobs:
       - name: Install and run tests
         run: |
           npm install
-          npm run test:ci
-          npm run build:ci
+          npm run test
