@@ -10,10 +10,6 @@ import { OverviewComponent } from './components/overview/overview.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PokemonImageByUrlPipe } from './pipes/pokemon-image-by-url.pipe';
 import { FormsModule } from '@angular/forms';
-import {
-  CdkVirtualScrollViewport,
-  ScrollingModule,
-} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -29,7 +25,6 @@ import {
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    CdkVirtualScrollViewport,
   ],
   providers: [],
   bootstrap: [AppComponent],

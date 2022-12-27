@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PokemonImageByUrlPipe implements PipeTransform {
   transform(url: string): string {
-    const regex: RegExp = /pokemon\/(.*)\//g;
+    const regex = /pokemon\/(.*)\//g;
     const id: string | undefined = url
       .match(regex)?.[0]
       .replace('pokemon/', '')

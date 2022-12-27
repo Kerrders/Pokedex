@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
-  public isLoading: boolean = true;
+  public isLoading: boolean;
   public pokemonData: any;
   private name: string;
 
