@@ -9,7 +9,7 @@
       <input matInput [(ngModel)]="name" (ngModelChange)="onNameChange()" />
     </mat-form-field>
 
-    <cdk-virtual-scroll-viewport style="height: 80vh" itemSize="30">
+    <cdk-virtual-scroll-viewport style="height: 80vh" itemSize="31.1">
       <ng-container *cdkVirtualFor="let row of filteredData">
         <div class="m-2">
           <mat-card class="pokemon-card" [routerLink]="['/pokemon/', row.name]">
