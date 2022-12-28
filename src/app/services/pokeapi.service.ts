@@ -16,33 +16,27 @@ export class PokeApiService {
     private _cachingService: CachingService
   ) {}
 
-  public getAllPokemons(): Observable<PokemonPaginatedList> {
-    if (this._cachingService.hasKey('allPokemons')) {
-      return of(
-        this._cachingService.getData('allPokemons') as PokemonPaginatedList
-      );
+  private cachedGetRequest<T>(route: string): Observable<T> {
+    if (this._cachingService.hasKey(route)) {
+      return of(this._cachingService.getData(route) as T);
     }
-    return this._httpClient
-      .get<PokemonPaginatedList>(`${this.baseUrl}/pokemon/?limit=5000`)
-      .pipe(
-        map((result: PokemonPaginatedList) => {
-          this._cachingService.setData('allPokemons', result);
-          return result;
-        })
-      );
+    return this._httpClient.get<T>(route).pipe(
+      map((result: T) => {
+        this._cachingService.setData(route, result);
+        return result;
+      })
+    );
+  }
+
+  public getAllPokemons(): Observable<PokemonPaginatedList> {
+    return this.cachedGetRequest<PokemonPaginatedList>(
+      `${this.baseUrl}/pokemon/?limit=5000`
+    );
   }
 
   public getPokemon(name: string): Observable<PokemonDetails> {
-    if (this._cachingService.hasKey(name)) {
-      return of(this._cachingService.getData(name) as PokemonDetails);
-    }
-    return this._httpClient
-      .get<PokemonDetails>(`${this.baseUrl}/pokemon/${name}`)
-      .pipe(
-        map((result: PokemonDetails) => {
-          this._cachingService.setData(name, result);
-          return result;
-        })
-      );
+    return this.cachedGetRequest<PokemonDetails>(
+      `${this.baseUrl}/pokemon/${name}`
+    );
   }
 }
