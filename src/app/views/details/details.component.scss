@@ -1,10 +1,9 @@
 .imgContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 324px;
+  flex-flow: column wrap;
   overflow: hidden;
-  margin: 0px auto;
   img {
     max-width: 90%;
   }

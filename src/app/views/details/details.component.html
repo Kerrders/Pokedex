@@ -37,26 +37,18 @@
               </mat-tab>
               <mat-tab label="Sprites">
                 <div class="imgContainer">
-                  <img [src]="pokemonData.details.sprites.back_default" />
-                  <img [src]="pokemonData.details.sprites.front_default" />
+                  <div class="text-center">
+                    <img [src]="pokemonData.details.sprites.back_default" />
+                    <img [src]="pokemonData.details.sprites.front_default" />
+                  </div>
+                  <mat-divider></mat-divider>
+                  <div class="text-center">
+                    <img [src]="pokemonData.details.sprites.back_shiny" />
+                    <img [src]="pokemonData.details.sprites.front_shiny" />
+                  </div>
                 </div>
               </mat-tab>
             </mat-tab-group>
-          </mat-card-content>
-        </mat-card>
-      </div>
-
-      <div class="col-12">
-        <mat-card>
-          <mat-card-content>
-            <mat-list role="list">
-              <mat-list-item
-                role="listitem"
-                *ngFor="let stat of pokemonData.details.stats"
-              >
-                {{ stat.stat.name }} : {{ stat.base_stat }}
-              </mat-list-item>
-            </mat-list>
           </mat-card-content>
         </mat-card>
       </div>
