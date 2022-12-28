@@ -1,4 +1,8 @@
-.statusBar {
-  height: 10px;
-  display: inline-block;
+.imgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 324px;
+  height: 324px;
+  margin: 0px auto;
 }

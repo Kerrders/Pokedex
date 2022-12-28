@@ -16,7 +16,7 @@
             <mat-card-header>
               <mat-card-subtitle>{{ row.name | titlecase }}</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content class="text-center">
               <img
                 *ngIf="(row.url | pokemonImageByUrl).length"
                 [src]="row.url | pokemonImageByUrl"
