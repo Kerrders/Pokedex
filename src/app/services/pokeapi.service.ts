@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { PokemonPaginatedList } from '../interfaces/PokemonPaginatedList.interface';
 import { Injectable } from '@angular/core';
-import { Observable, of, tap, map } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
 import { PokemonDetails } from '../interfaces/PokemonDetails.interface';
 import { CachingService } from './caching.service';
 import { SidenavService } from './sidenav.service';

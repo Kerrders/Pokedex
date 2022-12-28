@@ -8,9 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public title: string = 'pokedex';
+  public title = 'pokedex';
   private _allowedLanguages: Array<string> = ['de', 'en'];
-  private _fallbackLanguage: string = 'en';
+  private _fallbackLanguage = 'en';
 
   constructor(
     public sidenavService: SidenavService,
