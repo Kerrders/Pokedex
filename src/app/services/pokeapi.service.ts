@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, tap, map } from 'rxjs';
 import { PokemonDetails } from '../interfaces/PokemonDetails.interface';
 import { CachingService } from './caching.service';
+import { SidenavService } from './sidenav.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ export class PokeApiService {
 
   constructor(
     private _httpClient: HttpClient,
-    private _cachingService: CachingService
+    private _cachingService: CachingService,
+    private _sidenavService: SidenavService
   ) {}
 
   private cachedGetRequest<T>(route: string): Observable<T> {
@@ -35,6 +37,7 @@ export class PokeApiService {
   }
 
   public getPokemon(name: string): Observable<PokemonDetails> {
+    this._sidenavService.addNode(name, `pokemon/${name}`);
     return this.cachedGetRequest<PokemonDetails>(
       `${this.baseUrl}/pokemon/${name}`
     );

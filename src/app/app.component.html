@@ -1,7 +1,33 @@
 <mat-toolbar>
   <span>Pokedex</span>
-  <div style="margin-left: 20px">
+  <div class="ms-4">
     <button mat-button color="primary" [routerLink]="['']">Home</button>
   </div>
+  <div>
+    <div
+      class="nodeContainer"
+      *ngFor="let node of sidenavService.nodes"
+      [routerLink]="node.url"
+    >
+      <button mat-button color="primary" class="align-middle">
+        {{ node.name | titlecase }}
+      </button>
+
+      <button
+        mat-icon-button
+        (click)="sidenavService.removeNode(node.name)"
+        class="closeNodeButton"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
 </mat-toolbar>
-<router-outlet></router-outlet>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
