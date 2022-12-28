@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false --browsers=ChromeHeadlessCustom",
     "lint": "ng lint",
-    "prettier": "npx prettier src/. --write"
+    "prettier": "npx prettier src/. --write",
+    "update": "node ./scripts/loadStaticData.mjs"
   },
   "private": true,
   "dependencies": {
