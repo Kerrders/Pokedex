@@ -1,7 +1,9 @@
 <table mat-table [dataSource]="pokemonStats" class="mat-elevation-z8">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.stat.name }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ "stats." + element.stat.name | translate }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="value">

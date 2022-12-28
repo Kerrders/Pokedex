@@ -1,0 +1,10 @@
+{
+  "stats": {
+    "hp": "Leben",
+    "attack": "Angriff",
+    "defense": "Verteidigung",
+    "special-attack": "Spezial Angriff",
+    "special-defense": "Spezial Verteidigung",
+    "speed": "Geschwindigkeit"
+  }
+}
