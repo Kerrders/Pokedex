@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PokemonDetails } from 'src/app/interfaces/PokemonDetails.interface';
+import { CollectedPokemonDetails } from 'src/app/interfaces/CollectedPokemonDetails.interface';
 import { PokeApiService } from 'src/app/services/pokeapi.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { PokeApiService } from 'src/app/services/pokeapi.service';
 })
 export class DetailsComponent implements OnInit {
   public isLoading: boolean;
-  public pokemonData: PokemonDetails;
+  public pokemonData: CollectedPokemonDetails;
   private name: string;
 
   constructor(
@@ -29,7 +29,7 @@ export class DetailsComponent implements OnInit {
     this.isLoading = true;
     this._pokeApiService
       .getPokemon(this.name)
-      .subscribe((result: PokemonDetails) => {
+      .subscribe((result: CollectedPokemonDetails) => {
         this.pokemonData = result;
         this.isLoading = false;
       });

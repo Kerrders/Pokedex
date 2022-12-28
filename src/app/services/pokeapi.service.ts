@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { PokemonPaginatedList } from '../interfaces/PokemonPaginatedList.interface';
 import { Injectable } from '@angular/core';
-import { Observable, of, map } from 'rxjs';
+import { Observable, of, map, forkJoin } from 'rxjs';
 import { PokemonDetails } from '../interfaces/PokemonDetails.interface';
 import { CachingService } from './caching.service';
 import { SidenavService } from './sidenav.service';
+import { PokemonSpecies } from '../interfaces/PokemonSpecies.interface';
+import { CollectedPokemonDetails } from '../interfaces/CollectedPokemonDetails.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -36,10 +38,15 @@ export class PokeApiService {
     );
   }
 
-  public getPokemon(name: string): Observable<PokemonDetails> {
+  public getPokemon(name: string): Observable<CollectedPokemonDetails> {
     this._sidenavService.addNode(name, `pokemon/${name}`);
-    return this.cachedGetRequest<PokemonDetails>(
-      `${this.baseUrl}/pokemon/${name}`
-    );
+    return forkJoin({
+      details: this.cachedGetRequest<PokemonDetails>(
+        `${this.baseUrl}/pokemon/${name}`
+      ),
+      species: this.cachedGetRequest<PokemonSpecies>(
+        `${this.baseUrl}/pokemon-species/${name}`
+      ),
+    });
   }
 }

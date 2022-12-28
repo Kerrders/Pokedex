@@ -2,7 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 324px;
   height: 324px;
+  overflow: hidden;
   margin: 0px auto;
+  img {
+    max-width: 90%;
+  }
 }

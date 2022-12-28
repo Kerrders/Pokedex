@@ -9,7 +9,9 @@
           <mat-card-content>
             <mat-tab-group>
               <mat-tab label="Status">
-                <app-pokemon-status-table [pokemonStats]="pokemonData.stats">
+                <app-pokemon-status-table
+                  [pokemonStats]="pokemonData.details.stats"
+                >
                 </app-pokemon-status-table>
               </mat-tab>
               <mat-tab label="Second"> Content 2 </mat-tab>
@@ -27,17 +29,16 @@
                 <div class="imgContainer">
                   <img
                     [src]="
-                      pokemonData.sprites.other['official-artwork']
+                      pokemonData.details.sprites.other['official-artwork']
                         .front_default
                     "
-                    style="max-width: 100%"
                   />
                 </div>
               </mat-tab>
               <mat-tab label="Sprites">
                 <div class="imgContainer">
-                  <img [src]="pokemonData.sprites.back_default" />
-                  <img [src]="pokemonData.sprites.front_default" />
+                  <img [src]="pokemonData.details.sprites.back_default" />
+                  <img [src]="pokemonData.details.sprites.front_default" />
                 </div>
               </mat-tab>
             </mat-tab-group>
@@ -51,7 +52,7 @@
             <mat-list role="list">
               <mat-list-item
                 role="listitem"
-                *ngFor="let stat of pokemonData.stats"
+                *ngFor="let stat of pokemonData.details.stats"
               >
                 {{ stat.stat.name }} : {{ stat.base_stat }}
               </mat-list-item>
