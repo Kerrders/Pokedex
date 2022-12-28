@@ -16,6 +16,7 @@ import { StatusTableComponent } from './components/status-table/status-table.com
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { PokemonNamePipe } from './pipes/pokemon-name.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     OverviewComponent,
     PokemonImageByUrlPipe,
     ColorForStatusValuePipe,
+    PokemonNamePipe,
     StatusTableComponent,
   ],
   imports: [

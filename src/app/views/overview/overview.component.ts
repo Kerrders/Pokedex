@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { PokemonList } from 'src/app/interfaces/PokemonList.interface';
 import { PokemonPaginatedList } from 'src/app/interfaces/PokemonPaginatedList.interface';
 import { PokeApiService } from 'src/app/services/pokeapi.service';
@@ -21,16 +22,19 @@ export class OverviewComponent implements OnInit {
       .getAllPokemons()
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading = false;
-        this.data = result.results;
+        this.data = result.results.map((pokemon) => {
+          pokemon.translatedName = LanguageHelper.getPokemonName(pokemon.name);
+          return pokemon;
+        });
         this.filteredData = this.data;
       });
   }
 
   public onNameChange(): void {
     this.filteredData = this.data.filter((pokemon: PokemonList) => {
-      return pokemon.name
-        .toLocaleLowerCase()
-        .includes(this.name.toLocaleLowerCase());
+      return pokemon.translatedName
+        ?.toLocaleLowerCase()
+        ?.includes(this.name.toLocaleLowerCase());
     });
   }
 }

@@ -7,6 +7,7 @@ import { CachingService } from './caching.service';
 import { SidenavService } from './sidenav.service';
 import { PokemonSpecies } from '../interfaces/PokemonSpecies.interface';
 import { CollectedPokemonDetails } from '../interfaces/CollectedPokemonDetails.interface';
+import { LanguageHelper } from '../helpers/languageHelper';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +40,10 @@ export class PokeApiService {
   }
 
   public getPokemon(name: string): Observable<CollectedPokemonDetails> {
-    this._sidenavService.addNode(name, `pokemon/${name}`);
+    this._sidenavService.addNode(
+      LanguageHelper.getPokemonName(name),
+      `pokemon/${name}`
+    );
     return forkJoin({
       details: this.cachedGetRequest<PokemonDetails>(
         `${this.baseUrl}/pokemon/${name}`

@@ -14,7 +14,7 @@
         <div class="m-2">
           <mat-card class="pokemon-card" [routerLink]="['/pokemon/', row.name]">
             <mat-card-header>
-              <mat-card-subtitle>{{ row.name | titlecase }}</mat-card-subtitle>
+              <mat-card-subtitle>{{ row.translatedName }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="text-center">
               <img
