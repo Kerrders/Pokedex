@@ -28,16 +28,21 @@ function loadFiles() {
     fetch(githubFilesUrl + file + ".csv", {
       method: "GET",
     })
-      .then((response) => response.text())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Could not load ${file}`);
+        }
+        return response.text();
+      })
       .then((data) => {
-        console.log(`File: ${file} loaded..`);
+        console.log("\x1b[32m%s\x1b[0m", `✔ ${file} succesfully loaded`);
         fs.writeFileSync(
           STATIC_FILES_DIRECTORY + file + ".json",
           JSON.stringify(csvJSON(data))
         );
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.log("\x1b[31m%s\x1b[0m", "Error:", error);
       });
   }
 }
