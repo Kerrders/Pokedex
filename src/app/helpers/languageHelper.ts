@@ -1,5 +1,5 @@
-import { pokemonSpecies } from '../data/pokemonSpecies';
-import { pokemonSpeciesNames } from '../data/pokemonSpeciesNames';
+import pokemonSpecies from '../../assets/data/pokemon_species.json';
+import pokemonSpeciesNames from '../../assets/data/pokemon_species_names.json';
 
 export class LanguageHelper {
   private static _allowedLanguages: Array<string> = ['de', 'en'];
@@ -30,7 +30,9 @@ export class LanguageHelper {
       pokemonSpeciesNames.find(
         (speciesNames) =>
           speciesNames.pokemon_species_id === species.id &&
-          speciesNames.local_language_id === LanguageHelper.getLanguageId()
+          speciesNames.local_language_id &&
+          parseInt(speciesNames.local_language_id) ===
+            LanguageHelper.getLanguageId()
       )?.name ?? 'UNKNOWN_NAME'
     );
   }

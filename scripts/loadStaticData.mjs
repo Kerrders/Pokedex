@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import path from "path";
 
-const files = ["move_names", "pokemon_species"];
+const files = ["move_names", "pokemon_species", "pokemon_species_names"];
 const githubFilesUrl =
   "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/";
 const STATIC_FILES_DIRECTORY = path
@@ -9,13 +9,13 @@ const STATIC_FILES_DIRECTORY = path
   .replace(/\\/gm, "/");
 
 function csvJSON(csv) {
-  var lines = csv.split("\n");
-  var result = [];
-  var headers = lines[0].split(",");
-  for (var i = 1; i < lines.length; i++) {
-    var obj = {};
-    var currentline = lines[i].split(",");
-    for (var j = 0; j < headers.length; j++) {
+  const lines = csv.split("\n");
+  let result = [];
+  const headers = lines[0].split(",");
+  for (let i = 1; i < lines.length; i++) {
+    let obj = {};
+    const currentline = lines[i].split(",");
+    for (let j = 0; j < headers.length; j++) {
       obj[headers[j]] = currentline[j];
     }
     result.push(obj);
