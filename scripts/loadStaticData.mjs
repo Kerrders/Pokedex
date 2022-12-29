@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import path from "path";
+import fetch from "node-fetch";
 
 const files = [
   "moves",
