@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'colorForStatusValue',
 })
 export class ColorForStatusValuePipe implements PipeTransform {
-  transform(statusValue: number): unknown {
+  transform(statusValue: number): string {
     if (statusValue >= 100) {
       return 'green';
     } else if (statusValue >= 65) {

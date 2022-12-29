@@ -10,3 +10,9 @@
   right: -30px;
   top: -6px;
 }
+
+::ng-deep {
+  .mat-mdc-card-title {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}

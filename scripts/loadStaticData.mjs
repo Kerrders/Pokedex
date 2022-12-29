@@ -1,7 +1,12 @@
 import * as fs from "fs";
 import path from "path";
 
-const files = ["move_names", "pokemon_species", "pokemon_species_names"];
+const files = [
+  "moves",
+  "move_names",
+  "pokemon_species",
+  "pokemon_species_names",
+];
 const githubFilesUrl =
   "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/";
 const STATIC_FILES_DIRECTORY = path

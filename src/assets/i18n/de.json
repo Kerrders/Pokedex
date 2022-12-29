@@ -6,5 +6,13 @@
     "special-attack": "Spezial Angriff",
     "special-defense": "Spezial Verteidigung",
     "speed": "Geschwindigkeit"
+  },
+  "moveTable": {
+    "title": "Liste der Attacken",
+    "learnTypes": {
+      "levelUp": "Levelup",
+      "tutor": "Lernbar",
+      "machine": "Lernbar (TM)"
+    }
   }
 }

@@ -13,20 +13,23 @@ import { FormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ColorForStatusValuePipe } from './pipes/color-for-status-value.pipe';
 import { StatusTableComponent } from './components/status-table/status-table.component';
-
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PokemonNamePipe } from './pipes/pokemon-name.pipe';
+import { MoveTableComponent } from './components/move-table/move-table.component';
+import { MoveNamePipe } from './pipes/move-name.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     DetailsComponent,
     OverviewComponent,
+    StatusTableComponent,
+    MoveTableComponent,
     PokemonImageByUrlPipe,
     ColorForStatusValuePipe,
     PokemonNamePipe,
-    StatusTableComponent,
+    MoveNamePipe,
   ],
   imports: [
     BrowserModule,

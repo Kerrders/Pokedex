@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ "moveTable.title" | translate }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-button-toggle-group
+      class="mat-elevation-z2 mt-3"
+      [(ngModel)]="currentLearnType"
+      (ngModelChange)="getData()"
+    >
+      <mat-button-toggle value="level-up">{{
+        "moveTable.learnTypes.levelUp" | translate
+      }}</mat-button-toggle>
+      <mat-button-toggle value="tutor">{{
+        "moveTable.learnTypes.tutor" | translate
+      }}</mat-button-toggle>
+      <mat-button-toggle value="machine">{{
+        "moveTable.learnTypes.machine" | translate
+      }}</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <table mat-table [dataSource]="filteredMoves" class="mat-elevation-z2 mt-3">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let move">
+          {{ move.name | moveName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="level">
+        <th mat-header-cell *matHeaderCellDef class="text-center">Level</th>
+        <td mat-cell *matCellDef="let move" class="text-center">
+          {{ move.level }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
