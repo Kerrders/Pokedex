@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PokemonMoves } from 'src/app/interfaces/PokemonMoves.interface';
+import versionGroups from '../../../assets/data/version_groups.json';
 
 @Component({
   selector: 'app-move-table',
@@ -11,6 +12,9 @@ export class MoveTableComponent implements OnInit {
   public pokemonMoves: Array<PokemonMoves>;
   public filteredMoves: Array<any>;
 
+  public allVersions: Array<string> = versionGroups.map(
+    (versionGroup) => versionGroup.identifier as string
+  );
   public currentVersion = 'omega-ruby-alpha-sapphire';
   public currentLearnType = 'level-up';
 

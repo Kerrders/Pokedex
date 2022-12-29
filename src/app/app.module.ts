@@ -18,6 +18,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PokemonNamePipe } from './pipes/pokemon-name.pipe';
 import { MoveTableComponent } from './components/move-table/move-table.component';
 import { MoveNamePipe } from './pipes/move-name.pipe';
+import { VersionNamePipe } from './pipes/version-name.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MoveNamePipe } from './pipes/move-name.pipe';
     ColorForStatusValuePipe,
     PokemonNamePipe,
     MoveNamePipe,
+    VersionNamePipe,
   ],
   imports: [
     BrowserModule,

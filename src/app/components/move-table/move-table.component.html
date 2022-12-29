@@ -19,6 +19,15 @@
       }}</mat-button-toggle>
     </mat-button-toggle-group>
 
+    <mat-form-field appearance="fill">
+      <mat-label>Pokemon Version</mat-label>
+      <mat-select [(ngModel)]="currentVersion" (ngModelChange)="getData()">
+        <mat-option *ngFor="let version of allVersions" [value]="version">
+          {{ version | versionName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <div class="table-container">
       <table
         mat-table
