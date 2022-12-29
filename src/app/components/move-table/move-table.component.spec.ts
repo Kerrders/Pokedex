@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { MaterialModule } from 'src/app/material-module';
 
 import { MoveTableComponent } from './move-table.component';
 
@@ -8,9 +11,9 @@ describe('MoveTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MoveTableComponent ]
-    })
-    .compileComponents();
+      declarations: [MoveTableComponent],
+      imports: [MaterialModule, TranslateModule.forRoot(), FormsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MoveTableComponent);
     component = fixture.componentInstance;

@@ -22,7 +22,7 @@ export class MoveTableComponent implements OnInit {
 
   public getData(): void {
     this.filteredMoves = [];
-    this.pokemonMoves.forEach((element) => {
+    this.pokemonMoves?.forEach((element) => {
       const versionData = element.version_group_details.find(
         (versionData: any) =>
           versionData.version_group.name === this.currentVersion
