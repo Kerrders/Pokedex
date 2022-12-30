@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { PokemonMoves } from 'src/app/interfaces/PokemonMoves.interface';
 import versionGroups from '../../../assets/data/version_groups.json';
 
@@ -7,7 +7,7 @@ import versionGroups from '../../../assets/data/version_groups.json';
   templateUrl: './move-table.component.html',
   styleUrls: ['./move-table.component.scss'],
 })
-export class MoveTableComponent implements OnInit {
+export class MoveTableComponent implements OnInit, OnChanges {
   @Input()
   public pokemonMoves: Array<PokemonMoves>;
   public filteredMoves: Array<any>;
@@ -21,6 +21,10 @@ export class MoveTableComponent implements OnInit {
   public displayedColumns: Array<string> = ['name', 'level'];
 
   public ngOnInit(): void {
+    this.getData();
+  }
+
+  public ngOnChanges(): void {
     this.getData();
   }
 
