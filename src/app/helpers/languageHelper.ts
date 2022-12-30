@@ -6,7 +6,7 @@ export class LanguageHelper {
   private static _fallbackLanguage = 'en';
   private static _languageIds: { [key: string]: number } = {
     de: 6,
-    en: 7,
+    en: 9,
   };
 
   public static getLanguageId(): number {
