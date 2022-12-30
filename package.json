@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "prettier": "npx prettier src/. --write",
     "update": "node ./scripts/loadStaticData.mjs",
-    "deploy": "ng deploy --repo=git@github.com:Kerrders/kerrders.github.io.git --base-href=https://kerrders.github.io"
+    "deploy": "ng deploy --repo=git@github.com:Kerrders/kerrders.github.io.git --base-href=https://kerrders.github.io --no-silent"
   },
   "private": true,
   "dependencies": {
