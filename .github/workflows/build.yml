@@ -1,0 +1,21 @@
+name: Deploy GitHub Pages
+on:
+  push:
+    branches: ["main"]
+jobs:
+  build:
+    name: Deploy to github pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install and run deploy
+        run: |
+          npm install
+          npm run update
+          npm run deploy
