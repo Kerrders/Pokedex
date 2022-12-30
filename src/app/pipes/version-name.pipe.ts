@@ -12,30 +12,21 @@ export class VersionNamePipe implements PipeTransform {
     if (!groupVersionName?.length) {
       return 'UNKNOWN_VERSION';
     }
-    const versions = groupVersionName?.split('-');
-    if (versions.length <= 1) {
-      return this._getVersionName(this._getVersionId(versions[0]));
+
+    const versionGroupId = versionGroups.find(
+      (versionGroup) => versionGroup.identifier === groupVersionName
+    )?.id;
+    if (!versionGroupId) {
+      return 'UNKNOWN_VERSION';
     }
 
-    let foundVersions: Array<string> = [];
-    let value = '';
-    versions.forEach((version) => {
-      value += version;
-      const foundVersion = this._getVersionId(value);
-      if (foundVersion !== '0') {
-        foundVersions.push(foundVersion);
-        value = '';
-      }
-    });
-
-    foundVersions = foundVersions.map((version) => {
-      return this._getVersionName(version);
-    });
-    return foundVersions.join('/');
+    const versions = versionsData
+      .filter((version) => version.version_group_id === versionGroupId)
+      .map((version) => this._getVersionName(version.id as string));
+    return versions.join('/');
   }
 
   private _getVersionName(versionId: string): string {
-    console.log(versionId);
     return (
       versionNames.find(
         (versionName) =>
@@ -45,12 +36,5 @@ export class VersionNamePipe implements PipeTransform {
             LanguageHelper.getLanguageId()
       )?.name ?? 'UNKNOWN'
     );
-  }
-
-  private _getVersionId(versionName: string): string {
-    const foundVersion = versionsData.find(
-      (version) => version.identifier === versionName
-    );
-    return foundVersion?.id ?? '0';
   }
 }
