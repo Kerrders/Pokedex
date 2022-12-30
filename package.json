@@ -9,7 +9,8 @@
     "test": "ng test --watch=false --browsers=ChromeHeadlessCustom",
     "lint": "ng lint",
     "prettier": "npx prettier src/. --write",
-    "update": "node ./scripts/loadStaticData.mjs"
+    "update": "node ./scripts/loadStaticData.mjs",
+    "deploy": "ng deploy --repo=git@github.com:Kerrders/kerrders.github.io.git --base-href=https://kerrders.github.io"
   },
   "private": true,
   "dependencies": {
@@ -47,6 +48,7 @@
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
+    "angular-cli-ghpages": "^1.0.5",
     "eslint": "^8.28.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
