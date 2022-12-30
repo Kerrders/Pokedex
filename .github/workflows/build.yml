@@ -11,6 +11,11 @@ jobs:
       security-events: write
       actions: read
     steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Checkout code
         uses: actions/checkout@v3
 
