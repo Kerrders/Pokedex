@@ -17,6 +17,11 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: unnecessary
 
+      - name: Set Git name and mail
+        run: |
+          git config --global user.email "kerrders@github.com"
+          git config --global user.name "Github Action"
+
       - name: Adding Known Hosts
         run: ssh-keyscan -H github.com  >> ~/.ssh/known_hosts
 
