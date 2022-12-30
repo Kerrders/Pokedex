@@ -1,7 +1,7 @@
+import { MoreToLoad } from './MoreToLoad.interface';
+import { VersionGroupDetails } from './VersionGroupDetails.interface';
+
 export interface PokemonMoves {
-  move: {
-    name: string;
-    url: string;
-  };
-  version_group_details: any; //@Todo create interface
+  move: MoreToLoad;
+  version_group_details: Array<VersionGroupDetails>;
 }
