@@ -7,6 +7,9 @@ const files = [
   "move_names",
   "pokemon_species",
   "pokemon_species_names",
+  "versions",
+  "version_names",
+  "version_groups",
 ];
 const githubFilesUrl =
   "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/";
