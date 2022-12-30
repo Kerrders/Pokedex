@@ -15,6 +15,10 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: unnecessary
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H github.com  >> ~/.ssh/known_hosts
 
       - name: Checkout code
         uses: actions/checkout@v3
