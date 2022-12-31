@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
 
 ## Auto generated demo
-[GitHub Page](https://kerrders.github.io)
+[Demo](https://kerrders.github.io)
 
 ## Installation
 `npm i`
