@@ -1,7 +1,7 @@
 name: Deploy GitHub Pages
 on:
   push:
-    branches: ["main"]
+    branches: ["build-workflow"] #switch to "main" after testing
 jobs:
   build:
     name: Deploy to github pages
@@ -17,19 +17,21 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: unnecessary
 
-      - name: Set Git name and mail
-        run: |
-          git config --global user.email "kerrders@github.com"
-          git config --global user.name "Github Action"
-
-      - name: Adding Known Hosts
-        run: ssh-keyscan -H github.com  >> ~/.ssh/known_hosts
-
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
-      - name: Install and run deploy
+      - name: Install and build
         run: |
           npm install
           npm run update
-          npm run deploy
+          npm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          ssh-key: true
+          branch: main
+          folder: dist
+          repository-name: Kerrders/Pokedex
