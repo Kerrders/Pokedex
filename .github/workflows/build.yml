@@ -28,6 +28,9 @@ jobs:
           npm run update
           npm run build-for-deploy
 
+      - name: Create 404 page
+        run: cp dist/pokedex/index.html dist/pokedex/404.html
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
