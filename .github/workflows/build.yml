@@ -33,5 +33,5 @@ jobs:
         with:
           ssh-key: true
           branch: main
-          folder: dist
+          folder: dist/pokedex
           repository-name: Kerrders/kerrders.github.io
