@@ -24,7 +24,7 @@ export class LanguageHelper {
       (species) => species.identifier === originalName
     );
     if (!species) {
-      return 'UNKNOWN_NAME';
+      return originalName;
     }
     return (
       pokemonSpeciesNames.find(
@@ -33,7 +33,7 @@ export class LanguageHelper {
           speciesNames.local_language_id &&
           parseInt(speciesNames.local_language_id) ===
             LanguageHelper.getLanguageId()
-      )?.name ?? 'UNKNOWN_NAME'
+      )?.name ?? originalName
     );
   }
 }

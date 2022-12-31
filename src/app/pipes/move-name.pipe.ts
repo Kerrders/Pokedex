@@ -10,7 +10,7 @@ export class MoveNamePipe implements PipeTransform {
   transform(originalName: string): string {
     const move = moves.find((move) => move.identifier === originalName);
     if (!move) {
-      return 'UNKNOWN_NAME';
+      return originalName;
     }
     return (
       moveNames.find(
@@ -19,7 +19,7 @@ export class MoveNamePipe implements PipeTransform {
           moveName.local_language_id &&
           parseInt(moveName.local_language_id) ===
             LanguageHelper.getLanguageId()
-      )?.name ?? 'UNKNOWN_NAME'
+      )?.name ?? originalName
     );
   }
 }
