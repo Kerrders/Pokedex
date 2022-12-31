@@ -17,13 +17,13 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: unnecessary
 
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H github.com  >> ~/.ssh/known_hosts
+
       - name: Set Git name and mail
         run: |
           git config --global user.email "kerrders@github.com"
           git config --global user.name "Github Action"
-
-      - name: Adding Known Hosts
-        run: ssh-keyscan -H github.com  >> ~/.ssh/known_hosts
 
       - name: Checkout code
         uses: actions/checkout@v3
@@ -37,6 +37,7 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
           branch: main
           folder: dist
           repository-name: Kerrders/Pokedex
