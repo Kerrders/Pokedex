@@ -1,7 +1,7 @@
 name: Deploy GitHub Pages
 on:
   push:
-    branches: ["build-workflow"] #switch to "main" after testing
+    branches: ["main"]
 jobs:
   build:
     name: Deploy to github pages
