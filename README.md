@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
 
-## Demo
+## Auto generated demo
 [GitHub Page](https://kerrders.github.io)
 
 ## Installation
