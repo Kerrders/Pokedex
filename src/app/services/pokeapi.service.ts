@@ -23,11 +23,11 @@ export class PokeApiService {
 
   private cachedGetRequest<T>(route: string): Observable<T> {
     if (this._cachingService.hasKey(route)) {
-      return of(this._cachingService.getData(route) as T);
+      return of(this._cachingService.getData<T>(route) as T);
     }
     return this._httpClient.get<T>(route).pipe(
       map((result: T) => {
-        this._cachingService.setData(route, result);
+        this._cachingService.setData<T>(route, result);
         return result;
       })
     );

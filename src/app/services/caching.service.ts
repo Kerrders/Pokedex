@@ -6,12 +6,12 @@ import { Injectable } from '@angular/core';
 export class CachingService {
   private _cachedData: { [key: string]: unknown } = {};
 
-  public setData(cacheKey: string, data: unknown): unknown {
-    return (this._cachedData[cacheKey] = data);
+  public setData<T>(cacheKey: string, data: T): void {
+    this._cachedData[cacheKey] = data;
   }
 
-  public getData(cacheKey: string): unknown {
-    return this._cachedData[cacheKey];
+  public getData<T>(cacheKey: string): T {
+    return this._cachedData[cacheKey] as T;
   }
 
   public hasKey(cacheKey: string): boolean {
