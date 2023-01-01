@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SidenavService } from './services/sidenav.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageHelper } from './helpers/languageHelper';
@@ -8,7 +8,7 @@ import { LanguageHelper } from './helpers/languageHelper';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   public title = 'pokedex';
   public actualLanguage: string = 'de';
   public languages = LanguageHelper.getAvailableLanguages();
@@ -19,10 +19,6 @@ export class AppComponent implements OnInit {
   ) {
     this._translate.setDefaultLang(LanguageHelper.fallbackLanguage);
     this._setLanguage();
-    this.actualLanguage = LanguageHelper.getLanguage();
-  }
-
-  public ngOnInit(): void {
     this.actualLanguage = LanguageHelper.getLanguage();
   }
 
