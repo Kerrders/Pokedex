@@ -17,12 +17,13 @@
               <mat-card-subtitle>{{ row.translatedName }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="text-center">
-              <img
-                *ngIf="(row.url | pokemonImageByUrl).length"
-                [src]="row.url | pokemonImageByUrl"
-                style="max-width: 96px"
-                class="center text-center"
-              />
+              <div class="image-container center">
+                <img
+                  *ngIf="(row.url | pokemonImageByUrl).length"
+                  [src]="row.url | pokemonImageByUrl"
+                  class="center text-center image-container"
+                />
+              </div>
             </mat-card-content>
           </mat-card>
         </div>
