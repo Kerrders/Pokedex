@@ -54,6 +54,23 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="nodata">
+          <td
+            mat-footer-row
+            *matFooterCellDef
+            [colSpan]="displayedColumns.length"
+            class="text-center"
+          >
+            {{ "table.noResult" | translate }}
+          </td>
+        </ng-container>
+
+        <tr
+          mat-footer-row
+          [hidden]="filteredMoves.length > 0"
+          *matFooterRowDef="['nodata']"
+        ></tr>
+
         <tr
           mat-header-row
           *matHeaderRowDef="displayedColumns; sticky: true"
