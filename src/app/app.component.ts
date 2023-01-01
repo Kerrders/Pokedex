@@ -10,7 +10,7 @@ import { LanguageHelper } from './helpers/languageHelper';
 })
 export class AppComponent {
   public title = 'pokedex';
-  public actualLanguage: string = 'de';
+  public actualLanguage = 'de';
   public languages = LanguageHelper.getAvailableLanguages();
 
   constructor(
