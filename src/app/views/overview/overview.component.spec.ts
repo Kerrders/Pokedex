@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from 'src/app/material-module';
 
 import { OverviewComponent } from './overview.component';
@@ -18,6 +19,7 @@ describe('OverviewComponent', () => {
         HttpClientModule,
         FormsModule,
         BrowserAnimationsModule,
+        TranslateModule.forRoot(),
       ],
     }).compileComponents();
 

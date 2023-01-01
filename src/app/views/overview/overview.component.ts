@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { PokemonList } from 'src/app/interfaces/PokemonList.interface';
 import { PokemonPaginatedList } from 'src/app/interfaces/PokemonPaginatedList.interface';
@@ -15,9 +16,28 @@ export class OverviewComponent implements OnInit {
   public data: Array<PokemonList> = [];
   public filteredData: Array<PokemonList> = [];
 
-  constructor(private _pokeApiService: PokeApiService) {}
+  constructor(
+    private _pokeApiService: PokeApiService,
+    private _ref: ChangeDetectorRef,
+    private _translate: TranslateService
+  ) {}
 
   public ngOnInit(): void {
+    this._translate.onLangChange.subscribe(() => {
+      this._getData();
+    });
+    this._getData();
+  }
+
+  public onNameChange(): void {
+    this.filteredData = this.data.filter((pokemon: PokemonList) => {
+      return pokemon.translatedName
+        ?.toLocaleLowerCase()
+        ?.includes(this.name.toLocaleLowerCase());
+    });
+  }
+
+  private _getData(): void {
     this._pokeApiService
       .getAllPokemons()
       .subscribe((result: PokemonPaginatedList) => {
@@ -28,13 +48,5 @@ export class OverviewComponent implements OnInit {
         });
         this.filteredData = this.data;
       });
-  }
-
-  public onNameChange(): void {
-    this.filteredData = this.data.filter((pokemon: PokemonList) => {
-      return pokemon.translatedName
-        ?.toLocaleLowerCase()
-        ?.includes(this.name.toLocaleLowerCase());
-    });
   }
 }

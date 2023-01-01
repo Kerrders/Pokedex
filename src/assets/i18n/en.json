@@ -1,4 +1,5 @@
 {
+  "language": "Language",
   "stats": {
     "hp": "Health",
     "attack": "Attack",
@@ -17,5 +18,9 @@
   },
   "table": {
     "noResult": "No data available"
+  },
+  "langs": {
+    "de": "German",
+    "en": "English"
   }
 }

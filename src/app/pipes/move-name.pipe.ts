@@ -7,7 +7,7 @@ import moveNames from '../../assets/data/move_names.json';
   name: 'moveName',
 })
 export class MoveNamePipe implements PipeTransform {
-  transform(originalName: string): string {
+  transform(originalName: string, languageId: number): string {
     const move = moves.find((move) => move.identifier === originalName);
     if (!move) {
       return originalName;
@@ -17,8 +17,7 @@ export class MoveNamePipe implements PipeTransform {
         (moveName) =>
           moveName.move_id === move.id &&
           moveName.local_language_id &&
-          parseInt(moveName.local_language_id) ===
-            LanguageHelper.getLanguageId()
+          parseInt(moveName.local_language_id) === languageId
       )?.name ?? originalName
     );
   }
