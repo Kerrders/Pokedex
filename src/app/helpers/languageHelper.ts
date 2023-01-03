@@ -28,7 +28,7 @@ export class LanguageHelper {
       : LanguageHelper.fallbackLanguage;
   }
 
-  public static getPokemonName(originalName: string): string {
+  public static getPokemonName(originalName: string, langId: number): string {
     const species = pokemonSpecies.find(
       (species) => species.identifier === originalName
     );
@@ -40,8 +40,7 @@ export class LanguageHelper {
         (speciesNames) =>
           speciesNames.pokemon_species_id === species.id &&
           speciesNames.local_language_id &&
-          parseInt(speciesNames.local_language_id) ===
-            LanguageHelper.getLanguageId()
+          parseInt(speciesNames.local_language_id) === langId
       )?.name ?? originalName
     );
   }

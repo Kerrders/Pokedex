@@ -5,7 +5,7 @@ import { LanguageHelper } from '../helpers/languageHelper';
   name: 'pokemonName',
 })
 export class PokemonNamePipe implements PipeTransform {
-  transform(originalName: string): string {
-    return LanguageHelper.getPokemonName(originalName);
+  transform(originalName: string, langId: number): string {
+    return LanguageHelper.getPokemonName(originalName, langId);
   }
 }

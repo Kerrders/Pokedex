@@ -40,10 +40,7 @@ export class PokeApiService {
   }
 
   public getPokemon(name: string): Observable<CollectedPokemonDetails> {
-    this._sidenavService.addNode(
-      LanguageHelper.getPokemonName(name),
-      `pokemon/${name}`
-    );
+    this._sidenavService.addNode(name, `pokemon/${name}`);
     return forkJoin({
       details: this.cachedGetRequest<PokemonDetails>(
         `${this.baseUrl}/pokemon/${name}`

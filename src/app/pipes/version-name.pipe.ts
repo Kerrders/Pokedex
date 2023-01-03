@@ -16,7 +16,7 @@ export class VersionNamePipe implements PipeTransform {
       (versionGroup) => versionGroup.identifier === groupVersionName
     )?.id;
     if (!versionGroupId) {
-      return 'UNKNOWN_VERSION';
+      return groupVersionName;
     }
 
     const versions = versionsData

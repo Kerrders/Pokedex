@@ -16,9 +16,9 @@ export class MoveTableComponent implements OnInit, OnChanges {
   public pokemonMoves: Array<PokemonMoves>;
   public filteredMoves: Array<FilteredPokemonMoves>;
 
-  public allVersions: Array<string> = versionGroups.map(
-    (versionGroup) => versionGroup.identifier as string
-  );
+  public allVersions: Array<string> = versionGroups
+    .map((versionGroup) => versionGroup.identifier as string)
+    .filter((string) => string && string.length);
   public currentVersion = 'omega-ruby-alpha-sapphire';
   public currentLearnType = 'level-up';
 

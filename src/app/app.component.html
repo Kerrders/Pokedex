@@ -10,7 +10,7 @@
       [routerLink]="node.url"
     >
       <button mat-button color="primary" class="align-middle">
-        {{ node.name | titlecase }}
+        {{ node.name | pokemonName : actualLanguageId | titlecase }}
       </button>
 
       <button

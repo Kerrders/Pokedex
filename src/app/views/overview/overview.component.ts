@@ -18,7 +18,6 @@ export class OverviewComponent implements OnInit {
 
   constructor(
     private _pokeApiService: PokeApiService,
-    private _ref: ChangeDetectorRef,
     private _translate: TranslateService
   ) {}
 
@@ -43,7 +42,10 @@ export class OverviewComponent implements OnInit {
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading = false;
         this.data = result.results.map((pokemon) => {
-          pokemon.translatedName = LanguageHelper.getPokemonName(pokemon.name);
+          pokemon.translatedName = LanguageHelper.getPokemonName(
+            pokemon.name,
+            LanguageHelper.getLanguageId()
+          );
           return pokemon;
         });
         this.filteredData = this.data;

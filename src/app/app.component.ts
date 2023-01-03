@@ -10,8 +10,9 @@ import { LanguageHelper } from './helpers/languageHelper';
 })
 export class AppComponent {
   public title = 'pokedex';
-  public actualLanguage = 'de';
+  public actualLanguage = LanguageHelper.getLanguage();
   public languages = LanguageHelper.getAvailableLanguages();
+  public actualLanguageId = LanguageHelper.getLanguageId();
 
   constructor(
     public sidenavService: SidenavService,
@@ -19,11 +20,11 @@ export class AppComponent {
   ) {
     this._translate.setDefaultLang(LanguageHelper.fallbackLanguage);
     this._setLanguage();
-    this.actualLanguage = LanguageHelper.getLanguage();
   }
 
   public onChangeLanguage(): void {
     LanguageHelper.setLanguage(this.actualLanguage);
+    this.actualLanguageId = LanguageHelper.getLanguageId();
     this._setLanguage();
   }
 
