@@ -23,20 +23,18 @@
     </div>
   </div>
   <div class="flex-align-right">
-    <mat-form-field appearance="fill" class="mt-2">
-      <mat-label>{{ "language" | translate }}</mat-label>
-      <mat-select
-        [(ngModel)]="actualLanguage"
-        (ngModelChange)="onChangeLanguage()"
+    <mat-button-toggle-group
+      class="mat-elevation-z2 language-select-button-group"
+      [(ngModel)]="actualLanguage"
+      (ngModelChange)="onChangeLanguage()"
+    >
+      <mat-button-toggle
+        *ngFor="let lang of languages | keyvalue"
+        [value]="lang.key"
       >
-        <mat-option
-          *ngFor="let lang of languages | keyvalue"
-          [value]="lang.key"
-        >
-          {{ "langs." + lang.key | translate }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+        {{ "langs." + lang.key | translate }}</mat-button-toggle
+      >
+    </mat-button-toggle-group>
   </div>
 </mat-toolbar>
 
