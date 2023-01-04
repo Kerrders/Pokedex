@@ -5,6 +5,7 @@ import { MaterialModule } from './material-module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -13,12 +14,12 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        MaterialModule,
         TranslateModule.forRoot(),
-        FormsModule,
         BrowserAnimationsModule,
+        MaterialModule,
+        FormsModule,
       ],
-      declarations: [AppComponent],
+      declarations: [AppComponent, NavbarComponent],
     }).compileComponents();
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;

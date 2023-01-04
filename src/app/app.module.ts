@@ -20,6 +20,7 @@ import { MoveTableComponent } from './components/move-table/move-table.component
 import { MoveNamePipe } from './pipes/move-name.pipe';
 import { VersionNamePipe } from './pipes/version-name.pipe';
 import { EvolutionTabComponent } from './components/evolution-tab/evolution-tab.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { EvolutionTabComponent } from './components/evolution-tab/evolution-tab.
     MoveNamePipe,
     VersionNamePipe,
     EvolutionTabComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

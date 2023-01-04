@@ -1,18 +1,5 @@
 $base-color: rgba(255, 255, 255, 0.7);
 
-.nodeContainer {
-  display: inline-block;
-  position: relative;
-  margin-left: 20px;
-}
-
-.closeNodeButton {
-  scale: 0.75;
-  position: absolute;
-  right: -30px;
-  top: -6px;
-}
-
 ::ng-deep {
   .mat-mdc-card-title {
     color: $base-color;
@@ -21,12 +8,4 @@ $base-color: rgba(255, 255, 255, 0.7);
   .mat-mdc-footer-row {
     color: $base-color;
   }
-}
-
-.flex-align-right {
-  margin-left: auto;
-}
-
-.language-select-button-group {
-  font-size: 14px;
 }
