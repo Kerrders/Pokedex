@@ -8,15 +8,3 @@
     max-width: 90%;
   }
 }
-
-.evolution-container {
-  display: grid;
-  gap: 10px;
-
-  .pokemon-card {
-    background-color: #212121;
-    &:hover {
-      background-color: var(--bs-code-color, transparent);
-    }
-  }
-}
