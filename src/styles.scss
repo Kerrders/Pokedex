@@ -10,8 +10,17 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background: #303030;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .center {
   margin: 0px auto;
+}
+
+.pokemon-card {
+  cursor: pointer;
+  transition: all ease-in-out 250ms;
+  &:hover {
+    background-color: var(--bs-code-color, transparent);
+  }
 }

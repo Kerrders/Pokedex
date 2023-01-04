@@ -14,8 +14,43 @@
                 >
                 </app-pokemon-status-table>
               </mat-tab>
-              <mat-tab label="Second"> Content 2 </mat-tab>
-              <mat-tab label="Third"> Content 3 </mat-tab>
+              <mat-tab label="Entwicklungen" *ngIf="evolutionChain.length > 1">
+                <div
+                  class="evolution-container align-items-center justify-content-center mt-2"
+                  [ngStyle]="{
+                    'grid-template-columns':
+                      'repeat(' + maximalEvolutionStep + ', 1fr)'
+                  }"
+                >
+                  <mat-card
+                    class="pokemon-card"
+                    *ngFor="let pokemon of evolutionChain"
+                    [routerLink]="['/pokemon/', pokemon.name]"
+                    [ngStyle]="{
+                      'grid-column': pokemon.step + 1
+                    }"
+                  >
+                    <mat-card-header>
+                      <mat-card-subtitle>
+                        {{
+                          pokemon.name
+                            | pokemonName : actualLanguageId
+                            | titlecase
+                        }}</mat-card-subtitle
+                      >
+                    </mat-card-header>
+                    <mat-card-content class="text-center">
+                      <div class="image-container center">
+                        <img
+                          *ngIf="(pokemon.url | pokemonImageByUrl).length"
+                          [src]="pokemon.url | pokemonImageByUrl"
+                          class="center text-center image-container"
+                        />
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+              </mat-tab>
             </mat-tab-group>
           </mat-card-content>
         </mat-card>
