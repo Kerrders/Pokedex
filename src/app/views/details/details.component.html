@@ -4,35 +4,14 @@
       <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
     </div>
     <div *ngIf="!isLoading && pokemonData" class="row">
-      <div class="col-md-8">
-        <mat-card>
-          <mat-card-content>
-            <mat-tab-group>
-              <mat-tab label="Status">
-                <app-pokemon-status-table
-                  [pokemonStats]="pokemonData.details.stats"
-                >
-                </app-pokemon-status-table>
-              </mat-tab>
-              <mat-tab label="Entwicklungen" *ngIf="evolutionChain.length > 1">
-                <app-evolution-tab
-                  [evolutionChain]="evolutionChain"
-                  [maximalEvolutionStep]="maximalEvolutionStep"
-                  [actualLanguageId]="actualLanguageId"
-                ></app-evolution-tab>
-              </mat-tab>
-            </mat-tab-group>
-          </mat-card-content>
-        </mat-card>
-      </div>
-
-      <div class="col-md-4">
+      <div class="col-md-4 mt-2">
         <mat-card>
           <mat-card-content>
             <mat-tab-group>
               <mat-tab label="Artwork">
                 <div class="imgContainer">
                   <img
+                    class="center"
                     [src]="
                       pokemonData.details.sprites.other['official-artwork']
                         .front_default
@@ -52,6 +31,28 @@
                     <img [src]="pokemonData.details.sprites.front_shiny" />
                   </div>
                 </div>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-md-8 mt-2">
+        <mat-card>
+          <mat-card-content>
+            <mat-tab-group>
+              <mat-tab label="Status">
+                <app-pokemon-status-table
+                  [pokemonStats]="pokemonData.details.stats"
+                >
+                </app-pokemon-status-table>
+              </mat-tab>
+              <mat-tab label="Entwicklungen" *ngIf="evolutionChain.length > 1">
+                <app-evolution-tab
+                  [evolutionChain]="evolutionChain"
+                  [maximalEvolutionStep]="maximalEvolutionStep"
+                  [actualLanguageId]="actualLanguageId"
+                ></app-evolution-tab>
               </mat-tab>
             </mat-tab-group>
           </mat-card-content>

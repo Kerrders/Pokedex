@@ -1,7 +1,7 @@
 ::ng-deep {
   .cdk-virtual-scroll-content-wrapper {
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 
@@ -10,6 +10,6 @@
 }
 
 .image-container {
-  width: 96px;
+  max-width: 96px;
   height: 96px;
 }
