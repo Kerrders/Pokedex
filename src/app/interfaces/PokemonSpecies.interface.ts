@@ -1,6 +1,4 @@
-import { MoreToLoad } from './MoreToLoad.interface';
-
 export interface PokemonSpecies {
-  evolution_chain: MoreToLoad;
+  evolution_chain_id: number;
   [key: string]: unknown;
 }

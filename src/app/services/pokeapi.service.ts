@@ -39,21 +39,16 @@ export class PokeApiService {
     );
   }
 
-  public getPokemon(name: string): Observable<CollectedPokemonDetails> {
+  public getPokemon(name: string): Observable<PokemonDetails> {
     this._sidenavService.addNode(name, `pokemon/${name}`);
 
-    return forkJoin({
-      details: this.cachedGetRequest<PokemonDetails>(
-        `${this.baseUrl}/pokemon/${name}`
-      ),
-      species: this.cachedGetRequest<PokemonSpecies>(
-        `${this.baseUrl}/pokemon-species/${name}`
-      ),
-    }).pipe(
-      concatMap((result: CollectedPokemonDetails) => {
-        if (result.species.evolution_chain.url) {
+    return this.cachedGetRequest<PokemonDetails>(
+      `${this.baseUrl}/pokemon/${name}`
+    ).pipe(
+      concatMap((result: PokemonDetails) => {
+        if (result.species.evolution_chain_id) {
           return this.cachedGetRequest<EvolutionChainRequest>(
-            result.species.evolution_chain.url
+            `${this.baseUrl}/evolution/${result.species.evolution_chain_id}`
           ).pipe(
             map((data: EvolutionChainRequest) => {
               result.evolution_chain = data;
