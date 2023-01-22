@@ -14,7 +14,7 @@
         <div class="p-2">
           <mat-card
             class="pokemon-card m-1"
-            [routerLink]="['/pokemon/', row.name]"
+            [routerLink]="['/pokemon/', row.identifier]"
           >
             <mat-card-header>
               <mat-card-subtitle>{{ row.translatedName }}</mat-card-subtitle>
@@ -22,8 +22,7 @@
             <mat-card-content class="text-center">
               <div class="image-container center">
                 <img
-                  *ngIf="(row.url | pokemonImageByUrl).length"
-                  [src]="row.url | pokemonImageByUrl"
+                  [src]="row.id | pokemonImageByUrl"
                   class="center text-center image-container"
                 />
               </div>

@@ -41,11 +41,12 @@ export class OverviewComponent implements OnInit {
       .getAllPokemons()
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading = false;
-        this.data = result.results.map((pokemon) => {
-          pokemon.translatedName = LanguageHelper.getPokemonName(
-            pokemon.name,
-            LanguageHelper.getLanguageId()
-          );
+        this.data = result.data.map((pokemon) => {
+          pokemon.translatedName =
+            pokemon.species_names.find(
+              (name) =>
+                name.local_language_id === LanguageHelper.getLanguageId()
+            )?.name ?? 'UNKNOWN';
           return pokemon;
         });
         this.filteredData = this.data;

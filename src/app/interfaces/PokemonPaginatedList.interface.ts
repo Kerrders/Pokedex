@@ -1,8 +1,8 @@
 import { PokemonList } from './PokemonList.interface';
 
 export interface PokemonPaginatedList {
-  count: number;
-  next: string;
-  previus?: string;
-  results: Array<PokemonList>;
+  total: number;
+  next_page_url: string;
+  prev_page_url?: string;
+  data: Array<PokemonList>;
 }
