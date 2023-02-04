@@ -3,25 +3,24 @@
   <div class="ms-4">
     <button mat-button color="primary" [routerLink]="['']">Home</button>
   </div>
-  <div>
-    <div
-      class="nodeContainer"
+  <button
+    *ngIf="sidenavService.nodes.length"
+    mat-button
+    color="primary"
+    [matMenuTriggerFor]="nodes"
+    [matBadge]="sidenavService.nodes.length"
+  >
+    Tabs
+  </button>
+  <mat-menu #nodes="matMenu" class="nodeMatMenu">
+    <button
+      mat-menu-item
       *ngFor="let node of sidenavService.nodes"
       [routerLink]="node.url"
     >
-      <button mat-button color="primary" class="align-middle">
-        {{ node.name | pokemonName : actualLanguageId | titlecase }}
-      </button>
-
-      <button
-        mat-icon-button
-        (click)="sidenavService.removeNode(node.name)"
-        class="closeNodeButton"
-      >
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
-  </div>
+      {{ node.name | pokemonName : actualLanguageId | titlecase }}
+    </button>
+  </mat-menu>
   <div class="flex-align-right">
     <mat-button-toggle-group
       class="mat-elevation-z2 language-select-button-group"
