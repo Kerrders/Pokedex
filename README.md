@@ -1,6 +1,7 @@
 # Pokedex
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+
 Pokemon type icons from: https://github.com/duiker101/pokemon-type-svg-icons
 
 ## Auto generated demo
