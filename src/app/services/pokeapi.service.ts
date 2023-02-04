@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { PokemonPaginatedList } from '../interfaces/PokemonPaginatedList.interface';
 import { Injectable } from '@angular/core';
-import { Observable, of, map, forkJoin, concatMap } from 'rxjs';
+import { Observable, of, map, forkJoin, concatMap, catchError } from 'rxjs';
 import { PokemonDetails } from '../interfaces/PokemonDetails.interface';
 import { CachingService } from './caching.service';
 import { SidenavService } from './sidenav.service';
@@ -48,10 +48,11 @@ export class PokeApiService {
       ),
       species: this.cachedGetRequest<PokemonSpecies>(
         `${this.baseUrl}/pokemon-species/${name}`
-      ),
+      ).pipe(catchError(() => of(null))),
     }).pipe(
       concatMap((result: CollectedPokemonDetails) => {
-        if (result.species.evolution_chain.url) {
+        console.log(result);
+        if (result.species && result.species.evolution_chain.url) {
           return this.cachedGetRequest<EvolutionChainRequest>(
             result.species.evolution_chain.url
           ).pipe(

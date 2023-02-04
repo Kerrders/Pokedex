@@ -4,6 +4,6 @@ import { PokemonSpecies } from './PokemonSpecies.interface';
 
 export interface CollectedPokemonDetails {
   details: PokemonDetails;
-  species: PokemonSpecies;
+  species: PokemonSpecies | null;
   evolution_chain?: EvolutionChainRequest;
 }
