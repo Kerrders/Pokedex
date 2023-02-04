@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { LanguageHelper } from '../helpers/languageHelper';
 import moves from '../../assets/data/moves.json';
 import moveNames from '../../assets/data/move_names.json';
 
