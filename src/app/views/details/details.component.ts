@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
-import { EvolutionChain } from 'src/app/interfaces/EvolutionChain.interface';
 import { MappedEvolutionChain } from 'src/app/interfaces/MappedEvolutionChain.interface';
 import { PokemonDetails } from 'src/app/interfaces/PokemonDetails.interface';
 import { PokeApiService } from 'src/app/services/pokeapi.service';
@@ -43,27 +42,36 @@ export class DetailsComponent implements OnInit {
     this._pokeApiService
       .getPokemon(this._name)
       .subscribe((result: PokemonDetails) => {
-        if (result.evolution_chain) {
-          this.evolutionChain = [];
-          //this.parseEvolutionChain(result.evolution_chain.chain, 0);
+        if (result.evolution_chain && result.evolution_chain.length) {
+          this.parseEvolutionChain(result.evolution_chain);
         }
         this.pokemonData = result;
         this.isLoading = false;
       });
   }
 
-  private parseEvolutionChain(chain: EvolutionChain, step: number): void {
-    this.evolutionChain.push({
-      name: chain.species.name,
-      url: chain.species.url.replace('pokemon-species', 'pokemon'),
-      step: step,
-    });
-    step++;
-    for (const nextChain of chain.evolves_to) {
-      this.parseEvolutionChain(nextChain, step);
+  private parseEvolutionChain(chain: any): void {
+    const pokemonMap: { [key: number]: number } = {};
+
+    for (const pokemon of chain) {
+      if (pokemon.evolves_from_species_id === null) {
+        pokemonMap[pokemon.id] = 0;
+      } else {
+        const evolvesFromId = parseInt(pokemon.evolves_from_species_id);
+        const evolvesFromStep = pokemonMap[evolvesFromId];
+        pokemonMap[pokemon.id] = evolvesFromStep + 1;
+      }
     }
-    if (!chain.evolves_to.length) {
-      this.maximalEvolutionStep = step;
+
+    for (const pokemon of chain) {
+      pokemon.step = pokemonMap[pokemon.id];
     }
+
+    this.evolutionChain = chain;
+
+    this.maximalEvolutionStep = chain.reduce(
+      (max: number, pokemon: any) => Math.max(max, pokemon.step),
+      0
+    );
   }
 }
