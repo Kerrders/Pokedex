@@ -1,12 +1,12 @@
 {
   "language": "Sprache",
   "stats": {
-    "hp": "Leben",
-    "attack": "Angriff",
-    "defense": "Verteidigung",
-    "special-attack": "Spezial Angriff",
-    "special-defense": "Spezial Verteidigung",
-    "speed": "Geschwindigkeit"
+    "1": "Leben",
+    "2": "Angriff",
+    "3": "Verteidigung",
+    "4": "Spezial Angriff",
+    "5": "Spezial Verteidigung",
+    "6": "Geschwindigkeit"
   },
   "moveTable": {
     "title": "Liste der Attacken",

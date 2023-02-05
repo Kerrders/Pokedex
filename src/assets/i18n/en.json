@@ -1,12 +1,12 @@
 {
   "language": "Language",
   "stats": {
-    "hp": "Health",
-    "attack": "Attack",
-    "defense": "Defense",
-    "special-attack": "Special Attack",
-    "special-defense": "Special Defense",
-    "speed": "Speed"
+    "1": "Health",
+    "2": "Attack",
+    "3": "Defense",
+    "4": "Special Attack",
+    "5": "Special Defense",
+    "6": "Speed"
   },
   "moveTable": {
     "title": "List of attacks",
