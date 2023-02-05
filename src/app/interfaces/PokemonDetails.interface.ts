@@ -4,6 +4,7 @@ import { PokemonSprite } from './PokemonSprite.interface';
 import { PokemonStatInterface } from './PokemonStat.interface';
 
 export interface PokemonDetails {
+  id: number;
   stats: Array<PokemonStatInterface>;
   sprites: PokemonSprite;
   moves: Array<PokemonMoves>;

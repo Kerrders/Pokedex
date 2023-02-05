@@ -1,10 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { PokemonSpriteTypePath } from '../enums/PokemonSpriteTypePath';
 
 @Pipe({
   name: 'pokemonImageByUrl',
 })
 export class PokemonImageByUrlPipe implements PipeTransform {
-  transform(id: string): string {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+  transform(id: string | number, type: PokemonSpriteTypePath): string {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${type}/${id}.png`;
   }
 }

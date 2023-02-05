@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { EvolutionChain } from 'src/app/interfaces/EvolutionChain.interface';
 import { MappedEvolutionChain } from 'src/app/interfaces/MappedEvolutionChain.interface';
@@ -18,6 +19,7 @@ export class DetailsComponent implements OnInit {
   public actualLanguageId = LanguageHelper.getLanguageId();
   public evolutionChain: Array<MappedEvolutionChain> = [];
   public maximalEvolutionStep: number;
+  public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
   private _name: string;
 
   constructor(

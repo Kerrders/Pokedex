@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { MappedEvolutionChain } from 'src/app/interfaces/MappedEvolutionChain.interface';
 
 @Component({
@@ -7,6 +8,8 @@ import { MappedEvolutionChain } from 'src/app/interfaces/MappedEvolutionChain.in
   styleUrls: ['./evolution-tab.component.scss'],
 })
 export class EvolutionTabComponent {
+  public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
+
   @Input()
   public evolutionChain: Array<MappedEvolutionChain>;
 

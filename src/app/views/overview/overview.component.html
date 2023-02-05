@@ -22,7 +22,9 @@
             <mat-card-content class="text-center">
               <div class="image-container center">
                 <img
-                  [src]="row.id | pokemonImageByUrl"
+                  [src]="
+                    row.id | pokemonImageByUrl : pokemonSpriteTypePath.FRONT
+                  "
                   class="center text-center image-container"
                 />
               </div>

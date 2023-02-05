@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { PokemonList } from 'src/app/interfaces/PokemonList.interface';
 import { PokemonPaginatedList } from 'src/app/interfaces/PokemonPaginatedList.interface';
@@ -15,6 +16,7 @@ export class OverviewComponent implements OnInit {
   public name: string;
   public data: Array<PokemonList> = [];
   public filteredData: Array<PokemonList> = [];
+  public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
 
   constructor(
     private _pokeApiService: PokeApiService,

@@ -22,8 +22,7 @@
     <mat-card-content class="text-center">
       <div class="image-container center">
         <img
-          *ngIf="(pokemon.url | pokemonImageByUrl).length"
-          [src]="pokemon.url | pokemonImageByUrl"
+          [src]="pokemon.url | pokemonImageByUrl : pokemonSpriteTypePath.FRONT"
           class="center text-center image-container"
         />
       </div>

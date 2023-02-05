@@ -13,8 +13,8 @@
                   <img
                     class="center"
                     [src]="
-                      pokemonData.sprites.other['official-artwork']
-                        .front_default
+                      pokemonData.id
+                        | pokemonImageByUrl : pokemonSpriteTypePath.ARTWORK
                     "
                   />
                 </div>
@@ -22,13 +22,34 @@
               <mat-tab label="Sprites">
                 <div class="imgContainer">
                   <div class="text-center">
-                    <img [src]="pokemonData.sprites.back_default" />
-                    <img [src]="pokemonData.sprites.front_default" />
+                    <img
+                      [src]="
+                        pokemonData.id
+                          | pokemonImageByUrl : pokemonSpriteTypePath.BACK
+                      "
+                    />
+                    <img
+                      [src]="
+                        pokemonData.id
+                          | pokemonImageByUrl : pokemonSpriteTypePath.FRONT
+                      "
+                    />
                   </div>
                   <mat-divider></mat-divider>
                   <div class="text-center">
-                    <img [src]="pokemonData.sprites.back_shiny" />
-                    <img [src]="pokemonData.sprites.front_shiny" />
+                    <img
+                      [src]="
+                        pokemonData.id
+                          | pokemonImageByUrl : pokemonSpriteTypePath.SHINY_BACK
+                      "
+                    />
+                    <img
+                      [src]="
+                        pokemonData.id
+                          | pokemonImageByUrl
+                            : pokemonSpriteTypePath.SHINY_FRONT
+                      "
+                    />
                   </div>
                 </div>
               </mat-tab>

@@ -13,7 +13,7 @@ import { EvolutionChainRequest } from '../interfaces/EvolutionChainRequest.inter
   providedIn: 'root',
 })
 export class PokeApiService {
-  private baseUrl = 'http://localhost';
+  private baseUrl = 'https://vps-0968ce91.vps.ovh.net';
 
   constructor(
     private _httpClient: HttpClient,
