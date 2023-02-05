@@ -3,9 +3,11 @@ import path from "path";
 import fetch from "node-fetch";
 
 const files = [
+  "pokemon_species",
+  "pokemon_species_names",
   "versions",
   "version_names",
-  "version_groups"
+  "version_groups",
 ];
 const githubFilesUrl =
   "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/";
