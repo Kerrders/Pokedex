@@ -10,13 +10,13 @@
           [(ngModel)]="currentLearnType"
           (ngModelChange)="getData()"
         >
-          <mat-button-toggle value="level-up">{{
+          <mat-button-toggle [value]="1">{{
             "moveTable.learnTypes.levelUp" | translate
           }}</mat-button-toggle>
-          <mat-button-toggle value="tutor">{{
+          <mat-button-toggle [value]="3">{{
             "moveTable.learnTypes.tutor" | translate
           }}</mat-button-toggle>
-          <mat-button-toggle value="machine">{{
+          <mat-button-toggle [value]="4">{{
             "moveTable.learnTypes.machine" | translate
           }}</mat-button-toggle>
         </mat-button-toggle-group>

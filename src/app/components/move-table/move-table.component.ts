@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { FilteredPokemonMoves } from 'src/app/interfaces/FilteredPokemonMoves.interface';
 import { PokemonMoves } from 'src/app/interfaces/PokemonMoves.interface';
-import { VersionGroupDetails } from 'src/app/interfaces/VersionGroupDetails.interface';
 import versionGroups from '../../../assets/data/version_groups.json';
 
 @Component({
@@ -17,10 +16,10 @@ export class MoveTableComponent implements OnInit, OnChanges {
   public filteredMoves: Array<FilteredPokemonMoves>;
 
   public allVersions: Array<string> = versionGroups
-    .map((versionGroup) => versionGroup.identifier as string)
-    .filter((string) => string && string.length);
-  public currentVersion = 'omega-ruby-alpha-sapphire';
-  public currentLearnType = 'level-up';
+    .map((versionGroup) => versionGroup.id)
+    .filter((value) => value);
+  public currentVersion = '1';
+  public currentLearnType = 1;
 
   public displayedColumns: Array<string> = ['name', 'level'];
   public langId: number = LanguageHelper.getLanguageId();
@@ -41,18 +40,16 @@ export class MoveTableComponent implements OnInit, OnChanges {
   public getData(): void {
     this.filteredMoves = [];
     this.pokemonMoves?.forEach((element) => {
-      const versionData = element.version_group_details.find(
-        (versionData: VersionGroupDetails) =>
-          versionData.version_group.name === this.currentVersion
-      );
       if (
-        versionData &&
-        versionData.move_learn_method.name === this.currentLearnType
+        element.version_group_id === parseInt(this.currentVersion) &&
+        element.pokemon_move_method_id === this.currentLearnType
       ) {
         this.filteredMoves.push({
-          name: element.move.name,
-          level: versionData.level_learned_at,
-          method: versionData.move_learn_method.name,
+          name:
+            element.names.find((name) => name.local_language_id === this.langId)
+              ?.name ?? 'UNKNOWN',
+          level: element.level,
+          method: element.pokemon_move_method_id,
         });
       }
     });

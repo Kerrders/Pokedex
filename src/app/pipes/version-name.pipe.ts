@@ -7,16 +7,16 @@ import versionGroups from '../../assets/data/version_groups.json';
   name: 'versionName',
 })
 export class VersionNamePipe implements PipeTransform {
-  transform(groupVersionName: string, languageId: number): string {
-    if (!groupVersionName?.length) {
+  transform(groupVersionId: string, languageId: number): string {
+    if (!groupVersionId?.length) {
       return 'UNKNOWN_VERSION';
     }
 
     const versionGroupId = versionGroups.find(
-      (versionGroup) => versionGroup.identifier === groupVersionName
+      (versionGroup) => versionGroup.id === groupVersionId
     )?.id;
     if (!versionGroupId) {
-      return groupVersionName;
+      return 'UNKNOWN_VERSION';
     }
 
     const versions = versionsData
