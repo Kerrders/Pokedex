@@ -7,7 +7,7 @@
   <mat-card
     class="pokemon-card"
     *ngFor="let pokemon of evolutionChain"
-    [routerLink]="['/pokemon/', pokemon.name]"
+    [routerLink]="['/pokemon/', pokemon.identifier]"
     [ngStyle]="{
       'grid-column': pokemon.step + 1
     }"
