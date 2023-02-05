@@ -3,8 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
-import { MappedEvolutionChain } from 'src/app/interfaces/MappedEvolutionChain.interface';
-import { PokemonDetails } from 'src/app/interfaces/PokemonDetails.interface';
+import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
+import { PokemonEvolution } from 'src/app/interfaces/PokemonEvolution.interface';
+import { PokemonSpecy } from 'src/app/interfaces/PokemonSpecy.interface';
 import { PokeApiService } from 'src/app/services/pokeapi.service';
 
 @Component({
@@ -14,9 +15,9 @@ import { PokeApiService } from 'src/app/services/pokeapi.service';
 })
 export class DetailsComponent implements OnInit {
   public isLoading: boolean;
-  public pokemonData: PokemonDetails;
+  public pokemonData: Pokemon;
   public actualLanguageId = LanguageHelper.getLanguageId();
-  public evolutionChain: Array<MappedEvolutionChain> = [];
+  public evolutionChain: Array<PokemonSpecy> = [];
   public maximalEvolutionStep: number;
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
   private _name: string;
@@ -39,18 +40,16 @@ export class DetailsComponent implements OnInit {
 
   private loadData(): void {
     this.isLoading = true;
-    this._pokeApiService
-      .getPokemon(this._name)
-      .subscribe((result: PokemonDetails) => {
-        if (result.evolution_chain && result.evolution_chain.length) {
-          this.parseEvolutionChain(result.evolution_chain);
-        }
-        this.pokemonData = result;
-        this.isLoading = false;
-      });
+    this._pokeApiService.getPokemon(this._name).subscribe((result: Pokemon) => {
+      if (result.evolution && result.evolution.length) {
+        this.parseEvolutionChain(result.evolution);
+      }
+      this.pokemonData = result;
+      this.isLoading = false;
+    });
   }
 
-  private parseEvolutionChain(chain: any): void {
+  private parseEvolutionChain(chain: Array<PokemonSpecy>): void {
     const pokemonMap: { [key: number]: number } = {};
 
     for (const pokemon of chain) {
@@ -70,7 +69,7 @@ export class DetailsComponent implements OnInit {
     this.evolutionChain = chain;
 
     this.maximalEvolutionStep = chain.reduce(
-      (max: number, pokemon: any) => Math.max(max, pokemon.step),
+      (max: number, pokemon: PokemonSpecy) => Math.max(max, pokemon?.step ?? 0),
       0
     );
   }

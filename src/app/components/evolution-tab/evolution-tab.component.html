@@ -9,13 +9,13 @@
     *ngFor="let pokemon of evolutionChain"
     [routerLink]="['/pokemon/', pokemon.identifier]"
     [ngStyle]="{
-      'grid-column': pokemon.step + 1
+      'grid-column': (pokemon.step ?? 0) + 1
     }"
   >
     <mat-card-header>
       <mat-card-subtitle>
         {{
-          pokemon.name | pokemonName : actualLanguageId | titlecase
+          pokemon.identifier | pokemonName : actualLanguageId | titlecase
         }}</mat-card-subtitle
       >
     </mat-card-header>

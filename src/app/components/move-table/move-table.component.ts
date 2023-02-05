@@ -2,7 +2,8 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { FilteredPokemonMoves } from 'src/app/interfaces/FilteredPokemonMoves.interface';
-import { PokemonMoves } from 'src/app/interfaces/PokemonMoves.interface';
+import { MoveName } from 'src/app/interfaces/MoveName.interface';
+import { PokemonMove } from 'src/app/interfaces/PokemonMove.interface';
 import versionGroups from '../../../assets/data/version_groups.json';
 
 @Component({
@@ -12,7 +13,7 @@ import versionGroups from '../../../assets/data/version_groups.json';
 })
 export class MoveTableComponent implements OnInit, OnChanges {
   @Input()
-  public pokemonMoves: Array<PokemonMoves>;
+  public pokemonMoves: Array<PokemonMove>;
   public filteredMoves: Array<FilteredPokemonMoves>;
 
   public allVersions: Array<string> = versionGroups
@@ -46,8 +47,9 @@ export class MoveTableComponent implements OnInit, OnChanges {
       ) {
         this.filteredMoves.push({
           name:
-            element.names.find((name) => name.local_language_id === this.langId)
-              ?.name ?? 'UNKNOWN',
+            element.names.find(
+              (name: MoveName) => name.local_language_id === this.langId
+            )?.name ?? 'UNKNOWN',
           level: element.level,
           method: element.pokemon_move_method_id,
         });

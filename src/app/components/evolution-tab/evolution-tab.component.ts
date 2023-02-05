@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
-import { MappedEvolutionChain } from 'src/app/interfaces/MappedEvolutionChain.interface';
+import { PokemonSpecy } from 'src/app/interfaces/PokemonSpecy.interface';
 
 @Component({
   selector: 'app-evolution-tab',
@@ -11,7 +11,7 @@ export class EvolutionTabComponent {
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
 
   @Input()
-  public evolutionChain: Array<MappedEvolutionChain>;
+  public evolutionChain: Array<PokemonSpecy>;
 
   @Input()
   public maximalEvolutionStep: number;
