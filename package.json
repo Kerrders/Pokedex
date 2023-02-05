@@ -9,6 +9,7 @@
     "test": "ng test --watch=false --browsers=ChromeHeadlessCustom",
     "lint": "ng lint",
     "prettier": "npx prettier src/. --write",
+    "update": "node ./scripts/loadStaticData.mjs",
     "build-for-deploy": "ng build --base-href https://kerrders.github.io"
   },
   "private": true,
