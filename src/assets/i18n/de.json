@@ -22,5 +22,25 @@
   "langs": {
     "de": "Deutsch",
     "en": "Englisch"
+  },
+  "types": {
+    "normal": "Normal",
+    "fire": "Feuer",
+    "water": "Wasser",
+    "grass": "Gras",
+    "electric": "Elektro",
+    "ice": "Eis",
+    "fighting": "Kampf",
+    "poison": "Gift",
+    "ground": "Boden",
+    "flying": "Flug",
+    "psychic": "Psycho",
+    "bug": "Käfer",
+    "rock": "Stein",
+    "ghost": "Geist",
+    "dragon": "Drache",
+    "dark": "Unlicht",
+    "steel": "Stahl",
+    "fairy": "Fee"
   }
 }

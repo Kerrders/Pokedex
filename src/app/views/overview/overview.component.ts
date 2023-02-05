@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';

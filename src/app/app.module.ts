@@ -21,6 +21,7 @@ import { MoveNamePipe } from './pipes/move-name.pipe';
 import { VersionNamePipe } from './pipes/version-name.pipe';
 import { EvolutionTabComponent } from './components/evolution-tab/evolution-tab.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ColorForTypePipe } from './pipes/color-for-type.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     VersionNamePipe,
     EvolutionTabComponent,
     NavbarComponent,
+    ColorForTypePipe,
   ],
   imports: [
     BrowserModule,

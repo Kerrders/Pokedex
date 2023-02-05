@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class SidenavService {
   public nodes: Array<{ name: string; url: string }> = [];
+  private _maxNodes = 10;
 
   public removeNode(name: string): void {
     this.nodes = this.nodes.filter((node) => node.name !== name);
@@ -14,6 +15,11 @@ export class SidenavService {
     if (this.nodes.some((node) => node.name === name)) {
       return;
     }
+
+    if (this.nodes.length >= this._maxNodes) {
+      this.nodes.shift();
+    }
+
     this.nodes.push({
       name: name,
       url: url,
