@@ -1,29 +1,30 @@
 <div
   class="evolution-container align-items-center justify-content-center mt-2"
   [ngStyle]="{
-    'grid-template-columns': 'repeat(' + maximalEvolutionStep + ', 1fr)'
+    'grid-template-columns': 'repeat(' + (maximalEvolutionStep + 1) + ', 1fr)'
   }"
 >
   <mat-card
     class="pokemon-card"
     *ngFor="let pokemon of evolutionChain"
-    [routerLink]="['/pokemon/', pokemon.name]"
+    [routerLink]="['/pokemon/', pokemon.identifier]"
     [ngStyle]="{
-      'grid-column': pokemon.step + 1
+      'grid-column': (pokemon.step ?? 0) + 1
     }"
   >
     <mat-card-header>
       <mat-card-subtitle>
         {{
-          pokemon.name | pokemonName : actualLanguageId | titlecase
+          pokemon.names ?? []
+            | pokemonSpeciesName : actualLanguageId
+            | titlecase
         }}</mat-card-subtitle
       >
     </mat-card-header>
     <mat-card-content class="text-center">
       <div class="image-container center">
         <img
-          *ngIf="(pokemon.url | pokemonImageByUrl).length"
-          [src]="pokemon.url | pokemonImageByUrl"
+          [src]="pokemon.id | pokemonImage : pokemonSpriteTypePath.FRONT"
           class="center text-center image-container"
         />
       </div>

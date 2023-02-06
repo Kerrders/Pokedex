@@ -18,7 +18,7 @@
       *ngFor="let node of sidenavService.nodes"
       [routerLink]="node.url"
     >
-      {{ node.name | pokemonName : actualLanguageId | titlecase }}
+      {{ node.name | pokemonSpeciesName : actualLanguageId }}
     </button>
   </mat-menu>
   <div class="flex-align-right">

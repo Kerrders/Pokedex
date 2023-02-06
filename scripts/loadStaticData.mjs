@@ -3,8 +3,6 @@ import path from "path";
 import fetch from "node-fetch";
 
 const files = [
-  "moves",
-  "move_names",
   "pokemon_species",
   "pokemon_species_names",
   "versions",

@@ -1,19 +1,17 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { PokemonPaginatedList } from '../interfaces/PokemonPaginatedList.interface';
 import { Injectable } from '@angular/core';
-import { Observable, of, map, forkJoin, concatMap, catchError } from 'rxjs';
-import { PokemonDetails } from '../interfaces/PokemonDetails.interface';
+import { Observable, of, map, concatMap } from 'rxjs';
 import { CachingService } from './caching.service';
 import { SidenavService } from './sidenav.service';
-import { PokemonSpecies } from '../interfaces/PokemonSpecies.interface';
-import { CollectedPokemonDetails } from '../interfaces/CollectedPokemonDetails.interface';
-import { EvolutionChainRequest } from '../interfaces/EvolutionChainRequest.interface';
+import { Pokemon } from '../interfaces/Pokemon.interface';
+import { PokemonSpecy } from '../interfaces/PokemonSpecy.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PokeApiService {
-  private baseUrl = 'https://pokeapi.co/api/v2';
+  private baseUrl = 'https://kerrders.ovh';
 
   constructor(
     private _httpClient: HttpClient,
@@ -33,35 +31,32 @@ export class PokeApiService {
     );
   }
 
-  public getAllPokemons(): Observable<PokemonPaginatedList> {
+  public getPokemons(params: HttpParams): Observable<PokemonPaginatedList> {
     return this.cachedGetRequest<PokemonPaginatedList>(
-      `${this.baseUrl}/pokemon/?limit=5000`
+      `${this.baseUrl}/pokemon?${params.toString()}`
     );
   }
 
-  public getPokemon(name: string): Observable<CollectedPokemonDetails> {
-    this._sidenavService.addNode(name, `pokemon/${name}`);
-
-    return forkJoin({
-      details: this.cachedGetRequest<PokemonDetails>(
-        `${this.baseUrl}/pokemon/${name}`
-      ),
-      species: this.cachedGetRequest<PokemonSpecies>(
-        `${this.baseUrl}/pokemon-species/${name}`
-      ).pipe(catchError(() => of(null))),
-    }).pipe(
-      concatMap((result: CollectedPokemonDetails) => {
-        console.log(result);
-        if (result.species && result.species.evolution_chain.url) {
-          return this.cachedGetRequest<EvolutionChainRequest>(
-            result.species.evolution_chain.url
+  public getPokemon(name: string): Observable<Pokemon> {
+    return this.cachedGetRequest<Pokemon>(
+      `${this.baseUrl}/pokemon/${name}`
+    ).pipe(
+      concatMap((result: Pokemon) => {
+        if (result.species.evolution_chain_id) {
+          return this.cachedGetRequest<Array<PokemonSpecy>>(
+            `${this.baseUrl}/evolution/${result.species.evolution_chain_id}`
           ).pipe(
-            map((data: EvolutionChainRequest) => {
-              result.evolution_chain = data;
+            map((data: Array<PokemonSpecy>) => {
+              result.evolution = data;
+              this._sidenavService.addNode(
+                result.species_names,
+                `pokemon/${name}`
+              );
               return result;
             })
           );
         }
+        this._sidenavService.addNode(result.species_names, `pokemon/${name}`);
         return of(result);
       })
     );

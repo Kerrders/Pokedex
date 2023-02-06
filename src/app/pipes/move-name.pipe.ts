@@ -1,23 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import moves from '../../assets/data/moves.json';
 import moveNames from '../../assets/data/move_names.json';
+import { MoveName } from '../interfaces/MoveName.interface';
 
 @Pipe({
   name: 'moveName',
 })
 export class MoveNamePipe implements PipeTransform {
-  transform(originalName: string, languageId: number): string {
-    const move = moves.find((move) => move.identifier === originalName);
-    if (!move) {
-      return originalName;
-    }
+  transform(names: Array<MoveName>, languageId: number): string {
     return (
-      moveNames.find(
-        (moveName) =>
-          moveName.move_id === move.id &&
-          moveName.local_language_id &&
-          parseInt(moveName.local_language_id) === languageId
-      )?.name ?? originalName
+      names.find((name) => name.local_language_id === languageId)?.name ??
+      'UNKNOWN'
     );
   }
 }

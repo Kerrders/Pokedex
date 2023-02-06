@@ -1,79 +1,85 @@
-<div *ngIf="isLoading">
-  <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
-</div>
-<div *ngIf="!isLoading && pokemonData" class="row">
-  <div class="col-md-4 mt-2">
-    <mat-card>
-      <mat-card-content>
-        <mat-tab-group>
-          <mat-tab label="Artwork">
-            <div class="imgContainer">
-              <img
-                class="center"
-                [src]="
-                  pokemonData.details.sprites.other['official-artwork']
-                    .front_default
-                "
-              />
-            </div>
-          </mat-tab>
-          <mat-tab label="Sprites">
-            <div class="imgContainer">
-              <div class="text-center">
-                <img [src]="pokemonData.details.sprites.back_default" />
-                <img [src]="pokemonData.details.sprites.front_default" />
-              </div>
-              <mat-divider></mat-divider>
-              <div class="text-center">
-                <img [src]="pokemonData.details.sprites.back_shiny" />
-                <img [src]="pokemonData.details.sprites.front_shiny" />
-              </div>
-            </div>
-          </mat-tab>
-        </mat-tab-group>
+<div class="container mt-3">
+  <div class="row">
+    <div *ngIf="isLoading">
+      <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
+    </div>
+    <div *ngIf="!isLoading && pokemonData" class="row">
+      <div class="col-md-4 mt-2">
+        <mat-card>
+          <mat-card-content>
+            <mat-tab-group>
+              <mat-tab label="Artwork">
+                <div class="imgContainer">
+                  <img
+                    class="center"
+                    [src]="
+                      pokemonData.id
+                        | pokemonImage : pokemonSpriteTypePath.ARTWORK
+                    "
+                  />
+                </div>
+              </mat-tab>
+              <mat-tab label="Sprites">
+                <div class="imgContainer">
+                  <div class="text-center">
+                    <img
+                      [src]="
+                        pokemonData.id
+                          | pokemonImage : pokemonSpriteTypePath.BACK
+                      "
+                    />
+                    <img
+                      [src]="
+                        pokemonData.id
+                          | pokemonImage : pokemonSpriteTypePath.FRONT
+                      "
+                    />
+                  </div>
+                  <mat-divider></mat-divider>
+                  <div class="text-center">
+                    <img
+                      [src]="
+                        pokemonData.id
+                          | pokemonImage : pokemonSpriteTypePath.SHINY_BACK
+                      "
+                    />
+                    <img
+                      [src]="
+                        pokemonData.id
+                          | pokemonImage : pokemonSpriteTypePath.SHINY_FRONT
+                      "
+                    />
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-card-content>
+        </mat-card>
+      </div>
 
-        <mat-chip-set>
-          <mat-chip
-            *ngFor="let typeElement of pokemonData.details.types"
-            [ngStyle]="{
-              'background-color': typeElement.type.name | colorForType
-            }"
-          >
-            <img
-              matChipAvatar
-              [src]="'./assets/images/types/' + typeElement.type.name + '.svg'"
-              [alt]="typeElement.type.name | titlecase"
-            />
-            {{ "types." + typeElement.type.name | translate }}
-          </mat-chip>
-        </mat-chip-set>
-      </mat-card-content>
-    </mat-card>
-  </div>
+      <div class="col-md-8 mt-2">
+        <mat-card>
+          <mat-card-content>
+            <mat-tab-group>
+              <mat-tab label="Status" *ngIf="pokemonData.stats">
+                <app-pokemon-status-table [pokemonStats]="pokemonData.stats">
+                </app-pokemon-status-table>
+              </mat-tab>
+              <mat-tab label="Entwicklungen" *ngIf="evolutionChain.length > 1">
+                <app-evolution-tab
+                  [evolutionChain]="evolutionChain"
+                  [maximalEvolutionStep]="maximalEvolutionStep"
+                  [actualLanguageId]="actualLanguageId"
+                ></app-evolution-tab>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-card-content>
+        </mat-card>
+      </div>
 
-  <div class="col-md-8 mt-2">
-    <mat-card>
-      <mat-card-content>
-        <mat-tab-group>
-          <mat-tab label="Status">
-            <app-pokemon-status-table
-              [pokemonStats]="pokemonData.details.stats"
-            >
-            </app-pokemon-status-table>
-          </mat-tab>
-          <mat-tab label="Entwicklungen" *ngIf="evolutionChain.length > 1">
-            <app-evolution-tab
-              [evolutionChain]="evolutionChain"
-              [maximalEvolutionStep]="maximalEvolutionStep"
-              [actualLanguageId]="actualLanguageId"
-            ></app-evolution-tab>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <div class="col-md-12 mt-3">
-    <app-move-table [pokemonMoves]="pokemonData.details.moves"></app-move-table>
+      <div class="col-md-12 mt-3" *ngIf="pokemonData.moves">
+        <app-move-table [pokemonMoves]="pokemonData.moves"></app-move-table>
+      </div>
+    </div>
   </div>
 </div>

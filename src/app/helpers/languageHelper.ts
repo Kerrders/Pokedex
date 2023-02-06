@@ -1,6 +1,3 @@
-import pokemonSpecies from '../../assets/data/pokemon_species.json';
-import pokemonSpeciesNames from '../../assets/data/pokemon_species_names.json';
-
 export class LanguageHelper {
   public static fallbackLanguage = 'en';
   private static _allowedLanguages: Array<string> = ['de', 'en'];
@@ -26,22 +23,5 @@ export class LanguageHelper {
     return LanguageHelper._allowedLanguages.includes(lang)
       ? lang
       : LanguageHelper.fallbackLanguage;
-  }
-
-  public static getPokemonName(originalName: string, langId: number): string {
-    const species = pokemonSpecies.find(
-      (species) => species.identifier === originalName
-    );
-    if (!species) {
-      return originalName;
-    }
-    return (
-      pokemonSpeciesNames.find(
-        (speciesNames) =>
-          speciesNames.pokemon_species_id === species.id &&
-          speciesNames.local_language_id &&
-          parseInt(speciesNames.local_language_id) === langId
-      )?.name ?? originalName
-    );
   }
 }

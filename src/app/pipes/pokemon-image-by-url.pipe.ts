@@ -1,17 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { PokemonSpriteTypePath } from '../enums/PokemonSpriteTypePath';
 
 @Pipe({
-  name: 'pokemonImageByUrl',
+  name: 'pokemonImage',
 })
 export class PokemonImageByUrlPipe implements PipeTransform {
-  transform(url: string): string {
-    const regex = /pokemon\/(.*)\//g;
-    const id: string | undefined = url
-      .match(regex)?.[0]
-      .replace('pokemon/', '')
-      .replace('/', '');
-    return id
-      ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-      : '';
+  transform(id: string | number, type: PokemonSpriteTypePath): string {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${type}/${id}.png`;
   }
 }

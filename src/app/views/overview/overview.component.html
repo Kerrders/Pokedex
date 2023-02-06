@@ -1,36 +1,42 @@
 <div class="container">
   <div class="row">
-    <div *ngIf="isLoading">
-      <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
-    </div>
-
     <mat-form-field class="mt-2">
       <mat-label>Name</mat-label>
       <input matInput [(ngModel)]="name" (ngModelChange)="onNameChange()" />
     </mat-form-field>
 
-    <cdk-virtual-scroll-viewport class="viewport" itemSize="25">
-      <ng-container *cdkVirtualFor="let row of filteredData">
-        <div class="p-2">
-          <mat-card
-            class="pokemon-card m-1"
-            [routerLink]="['/pokemon/', row.name]"
-          >
-            <mat-card-header>
-              <mat-card-subtitle>{{ row.translatedName }}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content class="text-center">
-              <div class="image-container center">
-                <img
-                  *ngIf="(row.url | pokemonImageByUrl).length"
-                  [src]="row.url | pokemonImageByUrl"
-                  class="center text-center image-container"
-                />
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </ng-container>
-    </cdk-virtual-scroll-viewport>
+    <div *ngIf="isLoading">
+      <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
+    </div>
+
+    <div class="pokemon-container">
+      <div class="p-2" *ngFor="let row of filteredData">
+        <mat-card
+          class="pokemon-card"
+          [routerLink]="['/pokemon/', row.identifier]"
+        >
+          <mat-card-header>
+            <mat-card-subtitle>{{
+              row.species_names | pokemonSpeciesName : langId
+            }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="text-center">
+            <div class="image-container center">
+              <img
+                [src]="row.id | pokemonImage : pokemonSpriteTypePath.FRONT"
+                class="center text-center image-container"
+              />
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <mat-paginator
+      *ngIf="!isLoading"
+      [length]="pokemonCount"
+      [pageSize]="pageSize"
+      (page)="changePage($event)"
+    >
+    </mat-paginator>
   </div>
 </div>

@@ -15,13 +15,13 @@ import { ColorForStatusValuePipe } from './pipes/color-for-status-value.pipe';
 import { StatusTableComponent } from './components/status-table/status-table.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { PokemonNamePipe } from './pipes/pokemon-name.pipe';
 import { MoveTableComponent } from './components/move-table/move-table.component';
 import { MoveNamePipe } from './pipes/move-name.pipe';
 import { VersionNamePipe } from './pipes/version-name.pipe';
 import { EvolutionTabComponent } from './components/evolution-tab/evolution-tab.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ColorForTypePipe } from './pipes/color-for-type.pipe';
+import { PokemonSpeciesNamePipe } from './pipes/pokemon-species-name.pipe';
 
 @NgModule({
   declarations: [
@@ -32,12 +32,12 @@ import { ColorForTypePipe } from './pipes/color-for-type.pipe';
     MoveTableComponent,
     PokemonImageByUrlPipe,
     ColorForStatusValuePipe,
-    PokemonNamePipe,
     MoveNamePipe,
     VersionNamePipe,
     EvolutionTabComponent,
     NavbarComponent,
     ColorForTypePipe,
+    PokemonSpeciesNamePipe,
   ],
   imports: [
     BrowserModule,
