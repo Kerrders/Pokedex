@@ -2,7 +2,12 @@ import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  Subject,
+  Subscription,
+} from 'rxjs';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
@@ -22,6 +27,7 @@ export class OverviewComponent implements OnInit {
   public pageSize = 50;
   public page = 1;
   public langId = LanguageHelper.getLanguageId();
+  public nameChanged = new Subject<string>();
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
   private _loadPokemonSubscription: Subscription;
 
@@ -35,6 +41,11 @@ export class OverviewComponent implements OnInit {
       this.langId = LanguageHelper.getLanguageId();
       this._getData();
     });
+    this.nameChanged
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe(() => {
+        this._getData();
+      });
     this._getData();
   }
 
