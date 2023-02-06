@@ -23,6 +23,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ColorForTypePipe } from './pipes/color-for-type.pipe';
 import { PokemonSpeciesNamePipe } from './pipes/pokemon-species-name.pipe';
 import { TypeToNamePipe } from './pipes/type-to-name.pipe';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { TypeToNamePipe } from './pipes/type-to-name.pipe';
     HttpClientModule,
     FormsModule,
     ScrollingModule,
+    InfiniteScrollModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

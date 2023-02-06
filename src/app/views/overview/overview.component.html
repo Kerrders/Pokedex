@@ -13,8 +13,14 @@
       <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
     </div>
 
-    <div class="pokemon-container" *ngIf="!isLoading">
-      <div class="p-2" *ngFor="let row of data">
+    <div
+      class="pokemon-container"
+      infinite-scroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="1000"
+      (scrolled)="onScroll()"
+    >
+      <div class="p-2" [hidden]="isLoading" *ngFor="let row of data">
         <mat-card
           class="pokemon-card"
           [routerLink]="['/pokemon/', row.identifier]"
@@ -35,14 +41,10 @@
         </mat-card>
       </div>
     </div>
-    <div [hidden]="isLoading">
-      <mat-paginator
-        [length]="pokemonCount"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="[25, 50, 100, 200]"
-        (page)="changePage($event)"
-      >
-      </mat-paginator>
-    </div>
+    <mat-progress-bar
+      mode="query"
+      *ngIf="isPageLoading"
+      class="mb-2 mt-2"
+    ></mat-progress-bar>
   </div>
 </div>

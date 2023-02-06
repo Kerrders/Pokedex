@@ -2,12 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  Subject,
-  Subscription,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
@@ -21,6 +16,7 @@ import { PokeApiService } from 'src/app/services/pokeapi.service';
 })
 export class OverviewComponent implements OnInit {
   public isLoading = true;
+  public isPageLoading = false;
   public name: string;
   public data: Array<Pokemon> = [];
   public pokemonCount = 0;
@@ -43,13 +39,9 @@ export class OverviewComponent implements OnInit {
     this.nameChanged
       .pipe(debounceTime(400), distinctUntilChanged())
       .subscribe(() => {
+        this.page = 1;
         this._getData();
       });
-    this._getData();
-  }
-
-  public onNameChange(): void {
-    this.page = 1;
     this._getData();
   }
 
@@ -70,6 +62,17 @@ export class OverviewComponent implements OnInit {
     }
 
     return params;
+  }
+
+  public onScroll(): void {
+    ++this.page;
+    this.isPageLoading = true;
+    this._pokeApiService
+      .getPokemons(this.getHttpParams())
+      .subscribe((result: PokemonPaginatedList) => {
+        this.isPageLoading = false;
+        this.data.push(...result.data);
+      });
   }
 
   private _getData(): void {
