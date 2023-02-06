@@ -9,8 +9,8 @@
       <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
     </div>
 
-    <div class="pokemon-container">
-      <div class="p-2" *ngFor="let row of filteredData">
+    <div class="pokemon-container" *ngIf="!isLoading">
+      <div class="p-2" *ngFor="let row of data">
         <mat-card
           class="pokemon-card"
           [routerLink]="['/pokemon/', row.identifier]"

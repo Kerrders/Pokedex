@@ -18,7 +18,6 @@ export class OverviewComponent implements OnInit {
   public isLoading = true;
   public name: string;
   public data: Array<Pokemon> = [];
-  public filteredData: Array<Pokemon> = [];
   public pokemonCount = 0;
   public pageSize = 50;
   public page = 1;
@@ -40,6 +39,7 @@ export class OverviewComponent implements OnInit {
   }
 
   public onNameChange(): void {
+    this.page = 1;
     this._getData();
   }
 
@@ -63,7 +63,6 @@ export class OverviewComponent implements OnInit {
   }
 
   private _getData(): void {
-    this.filteredData = [];
     this.isLoading = true;
     this._loadPokemonSubscription?.unsubscribe();
     this._loadPokemonSubscription = this._pokeApiService
@@ -71,7 +70,6 @@ export class OverviewComponent implements OnInit {
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading = false;
         this.data = result.data;
-        this.filteredData = this.data;
         this.pokemonCount = result.total;
       });
   }
