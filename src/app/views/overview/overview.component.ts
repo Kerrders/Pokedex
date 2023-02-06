@@ -29,7 +29,6 @@ export class OverviewComponent implements OnInit {
   public langId = LanguageHelper.getLanguageId();
   public nameChanged = new Subject<string>();
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
-  private _loadPokemonSubscription: Subscription;
 
   constructor(
     private _pokeApiService: PokeApiService,
@@ -75,8 +74,7 @@ export class OverviewComponent implements OnInit {
 
   private _getData(): void {
     this.isLoading = true;
-    this._loadPokemonSubscription?.unsubscribe();
-    this._loadPokemonSubscription = this._pokeApiService
+    this._pokeApiService
       .getPokemons(this.getHttpParams())
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading = false;

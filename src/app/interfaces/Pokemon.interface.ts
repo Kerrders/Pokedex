@@ -2,6 +2,7 @@ import { PokemonMove } from './PokemonMove.interface';
 import { PokemonSpeciesName } from './PokemonSpeciesName.interface';
 import { PokemonSpecy } from './PokemonSpecy.interface';
 import { PokemonStat } from './PokemonStat.interface';
+import { PokemonType } from './PokemonType.interface';
 
 export interface Pokemon {
   id: number;
@@ -17,4 +18,5 @@ export interface Pokemon {
   moves?: Array<PokemonMove>;
   stats?: Array<PokemonStat>;
   evolution?: Array<PokemonSpecy>;
+  types?: Array<PokemonType>;
 }

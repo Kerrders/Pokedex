@@ -22,6 +22,7 @@ import { EvolutionTabComponent } from './components/evolution-tab/evolution-tab.
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ColorForTypePipe } from './pipes/color-for-type.pipe';
 import { PokemonSpeciesNamePipe } from './pipes/pokemon-species-name.pipe';
+import { TypeToNamePipe } from './pipes/type-to-name.pipe';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { PokemonSpeciesNamePipe } from './pipes/pokemon-species-name.pipe';
     NavbarComponent,
     ColorForTypePipe,
     PokemonSpeciesNamePipe,
+    TypeToNamePipe,
   ],
   imports: [
     BrowserModule,

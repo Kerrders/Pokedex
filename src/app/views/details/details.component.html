@@ -53,6 +53,29 @@
                 </div>
               </mat-tab>
             </mat-tab-group>
+
+            <mat-chip-listbox
+              class="mat-mdc-chip-set-stacked"
+              *ngFor="let typeElement of pokemonData.types"
+            >
+              <mat-chip
+                [ngStyle]="{
+                  'background-color':
+                    typeElement.type_id | typeToName | colorForType
+                }"
+              >
+                <img
+                  matChipAvatar
+                  [src]="
+                    './assets/images/types/' +
+                    (typeElement.type_id | typeToName) +
+                    '.svg'
+                  "
+                  [alt]="typeElement.type_id | typeToName | titlecase"
+                />
+                {{ "types." + (typeElement.type_id | typeToName) | translate }}
+              </mat-chip>
+            </mat-chip-listbox>
           </mat-card-content>
         </mat-card>
       </div>
