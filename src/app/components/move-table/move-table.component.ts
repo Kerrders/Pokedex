@@ -2,7 +2,6 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { FilteredPokemonMoves } from 'src/app/interfaces/FilteredPokemonMoves.interface';
-import { MoveName } from 'src/app/interfaces/MoveName.interface';
 import { PokemonMove } from 'src/app/interfaces/PokemonMove.interface';
 import versionGroups from '../../../assets/data/version_groups.json';
 

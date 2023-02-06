@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
-import { PokemonEvolution } from 'src/app/interfaces/PokemonEvolution.interface';
 import { PokemonSpecy } from 'src/app/interfaces/PokemonSpecy.interface';
 import { PokeApiService } from 'src/app/services/pokeapi.service';
 

@@ -1,4 +1,3 @@
-import { PokemonEvolution } from './PokemonEvolution.interface';
 import { PokemonMove } from './PokemonMove.interface';
 import { PokemonSpeciesName } from './PokemonSpeciesName.interface';
 import { PokemonSpecy } from './PokemonSpecy.interface';
