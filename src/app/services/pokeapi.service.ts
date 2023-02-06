@@ -5,14 +5,13 @@ import { Observable, of, map, concatMap } from 'rxjs';
 import { CachingService } from './caching.service';
 import { SidenavService } from './sidenav.service';
 import { Pokemon } from '../interfaces/Pokemon.interface';
-import { PokemonEvolution } from '../interfaces/PokemonEvolution.interface';
 import { PokemonSpecy } from '../interfaces/PokemonSpecy.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PokeApiService {
-  private baseUrl = 'http://localhost';
+  private baseUrl = 'https://kerrders.ovh';
 
   constructor(
     private _httpClient: HttpClient,
@@ -32,9 +31,12 @@ export class PokeApiService {
     );
   }
 
-  public getAllPokemons(): Observable<PokemonPaginatedList> {
+  public getPokemons(
+    page: number,
+    perPage: number
+  ): Observable<PokemonPaginatedList> {
     return this.cachedGetRequest<PokemonPaginatedList>(
-      `${this.baseUrl}/pokemon/?limit=5000`
+      `${this.baseUrl}/pokemon?page=${page}&perPage=${perPage}`
     );
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
@@ -16,6 +17,9 @@ export class OverviewComponent implements OnInit {
   public name: string;
   public data: Array<Pokemon> = [];
   public filteredData: Array<Pokemon> = [];
+  public pokemonCount = 0;
+  public pageSize = 50;
+  public page = 1;
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
 
   constructor(
@@ -38,9 +42,15 @@ export class OverviewComponent implements OnInit {
     });
   }
 
+  public changePage(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.page = event.pageIndex + 1;
+    this._getData();
+  }
+
   private _getData(): void {
     this._pokeApiService
-      .getAllPokemons()
+      .getPokemons(this.page, this.pageSize)
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading = false;
         this.data = result.data.map((pokemon) => {
@@ -52,6 +62,7 @@ export class OverviewComponent implements OnInit {
           return pokemon;
         });
         this.filteredData = this.data;
+        this.pokemonCount = result.total;
       });
   }
 }

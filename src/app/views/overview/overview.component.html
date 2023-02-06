@@ -9,29 +9,31 @@
       <input matInput [(ngModel)]="name" (ngModelChange)="onNameChange()" />
     </mat-form-field>
 
-    <cdk-virtual-scroll-viewport class="viewport" itemSize="25">
-      <ng-container *cdkVirtualFor="let row of filteredData">
-        <div class="p-2">
-          <mat-card
-            class="pokemon-card m-1"
-            [routerLink]="['/pokemon/', row.identifier]"
-          >
-            <mat-card-header>
-              <mat-card-subtitle>{{ row.translatedName }}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content class="text-center">
-              <div class="image-container center">
-                <img
-                  [src]="
-                    row.id | pokemonImageByUrl : pokemonSpriteTypePath.FRONT
-                  "
-                  class="center text-center image-container"
-                />
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </ng-container>
-    </cdk-virtual-scroll-viewport>
+    <div class="pokemon-container">
+      <div class="p-2" *ngFor="let row of filteredData">
+        <mat-card
+          class="pokemon-card"
+          [routerLink]="['/pokemon/', row.identifier]"
+        >
+          <mat-card-header>
+            <mat-card-subtitle>{{ row.translatedName }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="text-center">
+            <div class="image-container center">
+              <img
+                [src]="row.id | pokemonImageByUrl : pokemonSpriteTypePath.FRONT"
+                class="center text-center image-container"
+              />
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <mat-paginator
+      [length]="pokemonCount"
+      [pageSize]="pageSize"
+      (page)="changePage($event)"
+    >
+    </mat-paginator>
   </div>
 </div>
