@@ -1,5 +1,8 @@
+import { MoveName } from './MoveName.interface';
+
 export interface FilteredPokemonMoves {
-  name: string;
+  id: number;
   level: number;
   method: number;
+  names: Array<MoveName>;
 }

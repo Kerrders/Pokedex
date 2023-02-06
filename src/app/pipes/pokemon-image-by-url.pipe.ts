@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { PokemonSpriteTypePath } from '../enums/PokemonSpriteTypePath';
 
 @Pipe({
-  name: 'pokemonImageByUrl',
+  name: 'pokemonImage',
 })
 export class PokemonImageByUrlPipe implements PipeTransform {
   transform(id: string | number, type: PokemonSpriteTypePath): string {

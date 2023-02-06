@@ -46,12 +46,10 @@ export class MoveTableComponent implements OnInit, OnChanges {
         element.pokemon_move_method_id === this.currentLearnType
       ) {
         this.filteredMoves.push({
-          name:
-            element.names.find(
-              (name: MoveName) => name.local_language_id === this.langId
-            )?.name ?? 'UNKNOWN',
+          id: element.move_id,
           level: element.level,
           method: element.pokemon_move_method_id,
+          names: element.names,
         });
       }
     });

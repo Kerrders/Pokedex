@@ -15,14 +15,16 @@
     <mat-card-header>
       <mat-card-subtitle>
         {{
-          pokemon.identifier | pokemonName : actualLanguageId | titlecase
+          pokemon.names ?? []
+            | pokemonSpeciesName : actualLanguageId
+            | titlecase
         }}</mat-card-subtitle
       >
     </mat-card-header>
     <mat-card-content class="text-center">
       <div class="image-container center">
         <img
-          [src]="pokemon.id | pokemonImageByUrl : pokemonSpriteTypePath.FRONT"
+          [src]="pokemon.id | pokemonImage : pokemonSpriteTypePath.FRONT"
           class="center text-center image-container"
         />
       </div>

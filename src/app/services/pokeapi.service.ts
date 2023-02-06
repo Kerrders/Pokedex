@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { PokemonPaginatedList } from '../interfaces/PokemonPaginatedList.interface';
 import { Injectable } from '@angular/core';
 import { Observable, of, map, concatMap } from 'rxjs';
@@ -11,7 +11,7 @@ import { PokemonSpecy } from '../interfaces/PokemonSpecy.interface';
   providedIn: 'root',
 })
 export class PokeApiService {
-  private baseUrl = 'https://kerrders.ovh';
+  private baseUrl = 'http://localhost';
 
   constructor(
     private _httpClient: HttpClient,
@@ -31,18 +31,13 @@ export class PokeApiService {
     );
   }
 
-  public getPokemons(
-    page: number,
-    perPage: number
-  ): Observable<PokemonPaginatedList> {
+  public getPokemons(params: HttpParams): Observable<PokemonPaginatedList> {
     return this.cachedGetRequest<PokemonPaginatedList>(
-      `${this.baseUrl}/pokemon?page=${page}&perPage=${perPage}`
+      `${this.baseUrl}/pokemon?${params.toString()}`
     );
   }
 
   public getPokemon(name: string): Observable<Pokemon> {
-    this._sidenavService.addNode(name, `pokemon/${name}`);
-
     return this.cachedGetRequest<Pokemon>(
       `${this.baseUrl}/pokemon/${name}`
     ).pipe(
@@ -53,10 +48,15 @@ export class PokeApiService {
           ).pipe(
             map((data: Array<PokemonSpecy>) => {
               result.evolution = data;
+              this._sidenavService.addNode(
+                result.species_names,
+                `pokemon/${name}`
+              );
               return result;
             })
           );
         }
+        this._sidenavService.addNode(result.species_names, `pokemon/${name}`);
         return of(result);
       })
     );

@@ -14,7 +14,7 @@
                     class="center"
                     [src]="
                       pokemonData.id
-                        | pokemonImageByUrl : pokemonSpriteTypePath.ARTWORK
+                        | pokemonImage : pokemonSpriteTypePath.ARTWORK
                     "
                   />
                 </div>
@@ -25,13 +25,13 @@
                     <img
                       [src]="
                         pokemonData.id
-                          | pokemonImageByUrl : pokemonSpriteTypePath.BACK
+                          | pokemonImage : pokemonSpriteTypePath.BACK
                       "
                     />
                     <img
                       [src]="
                         pokemonData.id
-                          | pokemonImageByUrl : pokemonSpriteTypePath.FRONT
+                          | pokemonImage : pokemonSpriteTypePath.FRONT
                       "
                     />
                   </div>
@@ -40,14 +40,13 @@
                     <img
                       [src]="
                         pokemonData.id
-                          | pokemonImageByUrl : pokemonSpriteTypePath.SHINY_BACK
+                          | pokemonImage : pokemonSpriteTypePath.SHINY_BACK
                       "
                     />
                     <img
                       [src]="
                         pokemonData.id
-                          | pokemonImageByUrl
-                            : pokemonSpriteTypePath.SHINY_FRONT
+                          | pokemonImage : pokemonSpriteTypePath.SHINY_FRONT
                       "
                     />
                   </div>

@@ -14,9 +14,8 @@ export interface Pokemon {
   order: number;
   is_default: number;
   species: PokemonSpecy;
-  species_names?: Array<PokemonSpeciesName>;
+  species_names: Array<PokemonSpeciesName>;
   moves?: Array<PokemonMove>;
   stats?: Array<PokemonStat>;
   evolution?: Array<PokemonSpecy>;
-  translatedName?: string;
 }

@@ -1,4 +1,5 @@
 import { PokemonEvolution } from './PokemonEvolution.interface';
+import { PokemonSpeciesName } from './PokemonSpeciesName.interface';
 
 export interface PokemonSpecy {
   id: number;
@@ -21,6 +22,7 @@ export interface PokemonSpecy {
   is_mythical: number;
   order: number;
   conquest_order: string;
+  names?: Array<PokemonSpeciesName>;
   evolution?: PokemonEvolution;
   step?: number;
 }

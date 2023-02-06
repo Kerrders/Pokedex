@@ -1,6 +1,8 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
@@ -20,7 +22,9 @@ export class OverviewComponent implements OnInit {
   public pokemonCount = 0;
   public pageSize = 50;
   public page = 1;
+  public langId = LanguageHelper.getLanguageId();
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
+  private _loadPokemonSubscription: Subscription;
 
   constructor(
     private _pokeApiService: PokeApiService,
@@ -29,17 +33,14 @@ export class OverviewComponent implements OnInit {
 
   public ngOnInit(): void {
     this._translate.onLangChange.subscribe(() => {
+      this.langId = LanguageHelper.getLanguageId();
       this._getData();
     });
     this._getData();
   }
 
   public onNameChange(): void {
-    this.filteredData = this.data.filter((pokemon: Pokemon) => {
-      return pokemon.translatedName
-        ?.toLocaleLowerCase()
-        ?.includes(this.name.toLocaleLowerCase());
-    });
+    this._getData();
   }
 
   public changePage(event: PageEvent): void {
@@ -48,19 +49,28 @@ export class OverviewComponent implements OnInit {
     this._getData();
   }
 
+  private getHttpParams(): HttpParams {
+    let params = new HttpParams()
+      .set('page', this.page)
+      .set('perPage', this.pageSize)
+      .set('langId', LanguageHelper.getLanguageId());
+
+    if (this.name && this.name.length > 3) {
+      params = params.set('name', this.name);
+    }
+
+    return params;
+  }
+
   private _getData(): void {
-    this._pokeApiService
-      .getPokemons(this.page, this.pageSize)
+    this.filteredData = [];
+    this.isLoading = true;
+    this._loadPokemonSubscription?.unsubscribe();
+    this._loadPokemonSubscription = this._pokeApiService
+      .getPokemons(this.getHttpParams())
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading = false;
-        this.data = result.data.map((pokemon) => {
-          pokemon.translatedName =
-            pokemon?.species_names?.find(
-              (name) =>
-                name.local_language_id === LanguageHelper.getLanguageId()
-            )?.name ?? 'UNKNOWN';
-          return pokemon;
-        });
+        this.data = result.data;
         this.filteredData = this.data;
         this.pokemonCount = result.total;
       });
