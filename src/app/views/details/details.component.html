@@ -54,11 +54,9 @@
               </mat-tab>
             </mat-tab-group>
 
-            <mat-chip-listbox
-              class="mat-mdc-chip-set-stacked"
-              *ngFor="let typeElement of pokemonData.types"
-            >
+            <mat-chip-listbox>
               <mat-chip
+                *ngFor="let typeElement of pokemonData.types"
                 [ngStyle]="{
                   'background-color':
                     typeElement.type_id | typeToName | colorForType
