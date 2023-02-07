@@ -11,7 +11,7 @@ import { PokemonSpecy } from '../interfaces/PokemonSpecy.interface';
   providedIn: 'root',
 })
 export class PokeApiService {
-  private baseUrl = 'https://kerrders.ovh';
+  private baseUrl = 'https://kerrders.ovh/api';
 
   constructor(
     private _httpClient: HttpClient,
