@@ -5,7 +5,6 @@ import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
 import { PokemonSpecy } from 'src/app/interfaces/PokemonSpecy.interface';
-import { PokeApiService } from 'src/app/services/pokeapi.service';
 
 @Component({
   selector: 'app-details',
@@ -19,32 +18,22 @@ export class DetailsComponent implements OnInit {
   public evolutionChain: Array<PokemonSpecy> = [];
   public maximalEvolutionStep: number;
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
-  private _name: string;
 
   constructor(
-    private _pokeApiService: PokeApiService,
-    private _route: ActivatedRoute,
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    private _activatedRoute: ActivatedRoute
   ) {}
 
   public ngOnInit(): void {
-    this._route.params.subscribe((params) => {
-      this._name = params['name'];
-      this.loadData();
+    this._activatedRoute.data.subscribe(({ pokemonData }) => {
+      this.pokemonData = pokemonData;
+      this.evolutionChain = [];
+      if (this.pokemonData.evolution) {
+        this.parseEvolutionChain(this.pokemonData.evolution);
+      }
     });
     this._translate.onLangChange.subscribe(() => {
       this.actualLanguageId = LanguageHelper.getLanguageId();
-    });
-  }
-
-  private loadData(): void {
-    this.isLoading = true;
-    this._pokeApiService.getPokemon(this._name).subscribe((result: Pokemon) => {
-      if (result.evolution && result.evolution.length) {
-        this.parseEvolutionChain(result.evolution);
-      }
-      this.pokemonData = result;
-      this.isLoading = false;
     });
   }
 

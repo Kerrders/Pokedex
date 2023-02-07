@@ -1,8 +1,5 @@
 <div class="container mt-2">
-  <div *ngIf="isLoading">
-    <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
-  </div>
-  <div *ngIf="!isLoading && pokemonData" class="row">
+  <div *ngIf="pokemonData" class="row">
     <div class="col-md-4 mt-2">
       <mat-card>
         <mat-card-content>
