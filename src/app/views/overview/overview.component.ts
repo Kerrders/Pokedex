@@ -2,7 +2,13 @@ import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
-import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  Subject,
+  Subscription,
+  take,
+} from 'rxjs';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { PokemonTypeEnum } from 'src/app/enums/PokemonTypesEnum';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
@@ -47,6 +53,7 @@ export class OverviewComponent implements OnInit {
     PokemonTypeEnum.FAIRY,
   ];
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
+  private _loadPokemonSubscription: Subscription;
 
   constructor(
     private _pokeApiService: PokeApiService,
@@ -54,10 +61,11 @@ export class OverviewComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this._translate.onLangChange.subscribe(() => {
+    this._translate.onLangChange.pipe(take(1)).subscribe(() => {
       this.langId = LanguageHelper.getLanguageId();
       this.getData();
     });
+
     this.nameChanged
       .pipe(debounceTime(400), distinctUntilChanged())
       .subscribe(() => {
@@ -86,7 +94,8 @@ export class OverviewComponent implements OnInit {
 
   public getData(): void {
     this.isLoading = true;
-    this._pokeApiService
+    this._loadPokemonSubscription?.unsubscribe();
+    this._loadPokemonSubscription = this._pokeApiService
       .getPokemons(this._getHttpParams())
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading = false;

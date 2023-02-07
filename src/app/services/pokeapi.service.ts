@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { PokemonPaginatedList } from '../interfaces/PokemonPaginatedList.interface';
 import { Injectable } from '@angular/core';
-import { Observable, of, map, concatMap } from 'rxjs';
+import { Observable, of, map, switchMap } from 'rxjs';
 import { CachingService } from './caching.service';
 import { SidenavService } from './sidenav.service';
 import { Pokemon } from '../interfaces/Pokemon.interface';
@@ -41,23 +41,25 @@ export class PokeApiService {
     return this.cachedGetRequest<Pokemon>(
       `${this.baseUrl}/pokemon/${name}`
     ).pipe(
-      concatMap((result: Pokemon) => {
+      switchMap((result: Pokemon) => {
+        let evolutionObservable: Observable<Array<PokemonSpecy>>;
         if (result.species.evolution_chain_id) {
-          return this.cachedGetRequest<Array<PokemonSpecy>>(
+          evolutionObservable = this.cachedGetRequest<Array<PokemonSpecy>>(
             `${this.baseUrl}/evolution/${result.species.evolution_chain_id}`
-          ).pipe(
-            map((data: Array<PokemonSpecy>) => {
-              result.evolution = data;
-              this._sidenavService.addNode(
-                result.species_names,
-                `pokemon/${name}`
-              );
-              return result;
-            })
           );
+        } else {
+          evolutionObservable = of([]);
         }
-        this._sidenavService.addNode(result.species_names, `pokemon/${name}`);
-        return of(result);
+        return evolutionObservable.pipe(
+          map((data: Array<PokemonSpecy>) => {
+            result.evolution = data;
+            this._sidenavService.addNode(
+              result.species_names,
+              `pokemon/${name}`
+            );
+            return result;
+          })
+        );
       })
     );
   }
