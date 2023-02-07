@@ -56,7 +56,7 @@ export class DetailsComponent implements OnInit {
         pokemonMap[pokemon.id] = 0;
       } else {
         const evolvesFromId = parseInt(pokemon.evolves_from_species_id);
-        let evolvesFromStep = pokemonMap[evolvesFromId] || 0;
+        const evolvesFromStep = pokemonMap[evolvesFromId] || 0;
         pokemonMap[pokemon.id] = evolvesFromStep + 1;
       }
     }
