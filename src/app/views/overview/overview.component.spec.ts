@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MaterialModule } from 'src/app/material-module';
+import { TypeToNamePipe } from 'src/app/pipes/type-to-name.pipe';
 
 import { OverviewComponent } from './overview.component';
 
@@ -14,7 +15,7 @@ describe('OverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OverviewComponent],
+      declarations: [OverviewComponent, TypeToNamePipe],
       imports: [
         MaterialModule,
         HttpClientModule,
