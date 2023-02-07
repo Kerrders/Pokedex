@@ -61,7 +61,7 @@ export class OverviewComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this._translate.onLangChange.pipe(take(1)).subscribe(() => {
+    this._translate.onLangChange.subscribe(() => {
       this.langId = LanguageHelper.getLanguageId();
       this.getData();
     });
