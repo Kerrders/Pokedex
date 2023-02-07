@@ -1,27 +1,27 @@
 <mat-toolbar>
-  <span>Pokedex</span>
+  <span fxShow fxHide.xs>Pokedex</span>
   <div class="ms-4">
     <button mat-button color="primary" [routerLink]="['']">Home</button>
   </div>
-  <button
-    *ngIf="sidenavService.nodes.length"
-    mat-button
-    color="primary"
-    [matMenuTriggerFor]="nodes"
-    [matBadge]="sidenavService.nodes.length"
+  <div
+    *ngFor="let node of sidenavService.nodes"
+    [routerLink]="node.url"
+    class="nodeContainer"
   >
-    Tabs
-  </button>
-  <mat-menu #nodes="matMenu" class="nodeMatMenu">
-    <button
-      mat-menu-item
-      *ngFor="let node of sidenavService.nodes"
-      [routerLink]="node.url"
-    >
-      {{ node.name | pokemonSpeciesName : actualLanguageId }}
+    <button mat-button color="primary" class="align-middle">
+      {{ node.name | pokemonSpeciesName : actualLanguageId | titlecase }}
     </button>
-  </mat-menu>
-  <div class="flex-align-right language-select-wrapper">
+
+    <button
+      mat-icon-button
+      (click)="sidenavService.removeNode(node.name)"
+      class="closeNodeButton"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="flex-align-right" fxShow fxHide.xs>
     <mat-button-toggle-group
       class="mat-elevation-z2 language-select-button-group"
       [(ngModel)]="actualLanguage"
@@ -36,3 +36,28 @@
     </mat-button-toggle-group>
   </div>
 </mat-toolbar>
+
+<div class="container" fxHide fxShow.xs>
+  <div class="row">
+    <div class="col-md-12 mt-2">
+      <mat-card>
+        <mat-card-content>
+          <div class="float-end">
+            <mat-button-toggle-group
+              class="mat-elevation-z2 language-select-button-group"
+              [(ngModel)]="actualLanguage"
+              (ngModelChange)="onChangeLanguage()"
+            >
+              <mat-button-toggle
+                *ngFor="let lang of languages | keyvalue"
+                [value]="lang.key"
+              >
+                {{ "langs." + lang.key | translate }}</mat-button-toggle
+              >
+            </mat-button-toggle-group>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

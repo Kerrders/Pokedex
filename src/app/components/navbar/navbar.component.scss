@@ -1,22 +1,21 @@
 .nodeContainer {
-  display: inline-block;
   position: relative;
   margin-left: 20px;
 }
 
 .closeNodeButton {
   scale: 0.75;
-  right: 0;
-  top: 5px;
+  position: absolute;
+  right: -26px;
+  top: -6px;
+}
+
+.mat-toolbar-single-row {
+  flex-wrap: wrap;
+  height: auto;
+  min-height: 70px;
 }
 
 .language-select-button-group {
   font-size: 14px;
-}
-
-@media (max-width: 576px) {
-  .mat-toolbar-single-row {
-    flex-wrap: wrap;
-    height: auto;
-  }
 }
