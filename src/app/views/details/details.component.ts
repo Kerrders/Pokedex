@@ -56,7 +56,7 @@ export class DetailsComponent implements OnInit {
         pokemonMap[pokemon.id] = 0;
       } else {
         const evolvesFromId = parseInt(pokemon.evolves_from_species_id);
-        const evolvesFromStep = pokemonMap[evolvesFromId];
+        let evolvesFromStep = pokemonMap[evolvesFromId] || 0;
         pokemonMap[pokemon.id] = evolvesFromStep + 1;
       }
     }
@@ -65,7 +65,11 @@ export class DetailsComponent implements OnInit {
       pokemon.step = pokemonMap[pokemon.id];
     }
 
-    this.evolutionChain = chain;
+    this.evolutionChain = chain.sort((a, b) => {
+      if (a.step === 0) return -1;
+      if (b.step === 0) return 1;
+      return (a.step ?? 0) - (b.step ?? 0);
+    });
 
     this.maximalEvolutionStep = chain.reduce(
       (max: number, pokemon: PokemonSpecy) => Math.max(max, pokemon?.step ?? 0),
