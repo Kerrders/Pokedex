@@ -1,12 +1,21 @@
 <div class="container">
-  <div class="row">
-    <mat-form-field class="mt-2">
+  <div class="row mt-2">
+    <mat-form-field class="w-50">
       <mat-label>Name</mat-label>
       <input
         matInput
         [(ngModel)]="name"
         (ngModelChange)="nameChanged.next($event)"
       />
+    </mat-form-field>
+
+    <mat-form-field class="w-50" appearance="fill">
+      <mat-label>{{ "filter.types" | translate }}</mat-label>
+      <mat-select [(ngModel)]="types" multiple (selectionChange)="getData()">
+        <mat-option *ngFor="let type of availableTypes" [value]="type">
+          {{ "types." + (type | typeToName) | translate }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <div *ngIf="isLoading">

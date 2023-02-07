@@ -2,13 +2,7 @@ import * as fs from "fs";
 import path from "path";
 import fetch from "node-fetch";
 
-const files = [
-  "pokemon_species",
-  "pokemon_species_names",
-  "versions",
-  "version_names",
-  "version_groups",
-];
+const files = ["versions", "version_names", "version_groups"];
 const githubFilesUrl =
   "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/";
 const STATIC_FILES_DIRECTORY = path

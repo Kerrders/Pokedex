@@ -1,5 +1,10 @@
 {
   "language": "Language",
+  "status": "Status",
+  "evolutions": "Evolutions",
+  "filter": {
+    "types": "Types"
+  },
   "stats": {
     "1": "Health",
     "2": "Attack",

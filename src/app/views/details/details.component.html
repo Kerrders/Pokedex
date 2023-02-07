@@ -80,11 +80,14 @@
       <mat-card>
         <mat-card-content>
           <mat-tab-group>
-            <mat-tab label="Status" *ngIf="pokemonData.stats">
+            <mat-tab [label]="'status' | translate" *ngIf="pokemonData.stats">
               <app-pokemon-status-table [pokemonStats]="pokemonData.stats">
               </app-pokemon-status-table>
             </mat-tab>
-            <mat-tab label="Entwicklungen" *ngIf="evolutionChain.length > 1">
+            <mat-tab
+              [label]="'evolutions' | translate"
+              *ngIf="evolutionChain.length > 1"
+            >
               <app-evolution-tab
                 [evolutionChain]="evolutionChain"
                 [maximalEvolutionStep]="maximalEvolutionStep"

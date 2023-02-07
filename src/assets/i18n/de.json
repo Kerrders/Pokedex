@@ -1,5 +1,10 @@
 {
   "language": "Sprache",
+  "status": "Status",
+  "evolutions": "Entwicklungen",
+  "filter": {
+    "types": "Typen"
+  },
   "stats": {
     "1": "Leben",
     "2": "Angriff",
