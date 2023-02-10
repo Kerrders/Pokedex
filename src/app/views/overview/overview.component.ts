@@ -7,7 +7,6 @@ import {
   distinctUntilChanged,
   Subject,
   Subscription,
-  take,
 } from 'rxjs';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { PokemonTypeEnum } from 'src/app/enums/PokemonTypesEnum';
