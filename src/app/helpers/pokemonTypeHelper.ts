@@ -146,7 +146,7 @@ export class PokemonTypeHelper {
     defenderType: PokemonTypeEnum,
     defenderType2?: PokemonTypeEnum
   ): PokemonTypeEffectivness {
-    let result: PokemonTypeEffectivness = {
+    const result: PokemonTypeEffectivness = {
       neutral: [],
       strong: [],
       weak: [],
