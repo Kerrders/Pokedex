@@ -114,29 +114,12 @@
                 </mat-chip>
               </mat-chip-listbox>
 
+              <mat-divider class="mt-2 mb-2"></mat-divider>
+
               <span>{{ "typeEffectiveness.strongAgainst" | translate }}</span>
               <mat-chip-listbox>
                 <mat-chip
                   *ngFor="let typeId of pokemonData.typeEffectiveness?.strong"
-                  [ngStyle]="{
-                    'background-color': typeId | typeToName | colorForType
-                  }"
-                >
-                  <img
-                    matChipAvatar
-                    [src]="
-                      './assets/images/types/' + (typeId | typeToName) + '.svg'
-                    "
-                    [alt]="typeId | typeToName | titlecase"
-                  />
-                  {{ "types." + (typeId | typeToName) | translate }}
-                </mat-chip>
-              </mat-chip-listbox>
-
-              <span>{{ "typeEffectiveness.neutral" | translate }}</span>
-              <mat-chip-listbox>
-                <mat-chip
-                  *ngFor="let typeId of pokemonData.typeEffectiveness?.neutral"
                   [ngStyle]="{
                     'background-color': typeId | typeToName | colorForType
                   }"
