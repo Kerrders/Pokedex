@@ -2,6 +2,12 @@
   "language": "Sprache",
   "status": "Status",
   "evolutions": "Entwicklungen",
+  "typeEffectiveness": {
+    "title": "Type Stärken/Schwächen",
+    "strongAgainst": "Stark gegen",
+    "weakAgainst": "Schwach gegen",
+    "neutral": "Neutral"
+  },
   "filter": {
     "types": "Typen"
   },

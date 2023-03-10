@@ -1,6 +1,6 @@
 import { PokemonTypeEnum } from '../enums/PokemonTypesEnum';
 
-export interface PokemonTypeEffectivness {
+export interface TypeEffectiveness {
   neutral: Array<PokemonTypeEnum>;
   strong: Array<PokemonTypeEnum>;
   weak: Array<PokemonTypeEnum>;

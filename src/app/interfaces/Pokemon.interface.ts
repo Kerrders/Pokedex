@@ -3,6 +3,7 @@ import { PokemonSpeciesName } from './PokemonSpeciesName.interface';
 import { PokemonSpecy } from './PokemonSpecy.interface';
 import { PokemonStat } from './PokemonStat.interface';
 import { PokemonType } from './PokemonType.interface';
+import { TypeEffectiveness } from './TypeEffectiveness';
 
 export interface Pokemon {
   id: number;
@@ -19,4 +20,5 @@ export interface Pokemon {
   stats?: Array<PokemonStat>;
   evolution?: Array<PokemonSpecy>;
   types?: Array<PokemonType>;
+  typeEffectiveness?: TypeEffectiveness;
 }
