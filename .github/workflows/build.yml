@@ -38,3 +38,4 @@ jobs:
           branch: main
           folder: dist/pokedex
           repository-name: Kerrders/kerrders.github.io
+          target-folder: pokedex
