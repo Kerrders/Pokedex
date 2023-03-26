@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "prettier": "npx prettier src/. --write",
     "update": "node ./scripts/loadStaticData.mjs",
-    "build-for-deploy": "ng build --base-href https://kerrders.github.io"
+    "build-for-deploy": "ng build --base-href https://kerrders.github.io/pokedex/"
   },
   "private": true,
   "dependencies": {
