@@ -56,5 +56,11 @@ export class MoveTableComponent implements OnInit, OnChanges {
     this.filteredMoves = this.filteredMoves.sort(function (a, b) {
       return a.level - b.level;
     });
+
+    this.allVersions = this.allVersions.filter((versionId) =>
+      this.pokemonMoves.some(
+        (element) => element.version_group_id === parseInt(versionId)
+      )
+    );
   }
 }
