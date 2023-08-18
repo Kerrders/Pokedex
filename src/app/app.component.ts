@@ -15,7 +15,7 @@ export class AppComponent {
     this.matIconRegistry.addSvgIcon(
       'github',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        '../assets/images/github-mark.svg'
+        './assets/images/github-mark.svg'
       )
     );
   }
