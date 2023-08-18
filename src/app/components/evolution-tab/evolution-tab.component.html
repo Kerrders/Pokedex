@@ -5,7 +5,7 @@
   }"
 >
   <mat-card
-    class="pokemon-card"
+    class="pokemon-card cursor-pointer"
     *ngFor="let pokemon of evolutionChain"
     [routerLink]="['/pokemon/', pokemon.identifier]"
     [ngStyle]="{

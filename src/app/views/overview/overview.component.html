@@ -31,7 +31,7 @@
     >
       <div class="p-2" [hidden]="isLoading" *ngFor="let row of data">
         <mat-card
-          class="pokemon-card"
+          class="pokemon-card cursor-pointer"
           [routerLink]="['/pokemon/', row.identifier]"
         >
           <mat-card-header>

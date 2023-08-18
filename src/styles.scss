@@ -33,7 +33,6 @@ body {
 }
 
 .pokemon-card {
-  cursor: pointer;
   transition: all ease-in-out 250ms;
   &:hover {
     background-color: var(--bs-code-color, transparent);
@@ -42,4 +41,8 @@ body {
 
 .flex-align-right {
   margin-left: auto;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

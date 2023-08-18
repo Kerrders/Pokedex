@@ -1,5 +1,22 @@
 <mat-toolbar>
-  <span fxShow fxHide.xs>Pokedex</span>
+  <span fxShow fxHide.xs [routerLink]="['']" class="cursor-pointer"
+    >Pokedex</span
+  >
+  <div>
+    <a
+      mat-icon-button
+      color="primary"
+      target="_blank"
+      href="https://github.com/Kerrders/Pokedex"
+      [matTooltip]="'Repository'"
+    >
+      <mat-icon
+        svgIcon="github"
+        aria-hidden="false"
+        [ngStyle]="{ color: 'white' }"
+      ></mat-icon>
+    </a>
+  </div>
   <div class="ms-4">
     <button mat-button color="primary" [routerLink]="['']">Home</button>
   </div>

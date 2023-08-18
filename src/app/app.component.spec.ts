@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { MatIconTestingModule } from '@angular/material/icon/testing';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -18,6 +19,7 @@ describe('AppComponent', () => {
         BrowserAnimationsModule,
         MaterialModule,
         FormsModule,
+        MatIconTestingModule,
       ],
       declarations: [AppComponent, NavbarComponent],
     }).compileComponents();
