@@ -4,6 +4,7 @@
   "evolutions": "Evolutions",
   "value": "Value",
   "graphicValue": "Value (Visual)",
+  "immune": "Immune",
   "typeEffectiveness": {
     "title": "Type Strengths/Weaknesses",
     "strongAgainst": "Strong against",

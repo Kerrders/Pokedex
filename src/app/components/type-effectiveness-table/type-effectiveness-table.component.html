@@ -27,7 +27,11 @@
       {{ "value" | translate }}
     </th>
     <td mat-cell *matCellDef="let typeEffectiveness" class="text-center">
-      {{ typeEffectiveness.damage }}x
+      {{
+        typeEffectiveness.damage === 0
+          ? ("immune" | translate)
+          : typeEffectiveness.damage + "x"
+      }}
     </td>
   </ng-container>
 

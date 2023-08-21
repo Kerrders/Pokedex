@@ -4,6 +4,7 @@
   "evolutions": "Entwicklungen",
   "value": "Wert",
   "graphicValue": "Wert (Grafisch)",
+  "immune": "Immun",
   "typeEffectiveness": {
     "title": "Type Stärken/Schwächen",
     "strongAgainst": "Stark gegen",
