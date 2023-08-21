@@ -8,8 +8,10 @@ export class SortByTypeDamagePipe implements PipeTransform {
   transform(
     types: Array<TypeEffectiveness> | undefined
   ): Array<TypeEffectiveness> | undefined {
-    return types?.sort(function (a, b) {
-      return b.damage - a.damage;
-    });
+    return types
+      ?.filter((type) => type.damage !== 1)
+      .sort(function (a, b) {
+        return b.damage - a.damage;
+      });
   }
 }
