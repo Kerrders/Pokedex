@@ -2,6 +2,8 @@
   "language": "Language",
   "status": "Status",
   "evolutions": "Evolutions",
+  "value": "Value",
+  "graphicValue": "Value (Visual)",
   "typeEffectiveness": {
     "title": "Type Strengths/Weaknesses",
     "strongAgainst": "Strong against",

@@ -2,6 +2,8 @@
   "language": "Sprache",
   "status": "Status",
   "evolutions": "Entwicklungen",
+  "value": "Wert",
+  "graphicValue": "Wert (Grafisch)",
   "typeEffectiveness": {
     "title": "Type Stärken/Schwächen",
     "strongAgainst": "Stark gegen",
