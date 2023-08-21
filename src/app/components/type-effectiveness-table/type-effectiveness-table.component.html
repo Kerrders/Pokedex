@@ -1,0 +1,34 @@
+<table mat-table [dataSource]="typeEffectiveness" class="mat-elevation-z8">
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Type</th>
+    <td mat-cell *matCellDef="let typeEffectiveness">
+      <mat-chip
+        [ngStyle]="{
+          'background-color':
+            typeEffectiveness.typeId | typeToName | colorForType
+        }"
+      >
+        <img
+          matChipAvatar
+          [src]="
+            './assets/images/types/' +
+            (typeEffectiveness.typeId | typeToName) +
+            '.svg'
+          "
+          [alt]="typeEffectiveness.typeId | typeToName | titlecase"
+        />
+        {{ "types." + (typeEffectiveness.typeId | typeToName) | translate }}
+      </mat-chip>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="damage">
+    <th mat-header-cell *matHeaderCellDef class="text-center">Wert</th>
+    <td mat-cell *matCellDef="let typeEffectiveness" class="text-center">
+      {{ typeEffectiveness.damage }}x
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

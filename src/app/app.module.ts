@@ -25,6 +25,8 @@ import { PokemonSpeciesNamePipe } from './pipes/pokemon-species-name.pipe';
 import { TypeToNamePipe } from './pipes/type-to-name.pipe';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SortByTypeDamagePipe } from './pipes/sort-by-type-damage.pipe';
+import { TypeEffectivenessTableComponent } from './components/type-effectiveness-table/type-effectiveness-table.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     OverviewComponent,
     StatusTableComponent,
     MoveTableComponent,
+    TypeEffectivenessTableComponent,
     PokemonImageByUrlPipe,
     ColorForStatusValuePipe,
     MoveNamePipe,
@@ -42,6 +45,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ColorForTypePipe,
     PokemonSpeciesNamePipe,
     TypeToNamePipe,
+    SortByTypeDamagePipe,
   ],
   imports: [
     BrowserModule,

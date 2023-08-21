@@ -95,45 +95,11 @@
               [label]="'typeEffectiveness.title' | translate"
               *ngIf="pokemonData.types"
             >
-              <span>{{ "typeEffectiveness.weakAgainst" | translate }}</span>
-              <mat-chip-listbox>
-                <mat-chip
-                  *ngFor="let typeId of pokemonData.typeEffectiveness?.weak"
-                  [ngStyle]="{
-                    'background-color': typeId | typeToName | colorForType
-                  }"
-                >
-                  <img
-                    matChipAvatar
-                    [src]="
-                      './assets/images/types/' + (typeId | typeToName) + '.svg'
-                    "
-                    [alt]="typeId | typeToName | titlecase"
-                  />
-                  {{ "types." + (typeId | typeToName) | translate }}
-                </mat-chip>
-              </mat-chip-listbox>
-
-              <mat-divider class="mt-2 mb-2"></mat-divider>
-
-              <span>{{ "typeEffectiveness.strongAgainst" | translate }}</span>
-              <mat-chip-listbox>
-                <mat-chip
-                  *ngFor="let typeId of pokemonData.typeEffectiveness?.strong"
-                  [ngStyle]="{
-                    'background-color': typeId | typeToName | colorForType
-                  }"
-                >
-                  <img
-                    matChipAvatar
-                    [src]="
-                      './assets/images/types/' + (typeId | typeToName) + '.svg'
-                    "
-                    [alt]="typeId | typeToName | titlecase"
-                  />
-                  {{ "types." + (typeId | typeToName) | translate }}
-                </mat-chip>
-              </mat-chip-listbox>
+              <app-pokemon-type-effectiveness-table
+                [typeEffectiveness]="
+                  (pokemonData.typeEffectiveness | sortByTypeDamage) ?? []
+                "
+              ></app-pokemon-type-effectiveness-table>
             </mat-tab>
           </mat-tab-group>
         </mat-card-content>

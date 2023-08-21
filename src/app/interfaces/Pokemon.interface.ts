@@ -20,5 +20,5 @@ export interface Pokemon {
   stats?: Array<PokemonStat>;
   evolution?: Array<PokemonSpecy>;
   types?: Array<PokemonType>;
-  typeEffectiveness?: TypeEffectiveness;
+  typeEffectiveness?: Array<TypeEffectiveness>;
 }
