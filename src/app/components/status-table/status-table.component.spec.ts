@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MaterialModule } from 'src/app/material-module';
 
 import { StatusTableComponent } from './status-table.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('StatusTableComponent', () => {
   let component: StatusTableComponent;
@@ -10,7 +11,7 @@ describe('StatusTableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [StatusTableComponent],
-      imports: [MaterialModule],
+      imports: [MaterialModule, TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(StatusTableComponent);
