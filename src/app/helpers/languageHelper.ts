@@ -1,9 +1,11 @@
+import { LanguageEnum } from '../enums/LanguageEnum';
+
 export class LanguageHelper {
   public static fallbackLanguage = 'en';
   private static _allowedLanguages: Array<string> = ['de', 'en'];
   private static _languageIds: { [key: string]: number } = {
-    de: 6,
-    en: 9,
+    de: LanguageEnum.GERMAN,
+    en: LanguageEnum.ENGLISH,
   };
 
   public static getAvailableLanguages(): { [key: string]: number } {

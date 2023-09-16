@@ -21,4 +21,25 @@ export class PokemonTypeHelper {
     { id: PokemonTypeEnum.DARK, identifier: 'dark' },
     { id: PokemonTypeEnum.FAIRY, identifier: 'fairy' },
   ];
+
+  public static readonly availableTypes: Array<PokemonTypeEnum> = [
+    PokemonTypeEnum.NORMAL,
+    PokemonTypeEnum.FIGHTING,
+    PokemonTypeEnum.FLYING,
+    PokemonTypeEnum.POISON,
+    PokemonTypeEnum.GROUND,
+    PokemonTypeEnum.ROCK,
+    PokemonTypeEnum.BUG,
+    PokemonTypeEnum.GHOST,
+    PokemonTypeEnum.STEEL,
+    PokemonTypeEnum.FIRE,
+    PokemonTypeEnum.WATER,
+    PokemonTypeEnum.GRASS,
+    PokemonTypeEnum.ELECTRIC,
+    PokemonTypeEnum.PSYCHIC,
+    PokemonTypeEnum.ICE,
+    PokemonTypeEnum.DRAGON,
+    PokemonTypeEnum.DARK,
+    PokemonTypeEnum.FAIRY,
+  ];
 }

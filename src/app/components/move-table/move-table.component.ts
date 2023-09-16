@@ -62,5 +62,10 @@ export class MoveTableComponent implements OnInit, OnChanges {
         (element) => element.version_group_id === parseInt(versionId)
       )
     );
+    if (
+      !this.allVersions.some((versionId) => versionId === this.currentVersion)
+    ) {
+      this.currentVersion = this.allVersions[0] ?? '1';
+    }
   }
 }

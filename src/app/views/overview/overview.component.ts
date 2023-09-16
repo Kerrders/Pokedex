@@ -11,8 +11,10 @@ import {
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { PokemonTypeEnum } from 'src/app/enums/PokemonTypesEnum';
 import { LanguageHelper } from 'src/app/helpers/languageHelper';
+import { PokemonTypeHelper } from 'src/app/helpers/pokemonTypeHelper';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
 import { PokemonPaginatedList } from 'src/app/interfaces/PokemonPaginatedList.interface';
+import { InputStateService } from 'src/app/services/input-state.service';
 import { PokeApiService } from 'src/app/services/pokeapi.service';
 
 @Component({
@@ -31,32 +33,15 @@ export class OverviewComponent implements OnInit {
   public langId = LanguageHelper.getLanguageId();
   public nameChanged = new Subject<string>();
   public types: Array<PokemonTypeEnum> = [];
-  public availableTypes: Array<PokemonTypeEnum> = [
-    PokemonTypeEnum.NORMAL,
-    PokemonTypeEnum.FIGHTING,
-    PokemonTypeEnum.FLYING,
-    PokemonTypeEnum.POISON,
-    PokemonTypeEnum.GROUND,
-    PokemonTypeEnum.ROCK,
-    PokemonTypeEnum.BUG,
-    PokemonTypeEnum.GHOST,
-    PokemonTypeEnum.STEEL,
-    PokemonTypeEnum.FIRE,
-    PokemonTypeEnum.WATER,
-    PokemonTypeEnum.GRASS,
-    PokemonTypeEnum.ELECTRIC,
-    PokemonTypeEnum.PSYCHIC,
-    PokemonTypeEnum.ICE,
-    PokemonTypeEnum.DRAGON,
-    PokemonTypeEnum.DARK,
-    PokemonTypeEnum.FAIRY,
-  ];
+  public availableTypes: Array<PokemonTypeEnum> =
+    PokemonTypeHelper.availableTypes;
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
   private _loadPokemonSubscription: Subscription;
 
   constructor(
     private _pokeApiService: PokeApiService,
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    private _inputStateService: InputStateService
   ) {}
 
   public ngOnInit(): void {
@@ -71,6 +56,8 @@ export class OverviewComponent implements OnInit {
         this.page = 1;
         this.getData();
       });
+
+    this._restoreInputValues();
     this.getData();
   }
 
@@ -101,6 +88,9 @@ export class OverviewComponent implements OnInit {
         this.data = result.data;
         this.pokemonCount = result.total;
       });
+
+    this._inputStateService.setInputValue('name', this.name);
+    this._inputStateService.setInputValue('types', this.types);
   }
 
   private _getHttpParams(): HttpParams {
@@ -120,5 +110,17 @@ export class OverviewComponent implements OnInit {
     }
 
     return params;
+  }
+
+  private _restoreInputValues(): void {
+    const name = this._inputStateService.getInputValue('name');
+    if (name) {
+      this.name = name;
+    }
+
+    const types = this._inputStateService.getInputValue('types');
+    if (types) {
+      this.types = types;
+    }
   }
 }
