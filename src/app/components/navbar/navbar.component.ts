@@ -9,7 +9,6 @@ import { SidenavService } from 'src/app/services/sidenav.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  public title = 'pokedex';
   public actualLanguage = LanguageHelper.getLanguage();
   public languages = LanguageHelper.getAvailableLanguages();
   public actualLanguageId = LanguageHelper.getLanguageId();

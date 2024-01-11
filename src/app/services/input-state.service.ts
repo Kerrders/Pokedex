@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 export class InputStateService {
   private inputValues: any = {};
 
-  public setInputValue(inputName: string, value: any): void {
+  public setInputValue<T>(inputName: string, value: T): void {
     this.inputValues[inputName] = value;
   }
 
-  public getInputValue(inputName: string): any {
+  public getInputValue<T>(inputName: string): T {
     return this.inputValues[inputName];
   }
 }

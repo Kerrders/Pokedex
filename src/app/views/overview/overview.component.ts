@@ -89,8 +89,11 @@ export class OverviewComponent implements OnInit {
         this.pokemonCount = result.total;
       });
 
-    this._inputStateService.setInputValue('name', this.name);
-    this._inputStateService.setInputValue('types', this.types);
+    this._inputStateService.setInputValue<string>('name', this.name);
+    this._inputStateService.setInputValue<Array<PokemonTypeEnum>>(
+      'types',
+      this.types
+    );
   }
 
   private _getHttpParams(): HttpParams {
@@ -113,12 +116,14 @@ export class OverviewComponent implements OnInit {
   }
 
   private _restoreInputValues(): void {
-    const name = this._inputStateService.getInputValue('name');
+    const name: string | undefined =
+      this._inputStateService.getInputValue<string>('name');
     if (name) {
       this.name = name;
     }
 
-    const types = this._inputStateService.getInputValue('types');
+    const types: Array<PokemonTypeEnum> | undefined =
+      this._inputStateService.getInputValue<Array<PokemonTypeEnum>>('types');
     if (types) {
       this.types = types;
     }
