@@ -30,13 +30,15 @@
     "bootstrap": "^5.3.0-alpha1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "har-validator": "^5.1.5",
     "ngx-infinite-scroll": "^17.0.0",
     "node-fetch": "^3.3.0",
+    "phantomjs-prebuilt": "^2.1.16",
     "prettier-eslint": "^15.0.1",
     "rxjs": "~7.5.0",
     "save-dev": "^0.0.1-security",
     "tslib": "^2.3.0",
-    "uuid": "^9.0.0",
+    "uuid": "^9.0.1",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
@@ -61,7 +63,7 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "karma-phantomjs-launcher": "^1.0.4",
     "prettier": "^2.8.1",
-    "puppeteer": "^19.4.1",
+    "puppeteer": "^21.7.0",
     "typescript": "~5.2.2"
   }
 }
