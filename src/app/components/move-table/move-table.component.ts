@@ -22,17 +22,10 @@ export class MoveTableComponent implements OnInit, OnChanges {
   public currentLearnType = 1;
 
   public displayedColumns: Array<string> = ['name', 'level'];
-  public langId: number = this.languageService.getLanguageId();
 
-  constructor(
-    public languageService: LanguageService,
-    private _translate: TranslateService
-  ) {}
+  constructor(public languageService: LanguageService) {}
 
   public ngOnInit(): void {
-    this._translate.onLangChange.subscribe(() => {
-      this.langId = this.languageService.getLanguageId();
-    });
     this.getData();
   }
 

@@ -21,7 +21,6 @@ export class OverviewComponent implements OnInit {
   public pokemonCount = 0;
   public pageSize = 50;
   public page = 1;
-  public langId = this.languageService.getLanguageId();
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
   private _loadPokemonSubscription: Subscription;
 
@@ -34,7 +33,6 @@ export class OverviewComponent implements OnInit {
 
   public ngOnInit(): void {
     this._translate.onLangChange.subscribe(() => {
-      this.langId = this.languageService.getLanguageId();
       this.getData();
     });
 

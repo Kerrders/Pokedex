@@ -27,7 +27,7 @@
           <mat-label>Pokemon Version</mat-label>
           <mat-select [(ngModel)]="currentVersion" (ngModelChange)="getData()">
             <mat-option *ngFor="let version of allVersions" [value]="version">
-              {{ version | versionName : langId }}
+              {{ version | versionName : languageService.langId }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -43,7 +43,7 @@
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Name</th>
           <td mat-cell *matCellDef="let move">
-            {{ move.names | moveName : langId }}
+            {{ move.names | moveName : languageService.langId }}
           </td>
         </ng-container>
 

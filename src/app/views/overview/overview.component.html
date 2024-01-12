@@ -20,7 +20,7 @@
         >
           <mat-card-header>
             <mat-card-subtitle>{{
-              row.species_names | pokemonSpeciesName : langId
+              row.species_names | pokemonSpeciesName : languageService.langId
             }}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="text-center">
