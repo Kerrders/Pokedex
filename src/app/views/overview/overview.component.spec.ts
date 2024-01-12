@@ -8,6 +8,7 @@ import { MaterialModule } from 'src/app/material-module';
 import { TypeToNamePipe } from 'src/app/pipes/type-to-name.pipe';
 
 import { OverviewComponent } from './overview.component';
+import { FiltersComponent } from 'src/app/components/filters/filters.component';
 
 describe('OverviewComponent', () => {
   let component: OverviewComponent;
@@ -15,7 +16,7 @@ describe('OverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OverviewComponent, TypeToNamePipe],
+      declarations: [OverviewComponent, TypeToNamePipe, FiltersComponent],
       imports: [
         MaterialModule,
         HttpClientModule,

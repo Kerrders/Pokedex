@@ -27,6 +27,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SortByTypeDamagePipe } from './pipes/sort-by-type-damage.pipe';
 import { TypeEffectivenessTableComponent } from './components/type-effectiveness-table/type-effectiveness-table.component';
+import { FiltersComponent } from './components/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { TypeEffectivenessTableComponent } from './components/type-effectiveness
     StatusTableComponent,
     MoveTableComponent,
     TypeEffectivenessTableComponent,
+    FiltersComponent,
     PokemonImageByUrlPipe,
     ColorForStatusValuePipe,
     MoveNamePipe,
