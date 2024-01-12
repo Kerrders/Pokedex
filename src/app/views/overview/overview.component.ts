@@ -1,14 +1,12 @@
-import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
-import { PokemonTypeEnum } from 'src/app/enums/PokemonTypesEnum';
-import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
 import { PokemonPaginatedList } from 'src/app/interfaces/PokemonPaginatedList.interface';
 import { FiltersService } from 'src/app/services/filters.service';
+import { LanguageService } from 'src/app/services/language.service';
 import { PokeApiService } from 'src/app/services/pokeapi.service';
 
 @Component({
@@ -23,11 +21,12 @@ export class OverviewComponent implements OnInit {
   public pokemonCount = 0;
   public pageSize = 50;
   public page = 1;
-  public langId = LanguageHelper.getLanguageId();
+  public langId = this.languageService.getLanguageId();
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
   private _loadPokemonSubscription: Subscription;
 
   constructor(
+    public languageService: LanguageService,
     private _pokeApiService: PokeApiService,
     private _translate: TranslateService,
     private _filtersService: FiltersService
@@ -35,7 +34,7 @@ export class OverviewComponent implements OnInit {
 
   public ngOnInit(): void {
     this._translate.onLangChange.subscribe(() => {
-      this.langId = LanguageHelper.getLanguageId();
+      this.langId = this.languageService.getLanguageId();
       this.getData();
     });
 

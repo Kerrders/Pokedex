@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { FilteredPokemonMoves } from 'src/app/interfaces/FilteredPokemonMoves.interface';
 import { PokemonMove } from 'src/app/interfaces/PokemonMove.interface';
 import versionGroups from '../../../assets/data/version_groups.json';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-move-table',
@@ -22,13 +22,16 @@ export class MoveTableComponent implements OnInit, OnChanges {
   public currentLearnType = 1;
 
   public displayedColumns: Array<string> = ['name', 'level'];
-  public langId: number = LanguageHelper.getLanguageId();
+  public langId: number = this.languageService.getLanguageId();
 
-  constructor(private _translate: TranslateService) {}
+  constructor(
+    public languageService: LanguageService,
+    private _translate: TranslateService
+  ) {}
 
   public ngOnInit(): void {
     this._translate.onLangChange.subscribe(() => {
-      this.langId = LanguageHelper.getLanguageId();
+      this.langId = this.languageService.getLanguageId();
     });
     this.getData();
   }

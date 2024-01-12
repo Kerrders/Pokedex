@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LanguageHelper } from 'src/app/helpers/languageHelper';
+import { LanguageService } from 'src/app/services/language.service';
 import { SidenavService } from 'src/app/services/sidenav.service';
 
 @Component({
@@ -9,21 +9,22 @@ import { SidenavService } from 'src/app/services/sidenav.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  public actualLanguage = LanguageHelper.getLanguage();
-  public languages = LanguageHelper.getAvailableLanguages();
-  public actualLanguageId = LanguageHelper.getLanguageId();
+  public actualLanguage = this.languageService.getLanguage();
+  public languages = this.languageService.getAvailableLanguages();
+  public actualLanguageId = this.languageService.getLanguageId();
 
   constructor(
     public sidenavService: SidenavService,
+    public languageService: LanguageService,
     private _translate: TranslateService
   ) {
-    this._translate.setDefaultLang(LanguageHelper.fallbackLanguage);
+    this._translate.setDefaultLang(this.languageService.fallbackLanguage);
     this._setLanguage();
   }
 
   public onChangeLanguage(): void {
-    LanguageHelper.setLanguage(this.actualLanguage);
-    this.actualLanguageId = LanguageHelper.getLanguageId();
+    this.languageService.setLanguage(this.actualLanguage);
+    this.actualLanguageId = this.languageService.getLanguageId();
     this._setLanguage();
   }
 

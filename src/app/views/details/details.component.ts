@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
-import { LanguageHelper } from 'src/app/helpers/languageHelper';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
 import { PokemonSpecy } from 'src/app/interfaces/PokemonSpecy.interface';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-details',
@@ -14,12 +14,13 @@ import { PokemonSpecy } from 'src/app/interfaces/PokemonSpecy.interface';
 export class DetailsComponent implements OnInit {
   public isLoading: boolean;
   public pokemonData: Pokemon;
-  public actualLanguageId = LanguageHelper.getLanguageId();
+  public actualLanguageId = this.languageService.getLanguageId();
   public evolutionChain: Array<PokemonSpecy> = [];
   public maximalEvolutionStep: number;
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
 
   constructor(
+    public languageService: LanguageService,
     private _translate: TranslateService,
     private _activatedRoute: ActivatedRoute
   ) {}
@@ -33,7 +34,7 @@ export class DetailsComponent implements OnInit {
       }
     });
     this._translate.onLangChange.subscribe(() => {
-      this.actualLanguageId = LanguageHelper.getLanguageId();
+      this.actualLanguageId = this.languageService.getLanguageId();
     });
   }
 
