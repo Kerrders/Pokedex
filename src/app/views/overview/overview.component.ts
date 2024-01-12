@@ -16,12 +16,12 @@ import { PokeApiService } from 'src/app/services/pokeapi.service';
 })
 export class OverviewComponent implements OnInit {
   public isLoading = true;
-  public isPageLoading = false;
   public data: Array<Pokemon> = [];
   public pokemonCount = 0;
   public pageSize = 50;
   public page = 1;
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
+
   private _loadPokemonSubscription: Subscription;
 
   constructor(
@@ -47,11 +47,11 @@ export class OverviewComponent implements OnInit {
 
   public onScroll(): void {
     ++this.page;
-    this.isPageLoading = true;
+    this.isLoading = true;
     this._pokeApiService
       .getPokemons(this._filtersService.getHttpParams(this.page, this.pageSize))
       .subscribe((result: PokemonPaginatedList) => {
-        this.isPageLoading = false;
+        this.isLoading = false;
         this.data.push(...result.data);
       });
   }
