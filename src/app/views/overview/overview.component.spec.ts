@@ -1,32 +1,26 @@
-import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { MaterialModule } from 'src/app/material-module';
-import { TypeToNamePipe } from 'src/app/pipes/type-to-name.pipe';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 import { OverviewComponent } from './overview.component';
-import { FiltersComponent } from 'src/app/components/filters/filters.component';
 
 describe('OverviewComponent', () => {
   let component: OverviewComponent;
   let fixture: ComponentFixture<OverviewComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [OverviewComponent, TypeToNamePipe, FiltersComponent],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
-        MaterialModule,
-        HttpClientModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        InfiniteScrollModule,
+        HttpClientTestingModule,
         TranslateModule.forRoot(),
+        BrowserAnimationsModule,
+        RouterTestingModule,
       ],
     }).compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(OverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

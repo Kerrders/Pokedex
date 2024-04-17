@@ -2,9 +2,9 @@
   <div class="row mt-2">
     <app-filters (search)="this.page = 1; this.getData()"></app-filters>
 
-    <div *ngIf="isLoading && page === 1">
-      <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
-    </div>
+    @if(isLoading && page === 1) {
+    <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
+    }
 
     <div
       class="pokemon-container"
@@ -13,11 +13,8 @@
       [infiniteScrollThrottle]="1000"
       (scrolled)="onScroll()"
     >
-      <div
-        class="p-2"
-        [hidden]="isLoading && page === 1"
-        *ngFor="let row of data"
-      >
+      @for (row of data; track $index) {
+      <div class="p-2" [hidden]="isLoading && page === 1">
         <mat-card
           class="pokemon-card cursor-pointer"
           [routerLink]="['/pokemon/', row.identifier]"
@@ -37,11 +34,10 @@
           </mat-card-content>
         </mat-card>
       </div>
+      }
     </div>
-    <mat-progress-bar
-      mode="query"
-      *ngIf="isLoading && page > 1"
-      class="mb-2 mt-2"
-    ></mat-progress-bar>
+    @if(isLoading && page > 1) {
+    <mat-progress-bar mode="query" class="mb-2 mt-2"></mat-progress-bar>
+    }
   </div>
 </div>

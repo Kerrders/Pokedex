@@ -3,6 +3,7 @@ import { MoveName } from '../interfaces/MoveName.interface';
 
 @Pipe({
   name: 'moveName',
+  standalone: true,
 })
 export class MoveNamePipe implements PipeTransform {
   transform(names: Array<MoveName>, languageId: number): string {

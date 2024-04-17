@@ -26,9 +26,11 @@
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>Pokemon Version</mat-label>
           <mat-select [(ngModel)]="currentVersion" (ngModelChange)="getData()">
-            <mat-option *ngFor="let version of allVersions" [value]="version">
+            @for (version of allVersions; track $index) {
+            <mat-option [value]="version">
               {{ version | versionName : languageService.langId }}
             </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>

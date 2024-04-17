@@ -3,6 +3,7 @@ import { TypeEffectiveness } from '../interfaces/TypeEffectiveness';
 
 @Pipe({
   name: 'sortByTypeDamage',
+  standalone: true,
 })
 export class SortByTypeDamagePipe implements PipeTransform {
   transform(

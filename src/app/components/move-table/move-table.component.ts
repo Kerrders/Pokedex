@@ -3,11 +3,34 @@ import { FilteredPokemonMoves } from 'src/app/interfaces/FilteredPokemonMoves.in
 import { PokemonMove } from 'src/app/interfaces/PokemonMove.interface';
 import versionGroups from '../../../assets/data/version_groups.json';
 import { LanguageService } from 'src/app/services/language.service';
+import { MoveNamePipe } from '../../pipes/move-name.pipe';
+import { VersionNamePipe } from '../../pipes/version-name.pipe';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-move-table',
   templateUrl: './move-table.component.html',
   styleUrls: ['./move-table.component.scss'],
+  standalone: true,
+  imports: [
+    TranslateModule,
+    MatCardModule,
+    MatButtonToggleModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatTableModule,
+    FormsModule,
+    MoveNamePipe,
+    VersionNamePipe,
+  ],
 })
 export class MoveTableComponent implements OnInit, OnChanges {
   @Input()

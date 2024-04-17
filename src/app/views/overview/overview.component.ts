@@ -8,11 +8,33 @@ import { PokemonPaginatedList } from 'src/app/interfaces/PokemonPaginatedList.in
 import { FiltersService } from 'src/app/services/filters.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { PokeApiService } from 'src/app/services/pokeapi.service';
+import { FiltersComponent } from '../../components/filters/filters.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MatCardModule } from '@angular/material/card';
+import { RouterModule } from '@angular/router';
+import { PokemonSpeciesNamePipe } from 'src/app/pipes/pokemon-species-name.pipe';
+import { PokemonImageByUrlPipe } from 'src/app/pipes/pokemon-image-by-url.pipe';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FiltersComponent,
+    MatProgressSpinnerModule,
+    InfiniteScrollModule,
+    MatCardModule,
+    PokemonSpeciesNamePipe,
+    PokemonImageByUrlPipe,
+    MatProgressBarModule,
+    InfiniteScrollModule,
+  ],
 })
 export class OverviewComponent implements OnInit {
   public isLoading = true;

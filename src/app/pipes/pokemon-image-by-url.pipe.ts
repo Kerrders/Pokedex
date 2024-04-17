@@ -3,6 +3,7 @@ import { PokemonSpriteTypePath } from '../enums/PokemonSpriteTypePath';
 
 @Pipe({
   name: 'pokemonImage',
+  standalone: true,
 })
 export class PokemonImageByUrlPipe implements PipeTransform {
   transform(id: string | number, type: PokemonSpriteTypePath): string {

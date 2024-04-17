@@ -3,6 +3,7 @@ import { PokemonSpeciesName } from '../interfaces/PokemonSpeciesName.interface';
 
 @Pipe({
   name: 'pokemonSpeciesName',
+  standalone: true,
 })
 export class PokemonSpeciesNamePipe implements PipeTransform {
   transform(names: Array<PokemonSpeciesName>, langId: number): string {

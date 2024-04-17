@@ -4,9 +4,9 @@
     'grid-template-columns': 'repeat(' + (maximalEvolutionStep + 1) + ', 1fr)'
   }"
 >
+  @for (pokemon of evolutionChain; track $index) {
   <mat-card
     class="pokemon-card cursor-pointer"
-    *ngFor="let pokemon of evolutionChain"
     [routerLink]="['/pokemon/', pokemon.identifier]"
     [ngStyle]="{
       'grid-column': (pokemon.step ?? 0) + 1
@@ -30,4 +30,5 @@
       </div>
     </mat-card-content>
   </mat-card>
+  }
 </div>

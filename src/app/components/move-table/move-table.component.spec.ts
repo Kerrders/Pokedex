@@ -1,27 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { MaterialModule } from 'src/app/material-module';
-import { VersionNamePipe } from 'src/app/pipes/version-name.pipe';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MoveTableComponent } from './move-table.component';
 
 describe('MoveTableComponent', () => {
   let component: MoveTableComponent;
   let fixture: ComponentFixture<MoveTableComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [MoveTableComponent, VersionNamePipe],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
-        MaterialModule,
+        HttpClientTestingModule,
         TranslateModule.forRoot(),
-        FormsModule,
         BrowserAnimationsModule,
       ],
     }).compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(MoveTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

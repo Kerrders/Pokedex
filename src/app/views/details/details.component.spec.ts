@@ -1,26 +1,26 @@
-import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { MaterialModule } from 'src/app/material-module';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsComponent } from './details.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('DetailsComponent', () => {
   let component: DetailsComponent;
   let fixture: ComponentFixture<DetailsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [DetailsComponent],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
-        MaterialModule,
-        HttpClientModule,
-        RouterTestingModule,
+        HttpClientTestingModule,
         TranslateModule.forRoot(),
+        BrowserAnimationsModule,
+        RouterTestingModule,
       ],
     }).compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(DetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

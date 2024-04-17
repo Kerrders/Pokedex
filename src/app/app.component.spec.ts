@@ -1,28 +1,26 @@
-import { RouterTestingModule } from '@angular/router/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-import { MaterialModule } from './material-module';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { MatIconTestingModule } from '@angular/material/icon/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
+        HttpClientTestingModule,
         TranslateModule.forRoot(),
         BrowserAnimationsModule,
-        MaterialModule,
-        FormsModule,
-        MatIconTestingModule,
+        RouterTestingModule,
       ],
-      declarations: [AppComponent, NavbarComponent],
     }).compileComponents();
+  }));
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

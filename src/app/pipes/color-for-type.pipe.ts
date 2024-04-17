@@ -23,6 +23,7 @@ const typeColorMap: { [type: string]: string } = {
 
 @Pipe({
   name: 'colorForType',
+  standalone: true,
 })
 export class ColorForTypePipe implements PipeTransform {
   transform(type: string): string {

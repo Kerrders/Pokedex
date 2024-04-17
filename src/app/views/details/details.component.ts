@@ -1,15 +1,45 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
 import { PokemonSpecy } from 'src/app/interfaces/PokemonSpecy.interface';
 import { LanguageService } from 'src/app/services/language.service';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { PokemonImageByUrlPipe } from '../../pipes/pokemon-image-by-url.pipe';
+import { EvolutionTabComponent } from '../../components/evolution-tab/evolution-tab.component';
+import { StatusTableComponent } from '../../components/status-table/status-table.component';
+import { TypeEffectivenessTableComponent } from '../../components/type-effectiveness-table/type-effectiveness-table.component';
+import { MoveTableComponent } from '../../components/move-table/move-table.component';
+import { TypeToNamePipe } from '../../pipes/type-to-name.pipe';
+import { ColorForTypePipe } from '../../pipes/color-for-type.pipe';
+import { SortByTypeDamagePipe } from '../../pipes/sort-by-type-damage.pipe';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    TranslateModule,
+    MatCardModule,
+    MatTabsModule,
+    MatDividerModule,
+    MatChipsModule,
+    PokemonImageByUrlPipe,
+    EvolutionTabComponent,
+    StatusTableComponent,
+    TypeEffectivenessTableComponent,
+    MoveTableComponent,
+    TypeToNamePipe,
+    ColorForTypePipe,
+    SortByTypeDamagePipe,
+  ],
 })
 export class DetailsComponent implements OnInit {
   public isLoading: boolean;

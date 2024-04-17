@@ -5,6 +5,7 @@ import versionGroups from '../../assets/data/version_groups.json';
 
 @Pipe({
   name: 'versionName',
+  standalone: true,
 })
 export class VersionNamePipe implements PipeTransform {
   transform(groupVersionId: string, languageId: number): string {

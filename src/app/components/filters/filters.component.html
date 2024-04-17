@@ -18,9 +18,11 @@
         (ngModelChange)="filtersService.types.set($event); this.search.emit()"
         multiple
       >
-        <mat-option *ngFor="let type of availableTypes" [value]="type">
+        @for (type of availableTypes; track $index) {
+        <mat-option [value]="type">
           {{ "types." + (type | typeToName) | translate }}
         </mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>

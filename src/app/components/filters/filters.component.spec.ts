@@ -1,29 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FiltersComponent } from './filters.component';
-import { MaterialModule } from 'src/app/material-module';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { TypeToNamePipe } from 'src/app/pipes/type-to-name.pipe';
+import { FiltersComponent } from './filters.component';
 
 describe('FiltersComponent', () => {
   let component: FiltersComponent;
   let fixture: ComponentFixture<FiltersComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [FiltersComponent, TypeToNamePipe],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
-        MaterialModule,
+        HttpClientTestingModule,
         TranslateModule.forRoot(),
-        FormsModule,
         BrowserAnimationsModule,
-        MatFormFieldModule,
       ],
     }).compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(FiltersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
