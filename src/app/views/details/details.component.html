@@ -1,7 +1,7 @@
 <div class="container mt-2">
   <div *ngIf="pokemonData" class="row">
     <div class="col-md-4 mt-2">
-      <mat-card>
+      <mat-card appearance="outlined">
         <mat-card-content>
           <mat-tab-group>
             <mat-tab label="Artwork">
@@ -50,7 +50,7 @@
           </mat-tab-group>
 
           <mat-chip-listbox>
-            <mat-chip
+            <mat-chip-option
               *ngFor="let typeElement of pokemonData.types"
               [ngStyle]="{
                 'background-color':
@@ -67,14 +67,14 @@
                 [alt]="typeElement.type_id | typeToName | titlecase"
               />
               {{ "types." + (typeElement.type_id | typeToName) | translate }}
-            </mat-chip>
+            </mat-chip-option>
           </mat-chip-listbox>
         </mat-card-content>
       </mat-card>
     </div>
 
     <div class="col-md-8 mt-2">
-      <mat-card>
+      <mat-card appearance="outlined">
         <mat-card-content>
           <mat-tab-group>
             <mat-tab [label]="'status' | translate" *ngIf="pokemonData.stats">

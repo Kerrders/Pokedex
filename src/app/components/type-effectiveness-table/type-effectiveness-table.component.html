@@ -2,7 +2,7 @@
   <ng-container matColumnDef="type">
     <th mat-header-cell *matHeaderCellDef>{{ "filter.types" | translate }}</th>
     <td mat-cell *matCellDef="let typeEffectiveness">
-      <mat-chip
+      <mat-chip-option
         [ngStyle]="{
           'background-color':
             typeEffectiveness.typeId | typeToName | colorForType
@@ -18,7 +18,7 @@
           [alt]="typeEffectiveness.typeId | typeToName | titlecase"
         />
         {{ "types." + (typeEffectiveness.typeId | typeToName) | translate }}
-      </mat-chip>
+      </mat-chip-option>
     </td>
   </ng-container>
 

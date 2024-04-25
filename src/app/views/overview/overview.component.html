@@ -3,7 +3,9 @@
     <app-filters (search)="this.page = 1; this.getData()"></app-filters>
 
     @if(isLoading && page === 1) {
-    <mat-spinner class="pt-3 pb-3 center"></mat-spinner>
+    <div>
+      <mat-spinner class="mt-3 mb-3 center"></mat-spinner>
+    </div>
     }
 
     <div

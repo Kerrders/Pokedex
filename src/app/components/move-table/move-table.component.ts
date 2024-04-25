@@ -18,7 +18,6 @@ import { MatSelectModule } from '@angular/material/select';
   selector: 'app-move-table',
   templateUrl: './move-table.component.html',
   styleUrls: ['./move-table.component.scss'],
-  standalone: true,
   imports: [
     TranslateModule,
     MatCardModule,
@@ -31,6 +30,7 @@ import { MatSelectModule } from '@angular/material/select';
     MoveNamePipe,
     VersionNamePipe,
   ],
+  standalone: true,
 })
 export class MoveTableComponent implements OnInit, OnChanges {
   @Input()
