@@ -7,5 +7,6 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "docwriter.style": "Auto-detect"
+  "docwriter.style": "Auto-detect",
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
