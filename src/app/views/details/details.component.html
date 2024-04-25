@@ -49,8 +49,8 @@
             </mat-tab>
           </mat-tab-group>
 
-          <mat-chip-listbox>
-            <mat-chip-option
+          <mat-chip-set>
+            <mat-chip
               *ngFor="let typeElement of pokemonData.types"
               [ngStyle]="{
                 'background-color':
@@ -67,8 +67,8 @@
                 [alt]="typeElement.type_id | typeToName | titlecase"
               />
               {{ "types." + (typeElement.type_id | typeToName) | translate }}
-            </mat-chip-option>
-          </mat-chip-listbox>
+            </mat-chip>
+          </mat-chip-set>
         </mat-card-content>
       </mat-card>
     </div>
