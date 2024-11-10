@@ -28,12 +28,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install ESLint
+      - name: Install
         run: |
-          npm install eslint@9.14.0
-          npm install @microsoft/eslint-formatter-sarif@2.1.7
+          npm install
 
       - name: Run ESLint
-        run: npx eslint src/
-          --config .eslintrc.json
+        run: ng lint
         continue-on-error: false
