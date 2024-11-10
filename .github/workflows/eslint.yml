@@ -11,10 +11,10 @@ name: ESLint
 
 on:
   push:
-    branches: [ "**" ]
+    branches: ["**"]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "**"]
+    branches: ["**"]
 
 jobs:
   eslint:
@@ -30,7 +30,7 @@ jobs:
 
       - name: Install ESLint
         run: |
-          npm install eslint@8.10.0
+          npm install eslint@9.14.0
           npm install @microsoft/eslint-formatter-sarif@2.1.7
 
       - name: Run ESLint
