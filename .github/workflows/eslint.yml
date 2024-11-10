@@ -33,5 +33,5 @@ jobs:
           npm install
 
       - name: Run ESLint
-        run: ng lint
+        run: npm run lint
         continue-on-error: false
