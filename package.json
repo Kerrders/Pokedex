@@ -31,7 +31,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "har-validator": "^5.1.5",
-    "ngx-infinite-scroll": "^17.0.0",
+    "ngx-infinite-scroll": "^18.0.0",
     "node-fetch": "^3.3.0",
     "prettier-eslint": "^15.0.1",
     "rxjs": "~7.5.0",
