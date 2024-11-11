@@ -36,8 +36,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 })
 export class NavbarComponent {
   public actualLanguage = this.languageService.getLanguage();
-  public languages = this.languageService.getAvailableLanguages();
-  public actualLanguageId = this.languageService.getLanguageId();
 
   constructor(
     public sidenavService: SidenavService,
@@ -49,8 +47,7 @@ export class NavbarComponent {
   }
 
   public onChangeLanguage(): void {
-    this.languageService.setLanguage(this.actualLanguage);
-    this.actualLanguageId = this.languageService.getLanguageId();
+    this.languageService.saveLanguage(this.actualLanguage);
     this._setLanguage();
   }
 

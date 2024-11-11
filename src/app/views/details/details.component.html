@@ -1,5 +1,6 @@
 <div class="container mt-2">
-  <div *ngIf="pokemonData" class="row">
+  @if(pokemonData) {
+  <div class="row">
     <div class="col-md-4 mt-2">
       <mat-card appearance="outlined">
         <mat-card-content>
@@ -8,10 +9,13 @@
               <div class="imgContainer">
                 <img
                   class="center"
-                  [src]="
+                  [ngSrc]="
                     pokemonData.id
                       | pokemonImage : pokemonSpriteTypePath.ARTWORK
                   "
+                  width="340"
+                  height="340"
+                  priority
                 />
               </div>
             </mat-tab>
@@ -19,30 +23,38 @@
               <div class="imgContainer">
                 <div class="text-center">
                   <img
-                    [src]="
+                    [ngSrc]="
                       pokemonData.id | pokemonImage : pokemonSpriteTypePath.BACK
                     "
+                    width="96"
+                    height="96"
                   />
                   <img
-                    [src]="
+                    [ngSrc]="
                       pokemonData.id
                         | pokemonImage : pokemonSpriteTypePath.FRONT
                     "
+                    width="96"
+                    height="96"
                   />
                 </div>
                 <mat-divider></mat-divider>
                 <div class="text-center">
                   <img
-                    [src]="
+                    [ngSrc]="
                       pokemonData.id
                         | pokemonImage : pokemonSpriteTypePath.SHINY_BACK
                     "
+                    width="96"
+                    height="96"
                   />
                   <img
-                    [src]="
+                    [ngSrc]="
                       pokemonData.id
                         | pokemonImage : pokemonSpriteTypePath.SHINY_FRONT
                     "
+                    width="96"
+                    height="96"
                   />
                 </div>
               </div>
@@ -50,8 +62,8 @@
           </mat-tab-group>
 
           <mat-chip-set>
+            @for(typeElement of pokemonData.types; track $index) {
             <mat-chip
-              *ngFor="let typeElement of pokemonData.types"
               [ngStyle]="{
                 'background-color':
                   typeElement.type_id | typeToName | colorForType
@@ -68,6 +80,7 @@
               />
               {{ "types." + (typeElement.type_id | typeToName) | translate }}
             </mat-chip>
+            }
           </mat-chip-set>
         </mat-card-content>
       </mat-card>
@@ -77,37 +90,42 @@
       <mat-card appearance="outlined">
         <mat-card-content>
           <mat-tab-group>
-            <mat-tab [label]="'status' | translate" *ngIf="pokemonData.stats">
+            @if(pokemonData.stats) {
+            <mat-tab [label]="'status' | translate">
               <app-pokemon-status-table [pokemonStats]="pokemonData.stats">
               </app-pokemon-status-table>
             </mat-tab>
-            <mat-tab
-              [label]="'evolutions' | translate"
-              *ngIf="evolutionChain.length > 1"
-            >
+            } @if(evolutionChain.length > 1) {
+            <mat-tab [label]="'evolutions' | translate">
+              @defer (on viewport) {
               <app-evolution-tab
                 [evolutionChain]="evolutionChain"
                 [maximalEvolutionStep]="maximalEvolutionStep"
-                [actualLanguageId]="actualLanguageId"
+                [actualLanguageId]="languageService.langId()"
               ></app-evolution-tab>
+              } @placeholder () {
+              <mat-spinner class="mt-3 mb-3 center"></mat-spinner>
+              }
             </mat-tab>
-            <mat-tab
-              [label]="'typeEffectiveness.title' | translate"
-              *ngIf="pokemonData.types"
-            >
+            } @if(pokemonData.types) {
+            <mat-tab [label]="'typeEffectiveness.title' | translate">
               <app-pokemon-type-effectiveness-table
                 [typeEffectiveness]="
                   (pokemonData.typeEffectiveness | sortByTypeDamage) ?? []
                 "
               ></app-pokemon-type-effectiveness-table>
             </mat-tab>
+            }
           </mat-tab-group>
         </mat-card-content>
       </mat-card>
     </div>
 
-    <div class="col-md-12 mt-3" *ngIf="pokemonData.moves">
+    @if(pokemonData.moves) {
+    <div class="col-md-12 mt-3">
       <app-move-table [pokemonMoves]="pokemonData.moves"></app-move-table>
     </div>
+    }
   </div>
+  }
 </div>

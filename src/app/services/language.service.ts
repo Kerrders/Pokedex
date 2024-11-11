@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal, Signal } from '@angular/core';
 import { LanguageEnum } from '../enums/LanguageEnum';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -6,20 +6,23 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class LanguageService {
-  public langId = LanguageEnum.ENGLISH;
+  public lang = signal(this.getLanguage());
+  public langId: Signal<LanguageEnum> = computed(
+    () => this._languageIds[this.lang()] ?? LanguageEnum.ENGLISH
+  );
   public fallbackLanguage = 'en';
 
-  private _allowedLanguages: Array<string> = ['de', 'en'];
-  private _languageIds: { [key: string]: number } = {
+  private readonly _allowedLanguages: Array<string> = ['de', 'en'];
+  private readonly _languageIds: { [key: string]: number } = {
     de: LanguageEnum.GERMAN,
     en: LanguageEnum.ENGLISH,
   };
 
   constructor(private _translate: TranslateService) {
-    this.langId = this.getLanguageId();
+    this.lang.set(this.getLanguage());
 
     this._translate.onLangChange.subscribe(() => {
-      this.langId = this.getLanguageId();
+      this.lang.set(this.getLanguage());
     });
   }
 
@@ -27,11 +30,7 @@ export class LanguageService {
     return this._languageIds;
   }
 
-  public getLanguageId(): number {
-    return this._languageIds[this.getLanguage()] ?? LanguageEnum.ENGLISH;
-  }
-
-  public setLanguage(lang: string): void {
+  public saveLanguage(lang: string): void {
     localStorage.setItem('lang', lang);
   }
 

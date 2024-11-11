@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
 import { PokemonSpecy } from 'src/app/interfaces/PokemonSpecy.interface';
@@ -18,6 +18,7 @@ import { MoveTableComponent } from '../../components/move-table/move-table.compo
 import { TypeToNamePipe } from '../../pipes/type-to-name.pipe';
 import { ColorForTypePipe } from '../../pipes/color-for-type.pipe';
 import { SortByTypeDamagePipe } from '../../pipes/sort-by-type-damage.pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-details',
@@ -39,19 +40,18 @@ import { SortByTypeDamagePipe } from '../../pipes/sort-by-type-damage.pipe';
     TypeToNamePipe,
     ColorForTypePipe,
     SortByTypeDamagePipe,
+    NgOptimizedImage,
+    MatProgressSpinnerModule,
   ],
 })
 export class DetailsComponent implements OnInit {
-  public isLoading: boolean;
   public pokemonData: Pokemon;
-  public actualLanguageId = this.languageService.getLanguageId();
   public evolutionChain: Array<PokemonSpecy> = [];
   public maximalEvolutionStep: number;
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
 
   constructor(
     public languageService: LanguageService,
-    private _translate: TranslateService,
     private _activatedRoute: ActivatedRoute
   ) {}
 
@@ -62,9 +62,6 @@ export class DetailsComponent implements OnInit {
       if (this.pokemonData.evolution) {
         this.parseEvolutionChain(this.pokemonData.evolution);
       }
-    });
-    this._translate.onLangChange.subscribe(() => {
-      this.actualLanguageId = this.languageService.getLanguageId();
     });
   }
 

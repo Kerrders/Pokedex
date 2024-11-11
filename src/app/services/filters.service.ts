@@ -16,7 +16,7 @@ export class FiltersService {
     let params = new HttpParams()
       .set('page', page)
       .set('perPage', pageSize)
-      .set('langId', this.languageService.getLanguageId());
+      .set('langId', this.languageService.langId());
 
     const name = this.name();
     if (name?.length > 3) {

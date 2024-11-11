@@ -20,13 +20,12 @@
   <div class="ms-4">
     <button mat-button color="primary" [routerLink]="['']">Home</button>
   </div>
-  <div
-    *ngFor="let node of sidenavService.nodes"
-    [routerLink]="node.url"
-    class="nodeContainer"
-  >
+  @for (node of sidenavService.nodes; track $index) {
+  <div [routerLink]="node.url" class="nodeContainer">
     <button mat-button color="primary" class="align-middle">
-      {{ node.name | pokemonSpeciesName : actualLanguageId | titlecase }}
+      {{
+        node.name | pokemonSpeciesName : languageService.langId() | titlecase
+      }}
     </button>
 
     <button
@@ -37,6 +36,7 @@
       <mat-icon>close</mat-icon>
     </button>
   </div>
+  }
 
   <div class="flex-align-right" fxShow fxHide.xs>
     <mat-button-toggle-group
@@ -44,12 +44,12 @@
       [(ngModel)]="actualLanguage"
       (ngModelChange)="onChangeLanguage()"
     >
-      <mat-button-toggle
-        *ngFor="let lang of languages | keyvalue"
-        [value]="lang.key"
-      >
+      @for (lang of languageService.getAvailableLanguages() | keyvalue; track
+      $index) {
+      <mat-button-toggle [value]="lang.key">
         {{ "langs." + lang.key | translate }}</mat-button-toggle
       >
+      }
     </mat-button-toggle-group>
   </div>
 </mat-toolbar>
@@ -65,12 +65,12 @@
               [(ngModel)]="actualLanguage"
               (ngModelChange)="onChangeLanguage()"
             >
-              <mat-button-toggle
-                *ngFor="let lang of languages | keyvalue"
-                [value]="lang.key"
-              >
+              @for (lang of languageService.getAvailableLanguages() | keyvalue;
+              track $index) {
+              <mat-button-toggle [value]="lang.key">
                 {{ "langs." + lang.key | translate }}</mat-button-toggle
               >
+              }
             </mat-button-toggle-group>
           </div>
         </mat-card-content>
