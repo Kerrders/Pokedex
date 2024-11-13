@@ -99,7 +99,7 @@
                 >
                 </app-pokemon-status-table>
               </mat-tab>
-              } @if(evolutionChain.length > 1) {
+              } @if(evolutionChain().length > 1) {
               <mat-tab [label]="'evolutions' | translate">
                 @defer (on viewport) {
                 <app-evolution-tab
