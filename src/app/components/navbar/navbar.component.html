@@ -20,7 +20,7 @@
   <div class="ms-4">
     <button mat-button color="primary" [routerLink]="['']">Home</button>
   </div>
-  @for (node of sidenavService.nodes; track $index) {
+  @for (node of sidenavService.nodes(); track $index) {
   <div [routerLink]="node.url" class="nodeContainer">
     <button mat-button color="primary" class="align-middle">
       {{

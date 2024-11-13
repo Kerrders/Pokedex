@@ -1,5 +1,12 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  computed,
+  OnInit,
+  Signal,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -45,9 +52,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   ],
 })
 export class DetailsComponent implements OnInit {
-  public pokemonData: Pokemon;
-  public evolutionChain: Array<PokemonSpecy> = [];
-  public maximalEvolutionStep: number;
+  public pokemonData: WritableSignal<Pokemon | undefined> = signal(undefined);
+  public evolutionChain: WritableSignal<Array<PokemonSpecy>> = signal([]);
+  public maximalEvolutionStep: Signal<number> = computed(() =>
+    this.evolutionChain().reduce(
+      (max: number, pokemon: PokemonSpecy) => Math.max(max, pokemon?.step ?? 0),
+      0
+    )
+  );
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
 
   constructor(
@@ -57,10 +69,10 @@ export class DetailsComponent implements OnInit {
 
   public ngOnInit(): void {
     this._activatedRoute.data.subscribe(({ pokemonData }) => {
-      this.pokemonData = pokemonData;
-      this.evolutionChain = [];
-      if (this.pokemonData.evolution) {
-        this.parseEvolutionChain(this.pokemonData.evolution);
+      this.pokemonData.set(pokemonData);
+      this.evolutionChain.set([]);
+      if (pokemonData.evolution) {
+        this.parseEvolutionChain(pokemonData.evolution);
       }
     });
   }
@@ -82,15 +94,12 @@ export class DetailsComponent implements OnInit {
       pokemon.step = pokemonMap[pokemon.id];
     }
 
-    this.evolutionChain = chain.sort((a, b) => {
-      if (a.step === 0) return -1;
-      if (b.step === 0) return 1;
-      return (a.step ?? 0) - (b.step ?? 0);
-    });
-
-    this.maximalEvolutionStep = chain.reduce(
-      (max: number, pokemon: PokemonSpecy) => Math.max(max, pokemon?.step ?? 0),
-      0
+    this.evolutionChain.set(
+      chain.sort((a, b) => {
+        if (a.step === 0) return -1;
+        if (b.step === 0) return 1;
+        return (a.step ?? 0) - (b.step ?? 0);
+      })
     );
   }
 }
