@@ -19,7 +19,7 @@ export class FiltersService {
       .set('langId', this.languageService.langId());
 
     const name = this.name();
-    if (name?.length > 3) {
+    if (name?.length >= 3) {
       params = params.set('name', name);
     }
 
