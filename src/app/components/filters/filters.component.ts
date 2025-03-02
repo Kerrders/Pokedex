@@ -13,20 +13,19 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-filters',
-  templateUrl: './filters.component.html',
-  styleUrls: ['./filters.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    FormsModule,
-    MatFormFieldModule,
-    TypeToNamePipe,
-    MatSelectModule,
-    MatOptionModule,
-    MatInputModule,
-  ],
+    selector: 'app-filters',
+    templateUrl: './filters.component.html',
+    styleUrls: ['./filters.component.scss'],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        FormsModule,
+        MatFormFieldModule,
+        TypeToNamePipe,
+        MatSelectModule,
+        MatOptionModule,
+        MatInputModule,
+    ]
 })
 export class FiltersComponent implements OnInit {
   public nameChanged = new Subject<string>();

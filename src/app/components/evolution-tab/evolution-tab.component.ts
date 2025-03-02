@@ -8,17 +8,16 @@ import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  selector: 'app-evolution-tab',
-  templateUrl: './evolution-tab.component.html',
-  styleUrls: ['./evolution-tab.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatCardModule,
-    PokemonSpeciesNamePipe,
-    PokemonImageByUrlPipe,
-  ],
+    selector: 'app-evolution-tab',
+    templateUrl: './evolution-tab.component.html',
+    styleUrls: ['./evolution-tab.component.scss'],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatCardModule,
+        PokemonSpeciesNamePipe,
+        PokemonImageByUrlPipe,
+    ]
 })
 export class EvolutionTabComponent {
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;

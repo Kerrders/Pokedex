@@ -6,16 +6,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-pokemon-status-table',
-  templateUrl: './status-table.component.html',
-  styleUrls: ['./status-table.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatTableModule,
-    TranslateModule,
-    ColorForStatusValuePipe,
-  ],
+    selector: 'app-pokemon-status-table',
+    templateUrl: './status-table.component.html',
+    styleUrls: ['./status-table.component.scss'],
+    imports: [
+        CommonModule,
+        MatTableModule,
+        TranslateModule,
+        ColorForStatusValuePipe,
+    ]
 })
 export class StatusTableComponent {
   @Input()

@@ -28,28 +28,27 @@ import { SortByTypeDamagePipe } from '../../pipes/sort-by-type-damage.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    MatCardModule,
-    MatTabsModule,
-    MatDividerModule,
-    MatChipsModule,
-    PokemonImageByUrlPipe,
-    EvolutionTabComponent,
-    StatusTableComponent,
-    TypeEffectivenessTableComponent,
-    MoveTableComponent,
-    TypeToNamePipe,
-    ColorForTypePipe,
-    SortByTypeDamagePipe,
-    NgOptimizedImage,
-    MatProgressSpinnerModule,
-  ],
+    selector: 'app-details',
+    templateUrl: './details.component.html',
+    styleUrls: ['./details.component.scss'],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        MatCardModule,
+        MatTabsModule,
+        MatDividerModule,
+        MatChipsModule,
+        PokemonImageByUrlPipe,
+        EvolutionTabComponent,
+        StatusTableComponent,
+        TypeEffectivenessTableComponent,
+        MoveTableComponent,
+        TypeToNamePipe,
+        ColorForTypePipe,
+        SortByTypeDamagePipe,
+        NgOptimizedImage,
+        MatProgressSpinnerModule,
+    ]
 })
 export class DetailsComponent implements OnInit {
   public pokemonData: WritableSignal<Pokemon | undefined> = signal(undefined);
