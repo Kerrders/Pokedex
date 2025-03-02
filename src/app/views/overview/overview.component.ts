@@ -26,22 +26,21 @@ import { PokemonImageByUrlPipe } from 'src/app/pipes/pokemon-image-by-url.pipe';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 @Component({
-  selector: 'app-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    FiltersComponent,
-    MatProgressSpinnerModule,
-    MatCardModule,
-    PokemonSpeciesNamePipe,
-    PokemonImageByUrlPipe,
-    MatProgressBarModule,
-    InfiniteScrollDirective,
-    NgOptimizedImage,
-  ],
+    selector: 'app-overview',
+    templateUrl: './overview.component.html',
+    styleUrls: ['./overview.component.scss'],
+    imports: [
+        CommonModule,
+        RouterModule,
+        FiltersComponent,
+        MatProgressSpinnerModule,
+        MatCardModule,
+        PokemonSpeciesNamePipe,
+        PokemonImageByUrlPipe,
+        MatProgressBarModule,
+        InfiniteScrollDirective,
+        NgOptimizedImage,
+    ]
 })
 export class OverviewComponent implements OnInit {
   public isLoading = signal(true);

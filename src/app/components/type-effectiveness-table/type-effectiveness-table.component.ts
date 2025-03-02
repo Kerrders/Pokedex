@@ -8,18 +8,17 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
-  selector: 'app-pokemon-type-effectiveness-table',
-  templateUrl: './type-effectiveness-table.component.html',
-  styleUrls: ['./type-effectiveness-table.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    MatTableModule,
-    MatChipsModule,
-    TypeToNamePipe,
-    ColorForTypePipe,
-  ],
+    selector: 'app-pokemon-type-effectiveness-table',
+    templateUrl: './type-effectiveness-table.component.html',
+    styleUrls: ['./type-effectiveness-table.component.scss'],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        MatTableModule,
+        MatChipsModule,
+        TypeToNamePipe,
+        ColorForTypePipe,
+    ]
 })
 export class TypeEffectivenessTableComponent {
   @Input()

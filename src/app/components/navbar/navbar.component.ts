@@ -15,24 +15,23 @@ import { PokemonSpeciesNamePipe } from 'src/app/pipes/pokemon-species-name.pipe'
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatButtonToggleModule,
-    TranslateModule,
-    PokemonSpeciesNamePipe,
-    FlexLayoutModule,
-  ],
-  standalone: true,
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss'],
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatButtonModule,
+        MatCardModule,
+        MatButtonToggleModule,
+        TranslateModule,
+        PokemonSpeciesNamePipe,
+        FlexLayoutModule,
+    ]
 })
 export class NavbarComponent {
   public actualLanguage = this.languageService.getLanguage();

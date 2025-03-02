@@ -15,22 +15,21 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-  selector: 'app-move-table',
-  templateUrl: './move-table.component.html',
-  styleUrls: ['./move-table.component.scss'],
-  imports: [
-    TranslateModule,
-    MatCardModule,
-    MatButtonToggleModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatTableModule,
-    FormsModule,
-    MoveNamePipe,
-    VersionNamePipe,
-  ],
-  standalone: true,
+    selector: 'app-move-table',
+    templateUrl: './move-table.component.html',
+    styleUrls: ['./move-table.component.scss'],
+    imports: [
+        TranslateModule,
+        MatCardModule,
+        MatButtonToggleModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatTableModule,
+        FormsModule,
+        MoveNamePipe,
+        VersionNamePipe,
+    ]
 })
 export class MoveTableComponent implements OnInit, OnChanges {
   @Input()
