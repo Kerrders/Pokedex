@@ -1,6 +1,14 @@
-import { computed, Injectable, signal, Signal } from '@angular/core';
+import {
+  computed,
+  DestroyRef,
+  inject,
+  Injectable,
+  signal,
+  Signal,
+} from '@angular/core';
 import { LanguageEnum } from '../enums/LanguageEnum';
 import { TranslateService } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -17,13 +25,16 @@ export class LanguageService {
     de: LanguageEnum.GERMAN,
     en: LanguageEnum.ENGLISH,
   };
+  private _destroyRef = inject(DestroyRef);
 
   constructor(private _translate: TranslateService) {
     this.lang.set(this.getLanguage());
 
-    this._translate.onLangChange.subscribe(() => {
-      this.lang.set(this.getLanguage());
-    });
+    this._translate.onLangChange
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => {
+        this.lang.set(this.getLanguage());
+      });
   }
 
   public getAvailableLanguages(): { [key: string]: number } {

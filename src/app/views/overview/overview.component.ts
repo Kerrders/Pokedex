@@ -1,6 +1,9 @@
 import {
   Component,
   computed,
+  DestroyRef,
+  inject,
+  OnDestroy,
   OnInit,
   Signal,
   signal,
@@ -24,25 +27,26 @@ import { RouterModule } from '@angular/router';
 import { PokemonSpeciesNamePipe } from 'src/app/pipes/pokemon-species-name.pipe';
 import { PokemonImageByUrlPipe } from 'src/app/pipes/pokemon-image-by-url.pipe';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-    selector: 'app-overview',
-    templateUrl: './overview.component.html',
-    styleUrls: ['./overview.component.scss'],
-    imports: [
-        CommonModule,
-        RouterModule,
-        FiltersComponent,
-        MatProgressSpinnerModule,
-        MatCardModule,
-        PokemonSpeciesNamePipe,
-        PokemonImageByUrlPipe,
-        MatProgressBarModule,
-        InfiniteScrollDirective,
-        NgOptimizedImage,
-    ]
+  selector: 'app-overview',
+  templateUrl: './overview.component.html',
+  styleUrls: ['./overview.component.scss'],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FiltersComponent,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    PokemonSpeciesNamePipe,
+    PokemonImageByUrlPipe,
+    MatProgressBarModule,
+    InfiniteScrollDirective,
+    NgOptimizedImage,
+  ],
 })
-export class OverviewComponent implements OnInit {
+export class OverviewComponent implements OnInit, OnDestroy {
   public isLoading = signal(true);
   public data: WritableSignal<Array<Pokemon>> = signal([]);
   public pokemonCount = signal(0);
@@ -51,7 +55,8 @@ export class OverviewComponent implements OnInit {
   public isFirstPage: Signal<boolean> = computed(() => this.page() === 1);
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
 
-  private _loadPokemonSubscription: Subscription;
+  private _loadPokemonSubscription?: Subscription;
+  private _destroyRef = inject(DestroyRef);
 
   constructor(
     public languageService: LanguageService,
@@ -61,11 +66,17 @@ export class OverviewComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this._translate.onLangChange.subscribe(() => {
-      this.getData();
-    });
+    this._translate.onLangChange
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => {
+        this.getData();
+      });
 
     this.getData();
+  }
+
+  public ngOnDestroy(): void {
+    this._loadPokemonSubscription = undefined;
   }
 
   public changePage(event: PageEvent): void {
@@ -81,6 +92,7 @@ export class OverviewComponent implements OnInit {
       .getPokemons(
         this._filtersService.getHttpParams(this.page(), this.pageSize())
       )
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading.set(false);
         this.data().push(...result.data);
@@ -94,6 +106,7 @@ export class OverviewComponent implements OnInit {
       .getPokemons(
         this._filtersService.getHttpParams(this.page(), this.pageSize())
       )
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading.set(false);
         this.data.set(result.data);

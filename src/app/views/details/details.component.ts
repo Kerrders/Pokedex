@@ -2,6 +2,8 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   Component,
   computed,
+  DestroyRef,
+  inject,
   OnInit,
   Signal,
   signal,
@@ -26,29 +28,30 @@ import { TypeToNamePipe } from '../../pipes/type-to-name.pipe';
 import { ColorForTypePipe } from '../../pipes/color-for-type.pipe';
 import { SortByTypeDamagePipe } from '../../pipes/sort-by-type-damage.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-    selector: 'app-details',
-    templateUrl: './details.component.html',
-    styleUrls: ['./details.component.scss'],
-    imports: [
-        CommonModule,
-        TranslateModule,
-        MatCardModule,
-        MatTabsModule,
-        MatDividerModule,
-        MatChipsModule,
-        PokemonImageByUrlPipe,
-        EvolutionTabComponent,
-        StatusTableComponent,
-        TypeEffectivenessTableComponent,
-        MoveTableComponent,
-        TypeToNamePipe,
-        ColorForTypePipe,
-        SortByTypeDamagePipe,
-        NgOptimizedImage,
-        MatProgressSpinnerModule,
-    ]
+  selector: 'app-details',
+  templateUrl: './details.component.html',
+  styleUrls: ['./details.component.scss'],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    MatCardModule,
+    MatTabsModule,
+    MatDividerModule,
+    MatChipsModule,
+    PokemonImageByUrlPipe,
+    EvolutionTabComponent,
+    StatusTableComponent,
+    TypeEffectivenessTableComponent,
+    MoveTableComponent,
+    TypeToNamePipe,
+    ColorForTypePipe,
+    SortByTypeDamagePipe,
+    NgOptimizedImage,
+    MatProgressSpinnerModule,
+  ],
 })
 export class DetailsComponent implements OnInit {
   public pokemonData: WritableSignal<Pokemon | undefined> = signal(undefined);
@@ -60,6 +63,7 @@ export class DetailsComponent implements OnInit {
     )
   );
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
+  private _destroyRef = inject(DestroyRef);
 
   constructor(
     public languageService: LanguageService,
@@ -67,13 +71,15 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this._activatedRoute.data.subscribe(({ pokemonData }) => {
-      this.pokemonData.set(pokemonData);
-      this.evolutionChain.set([]);
-      if (pokemonData.evolution) {
-        this.parseEvolutionChain(pokemonData.evolution);
-      }
-    });
+    this._activatedRoute.data
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(({ pokemonData }) => {
+        this.pokemonData.set(pokemonData);
+        this.evolutionChain.set([]);
+        if (pokemonData.evolution) {
+          this.parseEvolutionChain(pokemonData.evolution);
+        }
+      });
   }
 
   private parseEvolutionChain(chain: Array<PokemonSpecy>): void {
