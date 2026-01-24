@@ -36,6 +36,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   ],
 })
 export class FiltersComponent implements OnInit {
+  public readonly filtersService = inject(FiltersService);
+
   public nameChanged = new Subject<string>();
   public availableTypes: Array<PokemonTypeEnum> =
     PokemonTypeHelper.availableTypes;
@@ -43,7 +45,7 @@ export class FiltersComponent implements OnInit {
 
   public readonly search = output<void>();
 
-  constructor(public filtersService: FiltersService) {
+  constructor() {
     effect(() => {
       this.search.emit();
     });

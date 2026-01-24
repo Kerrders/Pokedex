@@ -1,4 +1,4 @@
-import { Component, input, OnInit, OnChanges } from '@angular/core';
+import { Component, input, OnInit, OnChanges, inject } from '@angular/core';
 import { FilteredPokemonMoves } from 'src/app/interfaces/FilteredPokemonMoves.interface';
 import { PokemonMove } from 'src/app/interfaces/PokemonMove.interface';
 import versionGroups from '../../../assets/data/version_groups.json';
@@ -32,6 +32,8 @@ import { MatSelectModule } from '@angular/material/select';
   ],
 })
 export class MoveTableComponent implements OnInit, OnChanges {
+  public readonly languageService = inject(LanguageService);
+
   public pokemonMoves = input<Array<PokemonMove>>();
 
   public filteredMoves: Array<FilteredPokemonMoves>;
@@ -43,7 +45,7 @@ export class MoveTableComponent implements OnInit, OnChanges {
 
   public displayedColumns: Array<string> = ['name', 'level'];
 
-  constructor(public languageService: LanguageService) {}
+  constructor() {}
 
   public ngOnInit(): void {
     this.getData();
