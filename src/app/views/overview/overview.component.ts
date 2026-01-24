@@ -2,15 +2,15 @@ import {
   Component,
   computed,
   DestroyRef,
+  ElementRef,
   inject,
-  OnDestroy,
   OnInit,
   Signal,
   signal,
+  viewChild,
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
 import { PokemonPaginatedList } from 'src/app/interfaces/PokemonPaginatedList.interface';
@@ -20,7 +20,6 @@ import { PokeApiService } from 'src/app/services/pokeapi.service';
 import { FiltersComponent } from '../../components/filters/filters.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 import { PokemonSpeciesNamePipe } from 'src/app/pipes/pokemon-species-name.pipe';
@@ -41,18 +40,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     PokemonSpeciesNamePipe,
     PokemonImageByUrlPipe,
     MatProgressBarModule,
-    InfiniteScrollDirective,
     NgOptimizedImage,
   ],
 })
-export class OverviewComponent implements OnInit, OnDestroy {
-  public isLoading = signal(true);
+export class OverviewComponent implements OnInit {
+  public isLoading = signal(false);
   public data = signal<Array<Pokemon>>([]);
   public pokemonCount = signal(0);
   public pageSize = signal(50);
   public page = signal(1);
   public isFirstPage: Signal<boolean> = computed(() => this.page() === 1);
-  private _loadPokemonSubscription?: Subscription;
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
 
   public readonly languageService = inject(LanguageService);
@@ -61,29 +58,74 @@ export class OverviewComponent implements OnInit, OnDestroy {
   private readonly _translate = inject(TranslateService);
   private readonly _filtersService = inject(FiltersService);
 
-  public ngOnInit(): void {
+  private hasMore = computed(() => this.data().length < this.pokemonCount());
+
+  loadMoreAnchor = viewChild<ElementRef<HTMLElement>>('loadMoreAnchor');
+
+  private observer?: IntersectionObserver;
+
+  ngOnInit(): void {
     this._translate.onLangChange
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(() => {
-        this.getData();
+        this.resetAndLoad();
       });
 
-    this.getData();
+    this.resetAndLoad();
   }
 
-  public ngOnDestroy(): void {
-    this._loadPokemonSubscription = undefined;
+  ngAfterViewInit(): void {
+    this.observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && this.hasMore() && !this.isLoading()) {
+          this.onScroll();
+        }
+      },
+      {
+        root: null,
+        rootMargin: '200px',
+        threshold: 0,
+      }
+    );
+
+    const loadMoreAnchor = this.loadMoreAnchor();
+    if (loadMoreAnchor) {
+      this.observer.observe(loadMoreAnchor.nativeElement);
+    }
+  }
+
+  public onScroll(): void {
+    if (this.isLoading() || !this.hasMore()) {
+      return;
+    }
+
+    this.page.update((p) => p + 1);
+    this.loadPokemons();
   }
 
   public changePage(event: PageEvent): void {
     this.pageSize.set(event.pageSize);
     this.page.set(event.pageIndex + 1);
-    this.getData();
+    this.resetAndLoad();
   }
 
-  public onScroll(): void {
-    this.page.set(this.page() + 1);
+  public onFilterSearch(): void {
+    this.resetAndLoad();
+  }
+
+  private resetAndLoad(): void {
+    this.page.set(1);
+    this.data.set([]);
+    this.loadPokemons(true);
+  }
+
+  private loadPokemons(reset = false): void {
+    if (this.isLoading()) {
+      return;
+    }
+
     this.isLoading.set(true);
+
     this._pokeApiService
       .getPokemons(
         this._filtersService.getHttpParams(this.page(), this.pageSize())
@@ -91,21 +133,11 @@ export class OverviewComponent implements OnInit, OnDestroy {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading.set(false);
-        this.data().push(...result.data);
-      });
-  }
 
-  public getData(): void {
-    this.isLoading.set(true);
-    this._loadPokemonSubscription?.unsubscribe();
-    this._loadPokemonSubscription = this._pokeApiService
-      .getPokemons(
-        this._filtersService.getHttpParams(this.page(), this.pageSize())
-      )
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((result: PokemonPaginatedList) => {
-        this.isLoading.set(false);
-        this.data.set(result.data);
+        this.data.update((current) =>
+          reset ? result.data : [...current, ...result.data]
+        );
+
         this.pokemonCount.set(result.total);
       });
   }
