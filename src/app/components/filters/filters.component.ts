@@ -43,11 +43,11 @@ export class FiltersComponent implements OnInit {
     PokemonTypeHelper.availableTypes;
   private readonly _destroyRef = inject(DestroyRef);
 
-  public readonly search = output<void>();
+  public readonly triggerSearch = output<void>();
 
   constructor() {
     effect(() => {
-      this.search.emit();
+      this.triggerSearch.emit();
     });
   }
 
@@ -60,7 +60,7 @@ export class FiltersComponent implements OnInit {
       )
       .subscribe((name: string) => {
         this.filtersService.name.set(name);
-        this.search.emit();
+        this.triggerSearch.emit();
       });
   }
 }

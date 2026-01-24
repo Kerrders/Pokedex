@@ -7,7 +7,6 @@ import {
   OnInit,
   Signal,
   signal,
-  WritableSignal,
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';

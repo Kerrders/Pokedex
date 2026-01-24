@@ -15,7 +15,9 @@
       <mat-label>{{ "filter.types" | translate }}</mat-label>
       <mat-select
         [ngModel]="filtersService.types()"
-        (ngModelChange)="filtersService.types.set($event); this.search.emit()"
+        (ngModelChange)="
+          filtersService.types.set($event); this.triggerSearch.emit()
+        "
         multiple
       >
         @for (type of availableTypes; track $index) {
