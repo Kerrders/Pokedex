@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   DestroyRef,
-  EventEmitter,
   OnInit,
-  Output,
+  output,
   effect,
   inject,
 } from '@angular/core';
@@ -40,10 +39,9 @@ export class FiltersComponent implements OnInit {
   public nameChanged = new Subject<string>();
   public availableTypes: Array<PokemonTypeEnum> =
     PokemonTypeHelper.availableTypes;
-  private _destroyRef = inject(DestroyRef);
+  private readonly _destroyRef = inject(DestroyRef);
 
-  @Output()
-  public search = new EventEmitter<boolean>();
+  public readonly search = output<void>();
 
   constructor(public filtersService: FiltersService) {
     effect(() => {

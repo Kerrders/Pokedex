@@ -1,4 +1,4 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable, WritableSignal, signal, inject } from '@angular/core';
 import { PokemonTypeEnum } from '../enums/PokemonTypesEnum';
 import { HttpParams } from '@angular/common/http';
 import { LanguageService } from './language.service';
@@ -10,7 +10,7 @@ export class FiltersService {
   public name: WritableSignal<string> = signal('');
   public types: WritableSignal<Array<PokemonTypeEnum>> = signal([]);
 
-  constructor(public languageService: LanguageService) {}
+  public readonly languageService = inject(LanguageService);
 
   public getHttpParams(page: number, pageSize: number): HttpParams {
     let params = new HttpParams()

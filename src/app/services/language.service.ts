@@ -25,9 +25,11 @@ export class LanguageService {
     de: LanguageEnum.GERMAN,
     en: LanguageEnum.ENGLISH,
   };
-  private _destroyRef = inject(DestroyRef);
 
-  constructor(private _translate: TranslateService) {
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _translate = inject(TranslateService);
+
+  constructor() {
     this.lang.set(this.getLanguage());
 
     this._translate.onLangChange

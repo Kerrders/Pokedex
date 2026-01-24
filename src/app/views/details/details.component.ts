@@ -63,12 +63,9 @@ export class DetailsComponent implements OnInit {
     )
   );
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
-  private _destroyRef = inject(DestroyRef);
-
-  constructor(
-    public languageService: LanguageService,
-    private _activatedRoute: ActivatedRoute
-  ) {}
+  public readonly languageService = inject(LanguageService);
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _activatedRoute = inject(ActivatedRoute);
 
   public ngOnInit(): void {
     this._activatedRoute.data

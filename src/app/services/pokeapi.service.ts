@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { PokemonPaginatedList } from '../interfaces/PokemonPaginatedList.interface';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, of, map, switchMap } from 'rxjs';
 import { CachingService } from './caching.service';
 import { SidenavService } from './sidenav.service';
@@ -13,11 +13,9 @@ import { PokemonSpecy } from '../interfaces/PokemonSpecy.interface';
 export class PokeApiService {
   private baseUrl = 'https://kerrders.ovh/api';
 
-  constructor(
-    private _httpClient: HttpClient,
-    private _cachingService: CachingService,
-    private _sidenavService: SidenavService
-  ) {}
+  private readonly _httpClient = inject(HttpClient);
+  private readonly _cachingService = inject(CachingService);
+  private readonly _sidenavService = inject(SidenavService);
 
   private cachedGetRequest<T>(route: string): Observable<T> {
     if (this._cachingService.hasKey(route)) {

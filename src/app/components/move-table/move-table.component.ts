@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, input, OnInit, OnChanges } from '@angular/core';
 import { FilteredPokemonMoves } from 'src/app/interfaces/FilteredPokemonMoves.interface';
 import { PokemonMove } from 'src/app/interfaces/PokemonMove.interface';
 import versionGroups from '../../../assets/data/version_groups.json';
@@ -15,27 +15,26 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-    selector: 'app-move-table',
-    templateUrl: './move-table.component.html',
-    styleUrls: ['./move-table.component.scss'],
-    imports: [
-        TranslateModule,
-        MatCardModule,
-        MatButtonToggleModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatOptionModule,
-        MatTableModule,
-        FormsModule,
-        MoveNamePipe,
-        VersionNamePipe,
-    ]
+  selector: 'app-move-table',
+  templateUrl: './move-table.component.html',
+  styleUrls: ['./move-table.component.scss'],
+  imports: [
+    TranslateModule,
+    MatCardModule,
+    MatButtonToggleModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatTableModule,
+    FormsModule,
+    MoveNamePipe,
+    VersionNamePipe,
+  ],
 })
 export class MoveTableComponent implements OnInit, OnChanges {
-  @Input()
-  public pokemonMoves: Array<PokemonMove>;
-  public filteredMoves: Array<FilteredPokemonMoves>;
+  public pokemonMoves = input<Array<PokemonMove>>();
 
+  public filteredMoves: Array<FilteredPokemonMoves>;
   public allVersions: Array<string> = versionGroups
     .map((versionGroup) => versionGroup.id)
     .filter((value) => value);
@@ -56,7 +55,7 @@ export class MoveTableComponent implements OnInit, OnChanges {
 
   public getData(): void {
     this.filteredMoves = [];
-    this.pokemonMoves?.forEach((element) => {
+    this.pokemonMoves()?.forEach((element) => {
       if (
         element.version_group_id === parseInt(this.currentVersion) &&
         element.pokemon_move_method_id === this.currentLearnType
@@ -75,7 +74,7 @@ export class MoveTableComponent implements OnInit, OnChanges {
     });
 
     this.allVersions = this.allVersions.filter((versionId) =>
-      this.pokemonMoves?.some(
+      this.pokemonMoves()?.some(
         (element) => element.version_group_id === parseInt(versionId)
       )
     );
