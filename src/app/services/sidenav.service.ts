@@ -1,4 +1,4 @@
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import { Injectable, signal, WritableSignal, inject } from '@angular/core';
 import { PokemonSpeciesName } from '../interfaces/PokemonSpeciesName.interface';
 import { Router } from '@angular/router';
 
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class SidenavService {
-  constructor(private _router: Router) {}
+  private readonly _router = inject(Router);
 
   public nodes: WritableSignal<
     Array<{ name: Array<PokemonSpeciesName>; url: string }>

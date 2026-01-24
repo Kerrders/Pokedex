@@ -1,23 +1,27 @@
-<table mat-table [dataSource]="typeEffectiveness" class="mat-elevation-z8">
+@let typeEffectivenessValue = typeEffectiveness();
+
+<table mat-table [dataSource]="typeEffectivenessValue" class="mat-elevation-z8">
   <ng-container matColumnDef="type">
     <th mat-header-cell *matHeaderCellDef>{{ "filter.types" | translate }}</th>
-    <td mat-cell *matCellDef="let typeEffectiveness">
+    <td mat-cell *matCellDef="let typeEffectivenessValue">
       <mat-chip
         [ngStyle]="{
           'background-color':
-            typeEffectiveness.typeId | typeToName | colorForType
+            typeEffectivenessValue.typeId | typeToName | colorForType
         }"
       >
         <img
           matChipAvatar
           [src]="
             './assets/images/types/' +
-            (typeEffectiveness.typeId | typeToName) +
+            (typeEffectivenessValue.typeId | typeToName) +
             '.svg'
           "
-          [alt]="typeEffectiveness.typeId | typeToName | titlecase"
+          [alt]="typeEffectivenessValue.typeId | typeToName | titlecase"
         />
-        {{ "types." + (typeEffectiveness.typeId | typeToName) | translate }}
+        {{
+          "types." + (typeEffectivenessValue.typeId | typeToName) | translate
+        }}
       </mat-chip>
     </td>
   </ng-container>
@@ -26,11 +30,11 @@
     <th mat-header-cell *matHeaderCellDef class="text-center">
       {{ "value" | translate }}
     </th>
-    <td mat-cell *matCellDef="let typeEffectiveness" class="text-center">
+    <td mat-cell *matCellDef="let typeEffectivenessValue" class="text-center">
       {{
-        typeEffectiveness.damage === 0
+        typeEffectivenessValue.damage === 0
           ? ("immune" | translate)
-          : typeEffectiveness.damage + "x"
+          : typeEffectivenessValue.damage + "x"
       }}
     </td>
   </ng-container>

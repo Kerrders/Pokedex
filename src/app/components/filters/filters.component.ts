@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   DestroyRef,
-  EventEmitter,
   OnInit,
-  Output,
+  output,
   effect,
   inject,
 } from '@angular/core';
@@ -37,17 +36,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   ],
 })
 export class FiltersComponent implements OnInit {
+  public readonly filtersService = inject(FiltersService);
+
   public nameChanged = new Subject<string>();
   public availableTypes: Array<PokemonTypeEnum> =
     PokemonTypeHelper.availableTypes;
-  private _destroyRef = inject(DestroyRef);
+  private readonly _destroyRef = inject(DestroyRef);
 
-  @Output()
-  public search = new EventEmitter<boolean>();
+  public readonly triggerSearch = output<void>();
 
-  constructor(public filtersService: FiltersService) {
+  constructor() {
     effect(() => {
-      this.search.emit();
+      this.triggerSearch.emit();
     });
   }
 
@@ -60,7 +60,7 @@ export class FiltersComponent implements OnInit {
       )
       .subscribe((name: string) => {
         this.filtersService.name.set(name);
-        this.search.emit();
+        this.triggerSearch.emit();
       });
   }
 }

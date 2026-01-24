@@ -7,7 +7,6 @@ import {
   OnInit,
   Signal,
   signal,
-  WritableSignal,
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
@@ -48,22 +47,19 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class OverviewComponent implements OnInit, OnDestroy {
   public isLoading = signal(true);
-  public data: WritableSignal<Array<Pokemon>> = signal([]);
+  public data = signal<Array<Pokemon>>([]);
   public pokemonCount = signal(0);
   public pageSize = signal(50);
   public page = signal(1);
   public isFirstPage: Signal<boolean> = computed(() => this.page() === 1);
+  private _loadPokemonSubscription?: Subscription;
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
 
-  private _loadPokemonSubscription?: Subscription;
-  private _destroyRef = inject(DestroyRef);
-
-  constructor(
-    public languageService: LanguageService,
-    private _pokeApiService: PokeApiService,
-    private _translate: TranslateService,
-    private _filtersService: FiltersService
-  ) {}
+  public readonly languageService = inject(LanguageService);
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _pokeApiService = inject(PokeApiService);
+  private readonly _translate = inject(TranslateService);
+  private readonly _filtersService = inject(FiltersService);
 
   public ngOnInit(): void {
     this._translate.onLangChange

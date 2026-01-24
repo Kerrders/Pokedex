@@ -1,6 +1,8 @@
 <div class="container">
   <div class="row mt-2">
-    <app-filters (search)="this.page.set(1); this.getData()"></app-filters>
+    <app-filters
+      (triggerSearch)="this.page.set(1); this.getData()"
+    ></app-filters>
 
     @if(isLoading() && isFirstPage()) {
     <div>

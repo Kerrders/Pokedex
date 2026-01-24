@@ -2,7 +2,7 @@
 
 [Backend Repository](https://github.com/Kerrders/pokedexBackend)
 
-A Pokedex built with Angular, utilizing the Pokemon API to showcase the world of Pokemon. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) (17).
+A Pokedex built with Angular, utilizing the Pokemon API to showcase the world of Pokemon. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) (21).
 
 ## Features
 
