@@ -1,8 +1,6 @@
 <div class="container">
   <div class="row mt-2">
-    <app-filters
-      (triggerSearch)="this.page.set(1); this.getData()"
-    ></app-filters>
+    <app-filters (triggerSearch)="this.onFilterSearch()"></app-filters>
 
     @if(isLoading() && isFirstPage()) {
     <div>
@@ -10,29 +8,26 @@
     </div>
     }
 
-    <div
-      class="pokemon-container"
-      infinite-scroll
-      [infiniteScrollDistance]="2"
-      [infiniteScrollThrottle]="1000"
-      (scrolled)="onScroll()"
-    >
-      @for (row of data(); track $index) {
+    <div class="pokemon-container">
+      @for (row of data(); track row.id) {
       <div class="p-2" [hidden]="isLoading() && isFirstPage()">
         <mat-card
           class="pokemon-card cursor-pointer"
           [routerLink]="['/pokemon/', row.identifier]"
         >
           <mat-card-header>
-            <mat-card-subtitle>{{
-              row.species_names | pokemonSpeciesName : languageService.langId()
-            }}</mat-card-subtitle>
+            <mat-card-subtitle>
+              {{
+                row.species_names
+                  | pokemonSpeciesName : languageService.langId()
+              }}
+            </mat-card-subtitle>
           </mat-card-header>
+
           <mat-card-content class="text-center">
             <div class="image-container center">
               <img
                 [ngSrc]="row.id | pokemonImage : pokemonSpriteTypePath.FRONT"
-                class="center text-center image-container"
                 width="96"
                 height="96"
               />
@@ -41,8 +36,12 @@
         </mat-card>
       </div>
       }
+
+      <!-- Sentinel -->
+      <div #loadMoreAnchor class="h-1"></div>
     </div>
-    @if(isLoading() && !isFirstPage()) {
+
+    @if (isLoading() && !isFirstPage()) {
     <mat-progress-bar mode="query" class="mb-2 mt-2"></mat-progress-bar>
     }
   </div>
