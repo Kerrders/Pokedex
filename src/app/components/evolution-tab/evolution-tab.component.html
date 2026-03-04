@@ -1,16 +1,12 @@
 <div
   class="evolution-container align-items-center justify-content-center mt-2"
-  [ngStyle]="{
-    'grid-template-columns': 'repeat(' + (maximalEvolutionStep() + 1) + ', 1fr)'
-  }"
+  [style.grid-template-columns]="'repeat(' + (maximalEvolutionStep() + 1) + ', 1fr)'"
 >
   @for (pokemon of evolutionChain(); track $index) {
   <mat-card
     class="pokemon-card cursor-pointer"
     [routerLink]="['/pokemon/', pokemon.identifier]"
-    [ngStyle]="{
-      'grid-column': (pokemon.step ?? 0) + 1
-    }"
+    [style.grid-column]="(pokemon.step ?? 0) + 1"
   >
     <mat-card-header>
       <mat-card-subtitle>

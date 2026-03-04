@@ -5,10 +5,7 @@
     <th mat-header-cell *matHeaderCellDef>{{ "filter.types" | translate }}</th>
     <td mat-cell *matCellDef="let typeEffectivenessValue">
       <mat-chip
-        [ngStyle]="{
-          'background-color':
-            typeEffectivenessValue.typeId | typeToName | colorForType
-        }"
+        [style.background-color]="typeEffectivenessValue.typeId | typeToName | colorForType"
       >
         <img
           matChipAvatar
