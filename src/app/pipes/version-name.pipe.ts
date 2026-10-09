@@ -22,11 +22,11 @@ export class VersionNamePipe implements PipeTransform {
 
     const versions = versionsData
       .filter((version) => version.version_group_id === versionGroupId)
-      .map((version) => this._getVersionName(version.id as string, languageId));
+      .map((version) => this.getVersionName(version.id as string, languageId));
     return versions.join('/');
   }
 
-  private _getVersionName(versionId: string, languageId: number): string {
+  private getVersionName(versionId: string, languageId: number): string {
     return (
       versionNames.find(
         (versionName) =>

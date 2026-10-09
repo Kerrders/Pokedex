@@ -1,15 +1,14 @@
-<div class="container mt-2">
+<main class="page-content">
   <ng-template #detailView let-pokemonData="pokemonData">
     @if(pokemonData) {
-    <div class="row">
-      <div class="col-md-4 mt-2">
-        <mat-card appearance="outlined">
+    <div class="detail-layout">
+      <section class="detail-artwork">
+        <mat-card appearance="outlined" class="app-surface">
           <mat-card-content>
             <mat-tab-group>
               <mat-tab label="Artwork">
                 <div class="imgContainer">
                   <img
-                    class="center"
                     [ngSrc]="
                       pokemonData.id
                         | pokemonImage : pokemonSpriteTypePath.ARTWORK
@@ -17,12 +16,17 @@
                     width="340"
                     height="340"
                     priority
+                    [alt]="
+                      (pokemonData.species_names
+                        | pokemonSpeciesName : languageService.langId()) +
+                      ' artwork'
+                    "
                   />
                 </div>
               </mat-tab>
               <mat-tab label="Sprites">
-                <div class="imgContainer">
-                  <div class="text-center">
+                <div class="imgContainer sprite-container">
+                  <div class="sprite-row">
                     <img
                       [ngSrc]="
                         pokemonData.id
@@ -30,6 +34,11 @@
                       "
                       width="96"
                       height="96"
+                      [alt]="
+                        (pokemonData.species_names
+                          | pokemonSpeciesName : languageService.langId()) +
+                        ' back sprite'
+                      "
                     />
                     <img
                       [ngSrc]="
@@ -38,10 +47,15 @@
                       "
                       width="96"
                       height="96"
+                      [alt]="
+                        (pokemonData.species_names
+                          | pokemonSpeciesName : languageService.langId()) +
+                        ' front sprite'
+                      "
                     />
                   </div>
                   <mat-divider />
-                  <div class="text-center">
+                  <div class="sprite-row">
                     <img
                       [ngSrc]="
                         pokemonData.id
@@ -49,6 +63,11 @@
                       "
                       width="96"
                       height="96"
+                      [alt]="
+                        (pokemonData.species_names
+                          | pokemonSpeciesName : languageService.langId()) +
+                        ' shiny back sprite'
+                      "
                     />
                     <img
                       [ngSrc]="
@@ -57,6 +76,11 @@
                       "
                       width="96"
                       height="96"
+                      [alt]="
+                        (pokemonData.species_names
+                          | pokemonSpeciesName : languageService.langId()) +
+                        ' shiny front sprite'
+                      "
                     />
                   </div>
                 </div>
@@ -64,9 +88,12 @@
             </mat-tab-group>
 
             <mat-chip-set>
-              @for(typeElement of pokemonData.types; track $index) {
+              @for(typeElement of pokemonData.types; track typeElement.type_id) {
               <mat-chip
-                [style.background-color]="typeElement.type_id | typeToName | colorForType"
+                class="type-chip"
+                [style.--type-color]="
+                  typeElement.type_id | typeToName | colorForType
+                "
               >
                 <img
                   matChipAvatar
@@ -75,7 +102,7 @@
                     (typeElement.type_id | typeToName) +
                     '.svg'
                   "
-                  [alt]="typeElement.type_id | typeToName | titlecase"
+                  alt=""
                 />
                 {{ "types." + (typeElement.type_id | typeToName) | translate }}
               </mat-chip>
@@ -83,10 +110,10 @@
             </mat-chip-set>
           </mat-card-content>
         </mat-card>
-      </div>
+      </section>
 
-      <div class="col-md-8 mt-2">
-        <mat-card appearance="outlined">
+      <section class="detail-info">
+        <mat-card appearance="outlined" class="app-surface">
           <mat-card-content>
             <mat-tab-group>
               @if(pokemonData.stats) {
@@ -102,7 +129,7 @@
                   [actualLanguageId]="languageService.langId()"
                  />
                 } @placeholder () {
-                <mat-spinner class="mt-3 mb-3 center" />
+                <mat-spinner class="deferred-spinner" />
                 }
               </mat-tab>
               } @if(pokemonData.types) {
@@ -116,13 +143,13 @@
             </mat-tab-group>
           </mat-card-content>
         </mat-card>
-      </div>
+      </section>
 
       @if(pokemonData.moves) {
-      <div class="col-md-12 mt-3">
+      <section class="detail-moves">
         <app-move-table [pokemonMoves]="pokemonData.moves ?? []"
          />
-      </div>
+      </section>
       }
     </div>
     }
@@ -131,4 +158,4 @@
   <ng-container [ngTemplateOutlet]="detailView"
     [ngTemplateOutletContext]="{ pokemonData: pokemonData() }"
    />
-</div>
+</main>

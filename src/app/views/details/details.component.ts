@@ -20,6 +20,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { PokemonImageByUrlPipe } from '../../pipes/pokemon-image-by-url.pipe';
+import { PokemonSpeciesNamePipe } from '../../pipes/pokemon-species-name.pipe';
 import { EvolutionTabComponent } from '../../components/evolution-tab/evolution-tab.component';
 import { StatusTableComponent } from '../../components/status-table/status-table.component';
 import { TypeEffectivenessTableComponent } from '../../components/type-effectiveness-table/type-effectiveness-table.component';
@@ -42,6 +43,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatDividerModule,
     MatChipsModule,
     PokemonImageByUrlPipe,
+    PokemonSpeciesNamePipe,
     EvolutionTabComponent,
     StatusTableComponent,
     TypeEffectivenessTableComponent,
@@ -64,12 +66,12 @@ export class DetailsComponent implements OnInit {
   );
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
   public readonly languageService = inject(LanguageService);
-  private readonly _destroyRef = inject(DestroyRef);
-  private readonly _activatedRoute = inject(ActivatedRoute);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly activatedRoute = inject(ActivatedRoute);
 
   public ngOnInit(): void {
-    this._activatedRoute.data
-      .pipe(takeUntilDestroyed(this._destroyRef))
+    this.activatedRoute.data
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(({ pokemonData }) => {
         this.pokemonData.set(pokemonData);
         this.evolutionChain.set([]);

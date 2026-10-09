@@ -1,4 +1,15 @@
 .statusBar {
+  display: block;
+  min-width: 2px;
   height: 10px;
-  display: inline-block;
+  margin-left: auto;
+  border-radius: 999px;
+}
+
+.stat-value-cell {
+  width: 45%;
+}
+
+td[mat-cell] {
+  padding-block: 10px;
 }

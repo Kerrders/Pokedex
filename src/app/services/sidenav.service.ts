@@ -6,16 +6,16 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class SidenavService {
-  private readonly _router = inject(Router);
+  private readonly router = inject(Router);
 
   public nodes: WritableSignal<
     Array<{ name: Array<PokemonSpeciesName>; url: string }>
   > = signal([]);
-  private readonly _maxNodes = 10;
+  private readonly maxNodes = 10;
 
   public removeNode(name: Array<PokemonSpeciesName>): void {
     this.nodes.set(this.nodes().filter((node) => node.name !== name));
-    this._router.navigate(['']);
+    this.router.navigate(['']);
   }
 
   public addNode(name: Array<PokemonSpeciesName>, url: string): void {
@@ -27,7 +27,7 @@ export class SidenavService {
       return;
     }
 
-    if (this.nodes.length >= this._maxNodes) {
+    if (this.nodes.length >= this.maxNodes) {
       this.nodes().shift();
     }
 

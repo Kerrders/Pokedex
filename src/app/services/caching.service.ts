@@ -4,24 +4,24 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CachingService {
-  private _cachedData: { [key: string]: unknown } = {};
+  private cachedData: { [key: string]: unknown } = {};
 
   public setData<T>(cacheKey: string, data: T): void {
-    this._cachedData[cacheKey] = data;
+    this.cachedData[cacheKey] = data;
   }
 
   public getData<T>(cacheKey: string): T {
-    return this._cachedData[cacheKey] as T;
+    return this.cachedData[cacheKey] as T;
   }
 
   public hasKey(cacheKey: string): boolean {
     return (
-      this._cachedData[cacheKey] !== undefined &&
-      this._cachedData[cacheKey] !== null
+      this.cachedData[cacheKey] !== undefined &&
+      this.cachedData[cacheKey] !== null
     );
   }
 
   public clearCache(cacheKey: string): void {
-    delete this._cachedData[cacheKey];
+    delete this.cachedData[cacheKey];
   }
 }

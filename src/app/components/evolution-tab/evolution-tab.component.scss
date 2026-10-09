@@ -1,11 +1,27 @@
 .evolution-container {
   display: grid;
-  gap: 10px;
+  grid-template-columns: repeat(var(--evolution-columns), minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+  padding-block: 4px;
+  overflow-x: auto;
+}
 
-  .pokemon-card {
-    background-color: #212121;
-    &:hover {
-      background-color: var(--bs-code-color, transparent);
-    }
+.pokemon-card mat-card-header {
+  justify-content: center;
+  text-align: center;
+  min-width: 0;
+}
+
+.image-container {
+  display: block;
+  width: 96px;
+  height: 96px;
+  margin-inline: auto;
+}
+
+@media (max-width: 600px) {
+  .evolution-container {
+    grid-template-columns: repeat(var(--evolution-columns), minmax(128px, 1fr));
   }
 }

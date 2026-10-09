@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="pokemonStats()" class="mat-elevation-z8">
+<table mat-table [dataSource]="pokemonStats()">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let element">
@@ -7,25 +7,25 @@
   </ng-container>
 
   <ng-container matColumnDef="value">
-    <th mat-header-cell *matHeaderCellDef class="text-center">
+    <th mat-header-cell *matHeaderCellDef class="numeric-cell">
       {{ "value" | translate }}
     </th>
-    <td mat-cell *matCellDef="let element" class="text-center">
+    <td mat-cell *matCellDef="let element" class="numeric-cell">
       {{ element.base_stat }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="valueVisual">
-    <th mat-header-cell *matHeaderCellDef class="text-end">
+    <th mat-header-cell *matHeaderCellDef class="numeric-cell">
       {{ "graphicValue" | translate }}
     </th>
-    <td mat-cell *matCellDef="let element" class="text-end">
+    <td mat-cell *matCellDef="let element" class="stat-value-cell">
       <div
         class="statusBar"
-        [style]="{
-          width: (element.base_stat / 200) * 100 + '%',
-          'background-color': element.base_stat | colorForStatusValue
-        }"
+        [style.width.%]="(element.base_stat / 200) * 100"
+        [style.background-color]="element.base_stat | colorForStatusValue"
+        role="img"
+        [attr.aria-label]="element.base_stat + ' / 200'"
       ></div>
     </td>
   </ng-container>

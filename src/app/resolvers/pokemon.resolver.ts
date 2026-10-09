@@ -8,13 +8,13 @@ import { PokeApiService } from '../services/pokeapi.service';
   providedIn: 'root',
 })
 export class PokemonResolver {
-  private readonly _pokeApiService = inject(PokeApiService);
+  private readonly pokeApiService = inject(PokeApiService);
 
   public resolve(route: ActivatedRouteSnapshot): Observable<Pokemon> {
     const name = route.paramMap.get('name');
     if (!name) {
       return of();
     }
-    return this._pokeApiService.getPokemon(name);
+    return this.pokeApiService.getPokemon(name);
   }
 }

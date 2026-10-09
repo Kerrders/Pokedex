@@ -3,6 +3,7 @@ import {
   computed,
   DestroyRef,
   ElementRef,
+  AfterViewInit,
   inject,
   OnInit,
   Signal,
@@ -22,6 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { PokemonSpeciesNamePipe } from 'src/app/pipes/pokemon-species-name.pipe';
 import { PokemonImageByUrlPipe } from 'src/app/pipes/pokemon-image-by-url.pipe';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
@@ -41,9 +43,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     PokemonImageByUrlPipe,
     MatProgressBarModule,
     NgOptimizedImage,
+    TranslateModule,
   ],
 })
-export class OverviewComponent implements OnInit {
+export class OverviewComponent implements OnInit, AfterViewInit {
   public isLoading = signal(false);
   public data = signal<Array<Pokemon>>([]);
   public pokemonCount = signal(0);
@@ -53,10 +56,10 @@ export class OverviewComponent implements OnInit {
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
 
   public readonly languageService = inject(LanguageService);
-  private readonly _destroyRef = inject(DestroyRef);
-  private readonly _pokeApiService = inject(PokeApiService);
-  private readonly _translate = inject(TranslateService);
-  private readonly _filtersService = inject(FiltersService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly pokeApiService = inject(PokeApiService);
+  private readonly translate = inject(TranslateService);
+  private readonly filtersService = inject(FiltersService);
 
   private hasMore = computed(() => this.data().length < this.pokemonCount());
 
@@ -65,8 +68,8 @@ export class OverviewComponent implements OnInit {
   private observer?: IntersectionObserver;
 
   ngOnInit(): void {
-    this._translate.onLangChange
-      .pipe(takeUntilDestroyed(this._destroyRef))
+    this.translate.onLangChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.resetAndLoad();
       });
@@ -126,11 +129,11 @@ export class OverviewComponent implements OnInit {
 
     this.isLoading.set(true);
 
-    this._pokeApiService
+    this.pokeApiService
       .getPokemons(
-        this._filtersService.getHttpParams(this.page(), this.pageSize())
+        this.filtersService.getHttpParams(this.page(), this.pageSize())
       )
-      .pipe(takeUntilDestroyed(this._destroyRef))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result: PokemonPaginatedList) => {
         this.isLoading.set(false);
 

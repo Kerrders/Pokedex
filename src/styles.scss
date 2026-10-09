@@ -1,48 +1,143 @@
-/* You can add global styles to this file, and also import other style files */
-@import "bootstrap/dist/css/bootstrap-grid.min.css";
-@import "bootstrap/dist/css/bootstrap-utilities.min.css";
+@use "@angular/material" as mat;
+
+html {
+  color-scheme: dark;
+
+  @include mat.theme(
+    (
+      color: (
+        theme-type: dark,
+        primary: mat.$cyan-palette,
+        tertiary: mat.$orange-palette,
+      ),
+      typography: (
+        plain-family: Roboto,
+        brand-family: Roboto,
+      ),
+      density: 0,
+    )
+  );
+
+  --app-content-width: 1440px;
+  --app-page-gutter: 24px;
+  --app-card-radius: 24px;
+}
 
 html,
 body {
   height: 100%;
-  margin: 0px;
-  padding: 0px;
-}
-body {
   margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: #303030;
-  color: rgba(255, 255, 255, 0.7);
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
 }
 
-.container {
+* {
+  box-sizing: border-box;
+}
+
+app-root {
+  display: block;
+  min-height: 100vh;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--mat-sys-primary);
+  outline-offset: 3px;
+}
+
+.page-content {
   width: 100%;
-  padding-right: 0;
-  padding-left: 0;
-  margin-right: auto;
-  margin-left: auto;
+  max-width: calc(var(--app-content-width) + 48px);
+  margin-inline: auto;
+  padding-inline: var(--app-page-gutter);
+  padding-block: 28px 40px;
 }
 
-.row {
-  margin-right: 0;
-  margin-left: 0;
+.app-surface {
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--app-card-radius);
+  background: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
 }
 
-.center {
-  margin: 0px auto;
+.muted-text {
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.pokemon-link {
+  display: block;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
 }
 
 .pokemon-card {
-  transition: all ease-in-out 250ms;
+  height: 100%;
+  overflow: hidden;
+  border-color: var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+
   &:hover {
-    background-color: var(--bs-code-color, transparent);
+    transform: translateY(-3px);
+    border-color: var(--mat-sys-primary);
+    background: var(--mat-sys-surface-container-high);
   }
 }
 
-.flex-align-right {
-  margin-left: auto;
+.saved-pokemon-item > a.mat-mdc-button:hover
+  .mat-mdc-button-persistent-ripple::before {
+  opacity: 0;
 }
 
-.cursor-pointer {
-  cursor: pointer;
+.type-chip {
+  border: 1px solid var(--type-color);
+  background: color-mix(
+    in srgb,
+    var(--type-color) 24%,
+    var(--mat-sys-surface-container-high)
+  ) !important;
+  color: var(--mat-sys-on-surface) !important;
+}
+
+table[mat-table] {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--mat-sys-surface-container-low);
+}
+
+th[mat-header-cell] {
+  color: var(--mat-sys-on-surface-variant);
+  font-weight: 600;
+}
+
+.numeric-cell {
+  text-align: end;
+}
+
+th[mat-header-cell],
+td[mat-cell],
+td[mat-footer-cell] {
+  border-bottom-color: var(--mat-sys-outline-variant);
+}
+
+@media (max-width: 600px) {
+  :root {
+    --app-page-gutter: 16px;
+  }
+
+  .page-content {
+    padding-block: 20px 32px;
+  }
 }
