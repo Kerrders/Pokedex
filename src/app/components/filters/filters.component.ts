@@ -41,7 +41,7 @@ export class FiltersComponent implements OnInit {
   public nameChanged = new Subject<string>();
   public availableTypes: Array<PokemonTypeEnum> =
     PokemonTypeHelper.availableTypes;
-  private readonly _destroyRef = inject(DestroyRef);
+  private readonly destroyRef = inject(DestroyRef);
 
   public readonly triggerSearch = output<void>();
 
@@ -56,11 +56,16 @@ export class FiltersComponent implements OnInit {
       .pipe(
         debounceTime(400),
         distinctUntilChanged(),
-        takeUntilDestroyed(this._destroyRef)
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((name: string) => {
         this.filtersService.name.set(name);
         this.triggerSearch.emit();
       });
+  }
+
+  public onTypesChange(types: Array<PokemonTypeEnum>): void {
+    this.filtersService.types.set(types);
+    this.triggerSearch.emit();
   }
 }

@@ -1,6 +1,55 @@
 .table-container {
   position: relative;
-  min-height: 200px;
-  max-height: 400px;
+  min-height: 120px;
+  max-height: 420px;
   overflow: auto;
+  margin-top: 12px;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 16px;
+}
+
+.move-controls {
+  min-width: 0;
+  align-self: center;
+}
+
+.move-filter-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 260px);
+  align-items: start;
+  gap: 16px;
+}
+
+.version-control {
+  width: min(100%, 260px);
+}
+
+.version-control mat-form-field {
+  width: 100%;
+}
+
+.no-results {
+  padding: 24px;
+  color: var(--mat-sys-on-surface-variant);
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .move-controls {
+    overflow-x: auto;
+  }
+
+  .move-controls mat-button-toggle-group {
+    min-width: max-content;
+  }
+
+  .version-control {
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .move-filter-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
 }

@@ -1,31 +1,28 @@
-<div class="row">
-  <div class="col-md-6">
-    <mat-form-field class="w-100">
+<div class="filters">
+  <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input
         matInput
+        type="search"
+        autocomplete="off"
+        aria-label="Search Pokémon by name"
         [ngModel]="filtersService.name()"
         (ngModelChange)="nameChanged.next($event)"
       />
-    </mat-form-field>
-  </div>
+  </mat-form-field>
 
-  <div class="col-md-6">
-    <mat-form-field class="w-100" appearance="fill">
+  <mat-form-field appearance="outline">
       <mat-label>{{ "filter.types" | translate }}</mat-label>
       <mat-select
         [ngModel]="filtersService.types()"
-        (ngModelChange)="
-          filtersService.types.set($event); this.triggerSearch.emit()
-        "
+        (ngModelChange)="onTypesChange($event)"
         multiple
       >
-        @for (type of availableTypes; track $index) {
+        @for (type of availableTypes; track type) {
         <mat-option [value]="type">
           {{ "types." + (type | typeToName) | translate }}
         </mat-option>
         }
       </mat-select>
-    </mat-form-field>
-  </div>
+  </mat-form-field>
 </div>

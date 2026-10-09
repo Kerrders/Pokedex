@@ -13,17 +13,17 @@ import { PokemonSpecy } from '../interfaces/PokemonSpecy.interface';
 export class PokeApiService {
   private baseUrl = 'https://kerrders.ovh/api';
 
-  private readonly _httpClient = inject(HttpClient);
-  private readonly _cachingService = inject(CachingService);
-  private readonly _sidenavService = inject(SidenavService);
+  private readonly httpClient = inject(HttpClient);
+  private readonly cachingService = inject(CachingService);
+  private readonly sidenavService = inject(SidenavService);
 
   private cachedGetRequest<T>(route: string): Observable<T> {
-    if (this._cachingService.hasKey(route)) {
-      return of(this._cachingService.getData<T>(route) as T);
+    if (this.cachingService.hasKey(route)) {
+      return of(this.cachingService.getData<T>(route) as T);
     }
-    return this._httpClient.get<T>(route).pipe(
+    return this.httpClient.get<T>(route).pipe(
       map((result: T) => {
-        this._cachingService.setData<T>(route, result);
+        this.cachingService.setData<T>(route, result);
         return result;
       })
     );
@@ -51,7 +51,7 @@ export class PokeApiService {
         return evolutionObservable.pipe(
           map((data: Array<PokemonSpecy>) => {
             result.evolution = data;
-            this._sidenavService.addNode(
+            this.sidenavService.addNode(
               result.species_names,
               `pokemon/${name}`
             );

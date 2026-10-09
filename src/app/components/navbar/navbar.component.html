@@ -1,79 +1,55 @@
-<mat-toolbar>
-  <span fxShow fxHide.xs [routerLink]="['']" class="cursor-pointer"
-    >Pokedex</span
+<mat-toolbar class="app-toolbar">
+  <a
+    matButton="text"
+    class="brand-link"
+    [routerLink]="['']"
+    aria-label="Pokedex home"
   >
-  <div>
-    <a
-      mat-icon-button
-      color="primary"
-      target="_blank"
-      href="https://github.com/Kerrders/Pokedex"
-      [matTooltip]="'Repository'"
-    >
-      <mat-icon svgIcon="github"
-        aria-hidden="false"
-        [style.color]="'white'"
-       />
-    </a>
-  </div>
-  <div class="ms-4">
-    <button mat-button color="primary" [routerLink]="['']">Home</button>
-  </div>
-  @for (node of sidenavService.nodes(); track $index) {
-  <div [routerLink]="node.url" class="nodeContainer">
-    <button mat-button color="primary" class="align-middle">
-      {{
-        node.name | pokemonSpeciesName : languageService.langId() | titlecase
-      }}
-    </button>
-
-    <button
-      mat-icon-button
-      (click)="sidenavService.removeNode(node.name)"
-      class="closeNodeButton"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-  }
-
-  <div class="flex-align-right" fxShow fxHide.xs>
-    <mat-button-toggle-group
-      class="mat-elevation-z2 language-select-button-group"
-      [(ngModel)]="actualLanguage"
-      (ngModelChange)="onChangeLanguage()"
-    >
-      @for (lang of languageService.getAvailableLanguages() | keyvalue; track
-      $index) {
-      <mat-button-toggle [value]="lang.key">
-        {{ "langs." + lang.key | translate }}</mat-button-toggle
+    <span>Pokedex</span>
+  </a>
+  <nav class="saved-pokemon" aria-label="Recently viewed Pokémon">
+    @for (node of sidenavService.nodes(); track node.url) {
+    <span class="saved-pokemon-item">
+      <a matButton="text" [routerLink]="node.url">
+        {{
+          node.name | pokemonSpeciesName : languageService.langId() | titlecase
+        }}
+      </a>
+      <button
+        matIconButton
+        type="button"
+        [attr.aria-label]="'Remove ' + (node.name | pokemonSpeciesName : languageService.langId())"
+        (click)="sidenavService.removeNode(node.name)"
       >
-      }
-    </mat-button-toggle-group>
-  </div>
+        <mat-icon>close</mat-icon>
+      </button>
+    </span>
+    }
+  </nav>
+  <span class="toolbar-spacer"></span>
+  <a
+    matIconButton
+    target="_blank"
+    rel="noopener noreferrer"
+    href="https://github.com/Kerrders/Pokedex"
+    matTooltip="Repository"
+    aria-label="Pokedex source repository"
+  >
+    <img src="./assets/images/github-mark.svg" alt="" />
+  </a>
+  <mat-button-toggle-group
+    class="language-select-button-group"
+    appearance="standard"
+    [hideSingleSelectionIndicator]="true"
+    aria-label="Language"
+    [(ngModel)]="actualLanguage"
+    (ngModelChange)="onChangeLanguage()"
+  >
+    @for (lang of languageService.getAvailableLanguages() | keyvalue; track
+    lang.key) {
+    <mat-button-toggle [value]="lang.key">
+      {{ "langs." + lang.key | translate }}
+    </mat-button-toggle>
+    }
+  </mat-button-toggle-group>
 </mat-toolbar>
-
-<div class="container" fxHide fxShow.xs>
-  <div class="row">
-    <div class="col-md-12 mt-2">
-      <mat-card appearance="outlined">
-        <mat-card-content>
-          <div class="float-end">
-            <mat-button-toggle-group
-              class="mat-elevation-z2 language-select-button-group"
-              [(ngModel)]="actualLanguage"
-              (ngModelChange)="onChangeLanguage()"
-            >
-              @for (lang of languageService.getAvailableLanguages() | keyvalue;
-              track $index) {
-              <mat-button-toggle [value]="lang.key">
-                {{ "langs." + lang.key | translate }}</mat-button-toggle
-              >
-              }
-            </mat-button-toggle-group>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-</div>

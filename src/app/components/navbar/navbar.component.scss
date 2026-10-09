@@ -1,21 +1,93 @@
-.nodeContainer {
+.app-toolbar {
   position: relative;
-  margin-left: 20px;
-}
-
-.closeNodeButton {
-  scale: 0.75;
-  position: absolute;
-  right: -26px;
-  top: -6px;
-}
-
-.mat-toolbar-single-row {
-  flex-wrap: wrap;
+  z-index: 1;
+  min-height: 72px;
   height: auto;
-  min-height: 70px;
+  gap: 8px;
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface-container);
 }
 
-.language-select-button-group {
-  font-size: 14px;
+.brand-link {
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.saved-pokemon {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.saved-pokemon::-webkit-scrollbar {
+  display: none;
+}
+
+.saved-pokemon-item {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 999px;
+  background: var(--mat-sys-surface-container-high);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.saved-pokemon-item:hover {
+  border-color: var(--mat-sys-primary);
+  background: var(--mat-sys-surface-container-highest);
+}
+
+.saved-pokemon-item > a {
+  min-height: 40px;
+  padding-inline: 12px 4px;
+}
+
+.saved-pokemon-item > button {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.app-toolbar > a[matIconButton] img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 700px) {
+  .app-toolbar {
+    flex-wrap: wrap;
+    padding-block: 8px;
+    padding-inline: 12px;
+  }
+
+  .brand-link {
+    order: 0;
+  }
+
+  .toolbar-spacer {
+    order: 1;
+  }
+
+  .app-toolbar > a[matIconButton],
+  .language-select-button-group {
+    order: 2;
+  }
+
+  .saved-pokemon {
+    order: 3;
+    flex-basis: 100%;
+  }
 }

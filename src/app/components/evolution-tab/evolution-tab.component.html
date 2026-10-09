@@ -1,30 +1,43 @@
 <div
-  class="evolution-container align-items-center justify-content-center mt-2"
-  [style.grid-template-columns]="'repeat(' + (maximalEvolutionStep() + 1) + ', 1fr)'"
+  class="evolution-container"
+  [style.--evolution-columns]="maximalEvolutionStep() + 1"
 >
-  @for (pokemon of evolutionChain(); track $index) {
-  <mat-card
-    class="pokemon-card cursor-pointer"
+  @for (pokemon of evolutionChain(); track pokemon.id) {
+  <a
+    class="pokemon-link"
     [routerLink]="['/pokemon/', pokemon.identifier]"
+    [attr.aria-label]="
+      (pokemon.names ?? []
+        | pokemonSpeciesName : actualLanguageId()
+        | titlecase) + ' details'
+    "
     [style.grid-column]="(pokemon.step ?? 0) + 1"
   >
-    <mat-card-header>
-      <mat-card-subtitle>
-        {{
-          pokemon.names ?? []
-            | pokemonSpeciesName : actualLanguageId()
-            | titlecase
-        }}</mat-card-subtitle
-      >
-    </mat-card-header>
-    <mat-card-content class="text-center">
-      <div class="image-container center">
-        <img
-          [src]="pokemon.id | pokemonImage : pokemonSpriteTypePath.FRONT"
-          class="center text-center image-container"
-        />
-      </div>
-    </mat-card-content>
-  </mat-card>
+    <mat-card appearance="outlined" class="pokemon-card">
+      <mat-card-header>
+        <mat-card-subtitle>
+          {{
+            pokemon.names ?? []
+              | pokemonSpeciesName : actualLanguageId()
+              | titlecase
+          }}</mat-card-subtitle
+        >
+      </mat-card-header>
+      <mat-card-content>
+        <div class="image-container">
+          <img
+            [src]="pokemon.id | pokemonImage : pokemonSpriteTypePath.FRONT"
+            width="96"
+            height="96"
+            [alt]="
+              pokemon.names ?? []
+                | pokemonSpeciesName : actualLanguageId()
+                | titlecase
+            "
+          />
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </a>
   }
 </div>
