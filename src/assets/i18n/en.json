@@ -43,7 +43,15 @@
     "neutral": "Neutral"
   },
   "filter": {
-    "types": "Types"
+    "title": "Discover Pokémon",
+    "description": "Find Pokémon and narrow down your selection.",
+    "searchPlaceholder": "Search Pokémon ...",
+    "types": "Types",
+    "activeFilters": "Active filters",
+    "selected": "Selected",
+    "reset": "Reset",
+    "removeName": "Remove name filter",
+    "removeType": "Remove type filter"
   },
   "stats": {
     "1": "Health",

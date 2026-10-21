@@ -19,6 +19,8 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-filters',
@@ -33,12 +35,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatSelectModule,
     MatOptionModule,
     MatInputModule,
+    MatIconModule,
+    MatChipsModule,
   ],
 })
 export class FiltersComponent implements OnInit {
   public readonly filtersService = inject(FiltersService);
 
   public nameChanged = new Subject<string>();
+  public nameInput = this.filtersService.name();
   public availableTypes: Array<PokemonTypeEnum> =
     PokemonTypeHelper.availableTypes;
   private readonly destroyRef = inject(DestroyRef);
@@ -59,13 +64,40 @@ export class FiltersComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((name: string) => {
+        if (this.filtersService.name() === name) {
+          return;
+        }
         this.filtersService.name.set(name);
         this.triggerSearch.emit();
       });
   }
 
+  public onNameChange(name: string): void {
+    this.nameInput = name;
+    this.nameChanged.next(name);
+  }
+
   public onTypesChange(types: Array<PokemonTypeEnum>): void {
     this.filtersService.types.set(types);
+    this.triggerSearch.emit();
+  }
+
+  public removeType(type: PokemonTypeEnum): void {
+    this.onTypesChange(this.filtersService.types().filter((item) => item !== type));
+  }
+
+  public removeName(): void {
+    this.nameInput = '';
+    this.nameChanged.next('');
+    this.filtersService.name.set('');
+    this.triggerSearch.emit();
+  }
+
+  public resetFilters(): void {
+    this.nameInput = '';
+    this.nameChanged.next('');
+    this.filtersService.name.set('');
+    this.filtersService.types.set([]);
     this.triggerSearch.emit();
   }
 }

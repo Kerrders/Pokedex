@@ -43,7 +43,15 @@
     "neutral": "Neutral"
   },
   "filter": {
-    "types": "Typen"
+    "title": "Pokémon entdecken",
+    "description": "Finde Pokémon und grenze deine Auswahl ein.",
+    "searchPlaceholder": "Pokémon suchen ...",
+    "types": "Typen",
+    "activeFilters": "Aktive Filter",
+    "selected": "Ausgewählt",
+    "reset": "Zurücksetzen",
+    "removeName": "Namensfilter entfernen",
+    "removeType": "Typfilter entfernen"
   },
   "stats": {
     "1": "Leben",

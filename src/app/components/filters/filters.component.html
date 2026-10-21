@@ -1,17 +1,25 @@
-<div class="filters">
-  <mat-form-field appearance="outline">
-      <mat-label>Name</mat-label>
+<section class="filter-panel" aria-labelledby="filter-title">
+  <header class="filter-heading">
+    <h1 id="filter-title">{{ "filter.title" | translate }}</h1>
+    <p>{{ "filter.description" | translate }}</p>
+  </header>
+
+  <div class="filters">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-icon matPrefix aria-hidden="true">search</mat-icon>
       <input
         matInput
         type="search"
         autocomplete="off"
-        aria-label="Search Pokémon by name"
-        [ngModel]="filtersService.name()"
-        (ngModelChange)="nameChanged.next($event)"
+        [placeholder]="'filter.searchPlaceholder' | translate"
+        [attr.aria-label]="'filter.searchPlaceholder' | translate"
+        [(ngModel)]="nameInput"
+        (ngModelChange)="onNameChange($event)"
       />
-  </mat-form-field>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="type-field">
+      <mat-icon matPrefix aria-hidden="true">tune</mat-icon>
       <mat-label>{{ "filter.types" | translate }}</mat-label>
       <mat-select
         [ngModel]="filtersService.types()"
@@ -24,5 +32,43 @@
         </mat-option>
         }
       </mat-select>
-  </mat-form-field>
-</div>
+    </mat-form-field>
+  </div>
+
+  @if (filtersService.name() || filtersService.types().length) {
+  <div class="active-filters">
+    <span class="selected-label">{{ "filter.selected" | translate }}</span>
+    <mat-chip-set
+      class="filter-chips"
+      [attr.aria-label]="'filter.activeFilters' | translate"
+    >
+      @if (filtersService.name().length >= 3) {
+      <mat-chip (removed)="removeName()">
+        {{ filtersService.name() }}
+        <button matChipRemove [attr.aria-label]="'filter.removeName' | translate">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-chip>
+      }
+      @for (type of filtersService.types(); track type) {
+      <mat-chip (removed)="removeType(type)">
+        {{ "types." + (type | typeToName) | translate }}
+        <button
+          matChipRemove
+          [attr.aria-label]="
+          ('filter.removeType' | translate) +
+          ' ' +
+          (('types.' + (type | typeToName)) | translate)
+        "
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-chip>
+      }
+    </mat-chip-set>
+    <button class="reset-filters" type="button" (click)="resetFilters()">
+      {{ "filter.reset" | translate }}
+    </button>
+  </div>
+  }
+</section>
