@@ -36,6 +36,26 @@
             "
           />
         </div>
+        @if (pokemon.evolution; as evolution) {
+        <section class="evolution-condition">
+          @if (getEvolutionTriggerName(evolution); as triggerName) {
+          <p class="evolution-trigger">{{ triggerName }}</p>
+          }
+          @let conditions = getEvolutionConditions(evolution);
+          @if (conditions.length > 0) {
+          <ul>
+            @for (condition of conditions; track condition.key) {
+            <li>
+              {{ ('evolutionConditions.' + condition.key) | translate }}
+              @if (condition.value) {
+              <span>{{ condition.value }}</span>
+              }
+            </li>
+            }
+          </ul>
+          }
+        </section>
+        }
       </mat-card-content>
     </mat-card>
   </a>

@@ -20,6 +20,29 @@
   margin-inline: auto;
 }
 
+.evolution-condition {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.evolution-trigger {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.evolution-condition ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.evolution-condition li {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
 @media (max-width: 600px) {
   .evolution-container {
     grid-template-columns: repeat(var(--evolution-columns), minmax(128px, 1fr));
