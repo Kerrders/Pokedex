@@ -1,63 +1,88 @@
-<div
-  class="evolution-container"
-  [style.--evolution-columns]="maximalEvolutionStep() + 1"
->
-  @for (pokemon of evolutionChain(); track pokemon.id) {
-  <a
-    class="pokemon-link"
-    [routerLink]="['/pokemon/', pokemon.identifier]"
-    [attr.aria-label]="
-      (pokemon.names ?? []
-        | pokemonSpeciesName : actualLanguageId()
-        | titlecase) + ' details'
+<div class="evolution-container">
+  @for (pokemon of getRootEvolutions(); track pokemon.id) {
+  <ng-container
+    *ngTemplateOutlet="
+      renderNode;
+      context: { $implicit: pokemon, evolution: pokemon.evolution }
     "
-    [style.grid-column]="(pokemon.step ?? 0) + 1"
-  >
-    <mat-card appearance="outlined" class="pokemon-card">
-      <mat-card-header>
-        <mat-card-subtitle>
-          {{
-            pokemon.names ?? []
-              | pokemonSpeciesName : actualLanguageId()
-              | titlecase
-          }}</mat-card-subtitle
-        >
-      </mat-card-header>
-      <mat-card-content>
-        <div class="image-container">
-          <img
-            [src]="pokemon.id | pokemonImage : pokemonSpriteTypePath.FRONT"
-            width="96"
-            height="96"
-            [alt]="
-              pokemon.names ?? []
-                | pokemonSpeciesName : actualLanguageId()
-                | titlecase
-            "
-          />
-        </div>
-        @if (pokemon.evolution; as evolution) {
-        <section class="evolution-condition">
-          @if (getEvolutionTriggerName(evolution); as triggerName) {
-          <p class="evolution-trigger">{{ triggerName }}</p>
-          }
-          @let conditions = getEvolutionConditions(evolution);
-          @if (conditions.length > 0) {
-          <ul>
-            @for (condition of conditions; track condition.key) {
-            <li>
-              {{ ('evolutionConditions.' + condition.key) | translate }}
-              @if (condition.value) {
-              <span>{{ condition.value }}</span>
-              }
-            </li>
-            }
-          </ul>
-          }
-        </section>
-        }
-      </mat-card-content>
-    </mat-card>
-  </a>
+  />
   }
 </div>
+
+<ng-template #renderNode let-pokemon let-evolution="evolution">
+  <div class="evolution-step">
+    <a
+      class="pokemon-link"
+      [routerLink]="['/pokemon/', pokemon.identifier]"
+      [attr.aria-label]="
+        (pokemon.names ?? []
+          | pokemonSpeciesName : actualLanguageId()
+          | titlecase) + ' details'
+      "
+    >
+      <mat-card appearance="outlined" class="pokemon-card evolution-card">
+        <mat-card-content>
+          <div class="evolution-pokemon">
+            <div class="image-container">
+              <img
+                [src]="pokemon.id | pokemonImage : pokemonSpriteTypePath.FRONT"
+                width="72"
+                height="72"
+                [alt]="
+                  pokemon.names ?? []
+                    | pokemonSpeciesName : actualLanguageId()
+                    | titlecase
+                "
+              />
+            </div>
+            <span class="evolution-name">
+              {{
+                pokemon.names ?? []
+                  | pokemonSpeciesName : actualLanguageId()
+                  | titlecase
+              }}
+            </span>
+            @if (evolution) {
+            <section class="evolution-condition">
+              @if (getEvolutionTriggerName(evolution); as triggerName) {
+              <p class="evolution-trigger">{{ triggerName }}</p>
+              }
+              @let conditions = getEvolutionConditions(evolution);
+              @if (conditions.length > 0) {
+              <ul>
+                @for (condition of conditions; track condition.key) {
+                <li>
+                  {{ ('evolutionConditions.' + condition.key) | translate }}
+                  @if (condition.value) {
+                  <span>{{ condition.value }}</span>
+                  }
+                </li>
+                }
+              </ul>
+              }
+            </section>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </a>
+    @let children = getEvolutionChildren(pokemon);
+    @if (children.length > 0) {
+    <div
+      class="evolution-branches"
+      [class.has-multiple-branches]="children.length > 1"
+    >
+      @for (child of children; track child.id) {
+      <div class="evolution-branch">
+        <ng-container
+          *ngTemplateOutlet="
+            renderNode;
+            context: { $implicit: child, evolution: child.evolution }
+          "
+        />
+      </div>
+      }
+    </div>
+    }
+  </div>
+</ng-template>

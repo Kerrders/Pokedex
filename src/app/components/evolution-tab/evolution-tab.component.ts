@@ -26,8 +26,19 @@ export class EvolutionTabComponent {
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
 
   public evolutionChain = input<Array<PokemonSpecy>>([]);
-  public maximalEvolutionStep = input<number>(0);
   public actualLanguageId = input<number>(0);
+
+  public getRootEvolutions(): Array<PokemonSpecy> {
+    return this.evolutionChain().filter(
+      (pokemon) => !pokemon.evolves_from_species_id
+    );
+  }
+
+  public getEvolutionChildren(pokemon: PokemonSpecy): Array<PokemonSpecy> {
+    return this.evolutionChain().filter(
+      (candidate) => Number(candidate.evolves_from_species_id) === pokemon.id
+    );
+  }
 
   public getEvolutionTriggerName(
     evolution: PokemonEvolution

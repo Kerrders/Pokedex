@@ -1,11 +1,9 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   Component,
-  computed,
   DestroyRef,
   inject,
   OnInit,
-  Signal,
   signal,
   WritableSignal,
 } from '@angular/core';
@@ -58,12 +56,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class DetailsComponent implements OnInit {
   public pokemonData: WritableSignal<Pokemon | undefined> = signal(undefined);
   public evolutionChain: WritableSignal<Array<PokemonSpecy>> = signal([]);
-  public maximalEvolutionStep: Signal<number> = computed(() =>
-    this.evolutionChain().reduce(
-      (max: number, pokemon: PokemonSpecy) => Math.max(max, pokemon?.step ?? 0),
-      0
-    )
-  );
   public readonly pokemonSpriteTypePath = PokemonSpriteTypePath;
   public readonly languageService = inject(LanguageService);
   private readonly destroyRef = inject(DestroyRef);

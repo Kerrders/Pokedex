@@ -2,9 +2,9 @@
   <ng-template #detailView let-pokemonData="pokemonData">
     @if(pokemonData) {
     <div class="detail-layout">
-      <section class="detail-artwork">
-        <mat-card appearance="outlined" class="app-surface">
-          <mat-card-content>
+      <mat-card appearance="outlined" class="app-surface detail-hero">
+        <mat-card-content>
+          <section class="detail-artwork">
             <mat-tab-group>
               <mat-tab label="Artwork">
                 <div class="imgContainer">
@@ -87,6 +87,13 @@
               </mat-tab>
             </mat-tab-group>
 
+            <h1>
+              {{
+                pokemonData.species_names
+                  | pokemonSpeciesName : languageService.langId()
+                  | titlecase
+              }}
+            </h1>
             <mat-chip-set>
               @for(typeElement of pokemonData.types; track typeElement.type_id) {
               <mat-chip
@@ -108,13 +115,9 @@
               </mat-chip>
               }
             </mat-chip-set>
-          </mat-card-content>
-        </mat-card>
-      </section>
+          </section>
 
-      <section class="detail-info">
-        <mat-card appearance="outlined" class="app-surface">
-          <mat-card-content>
+          <section class="detail-info">
             <mat-tab-group>
               @if(pokemonData.stats) {
               <mat-tab [label]="'status' | translate">
@@ -125,7 +128,6 @@
               <mat-tab [label]="'evolutions' | translate">
                 @defer (on viewport) {
                 <app-evolution-tab [evolutionChain]="evolutionChain()"
-                  [maximalEvolutionStep]="maximalEvolutionStep()"
                   [actualLanguageId]="languageService.langId()"
                  />
                 } @placeholder () {
@@ -141,9 +143,9 @@
               </mat-tab>
               }
             </mat-tab-group>
-          </mat-card-content>
-        </mat-card>
-      </section>
+          </section>
+        </mat-card-content>
+      </mat-card>
 
       @if(pokemonData.moves) {
       <section class="detail-moves">
