@@ -19,21 +19,25 @@ export class SidenavService {
   }
 
   public addNode(name: Array<PokemonSpeciesName>, url: string): void {
+    const nodes = this.nodes();
+
     if (
-      this.nodes().some(
-        (node) => JSON.stringify(node.name) === JSON.stringify(name)
-      )
+      nodes.some((node) => JSON.stringify(node.name) === JSON.stringify(name))
     ) {
       return;
     }
 
-    if (this.nodes.length >= this.maxNodes) {
-      this.nodes().shift();
-    }
-
-    this.nodes().push({
-      name: name,
-      url: url,
-    });
+    const updatedNodes = [
+      ...nodes,
+      {
+        name: name,
+        url: url,
+      },
+    ];
+    this.nodes.set(
+      updatedNodes.length > this.maxNodes
+        ? updatedNodes.slice(-this.maxNodes)
+        : updatedNodes,
+    );
   }
 }
