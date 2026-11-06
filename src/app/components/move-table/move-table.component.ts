@@ -5,7 +5,7 @@ import versionGroups from '../../../assets/data/version_groups.json';
 import { LanguageService } from 'src/app/services/language.service';
 import { MoveNamePipe } from '../../pipes/move-name.pipe';
 import { VersionNamePipe } from '../../pipes/version-name.pipe';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: './move-table.component.html',
   styleUrls: ['./move-table.component.scss'],
   imports: [
-    TranslateModule,
+    TranslatePipe,
     MatCardModule,
     MatButtonToggleModule,
     MatFormFieldModule,

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/services/language.service';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,7 +25,7 @@ import { PokemonSpeciesNamePipe } from 'src/app/pipes/pokemon-species-name.pipe'
     MatIconModule,
     MatButtonModule,
     MatButtonToggleModule,
-    TranslateModule,
+    TranslatePipe,
     PokemonSpeciesNamePipe,
   ],
 })
@@ -37,7 +37,6 @@ export class NavbarComponent {
   public actualLanguage = this.languageService.getLanguage();
 
   constructor() {
-    this.translate.setDefaultLang(this.languageService.fallbackLanguage);
     this.setLanguage();
   }
 

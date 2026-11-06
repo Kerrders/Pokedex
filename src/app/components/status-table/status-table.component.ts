@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { PokemonStat } from 'src/app/interfaces/PokemonStat.interface';
 import { ColorForStatusValuePipe } from '../../pipes/color-for-status-value.pipe';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./status-table.component.scss'],
   imports: [
     MatTableModule,
-    TranslateModule,
+    TranslatePipe,
     ColorForStatusValuePipe
 ],
 })

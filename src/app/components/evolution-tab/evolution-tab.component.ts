@@ -6,7 +6,7 @@ import { PokemonImageByUrlPipe } from '../../pipes/pokemon-image-by-url.pipe';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { PokemonEvolution } from '../../interfaces/PokemonEvolution.interface';
 
 @Component({
@@ -17,7 +17,7 @@ import { PokemonEvolution } from '../../interfaces/PokemonEvolution.interface';
     CommonModule,
     RouterModule,
     MatCardModule,
-    TranslateModule,
+    TranslatePipe,
     PokemonSpeciesNamePipe,
     PokemonImageByUrlPipe,
   ],

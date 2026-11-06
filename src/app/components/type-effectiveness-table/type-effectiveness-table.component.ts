@@ -4,7 +4,7 @@ import { TypeToNamePipe } from '../../pipes/type-to-name.pipe';
 import { ColorForTypePipe } from '../../pipes/color-for-type.pipe';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
@@ -13,7 +13,7 @@ import { MatChipsModule } from '@angular/material/chips';
   styleUrls: ['./type-effectiveness-table.component.scss'],
   imports: [
     CommonModule,
-    TranslateModule,
+    TranslatePipe,
     MatTableModule,
     MatChipsModule,
     TypeToNamePipe,
