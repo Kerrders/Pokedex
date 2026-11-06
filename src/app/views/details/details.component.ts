@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { PokemonSpriteTypePath } from 'src/app/enums/PokemonSpriteTypePath';
 import { Pokemon } from 'src/app/interfaces/Pokemon.interface';
 import { PokemonSpecy } from 'src/app/interfaces/PokemonSpecy.interface';
@@ -35,7 +35,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./details.component.scss'],
   imports: [
     CommonModule,
-    TranslateModule,
+    TranslatePipe,
     MatCardModule,
     MatTabsModule,
     MatDividerModule,

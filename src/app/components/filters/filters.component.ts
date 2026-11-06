@@ -14,7 +14,7 @@ import { PokemonTypeEnum } from 'src/app/enums/PokemonTypesEnum';
 import { PokemonTypeHelper } from 'src/app/helpers/pokemonTypeHelper';
 import { FiltersService } from 'src/app/services/filters.service';
 import { TypeToNamePipe } from '../../pipes/type-to-name.pipe';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -28,7 +28,7 @@ import { MatChipsModule } from '@angular/material/chips';
   styleUrls: ['./filters.component.scss'],
   imports: [
     CommonModule,
-    TranslateModule,
+    TranslatePipe,
     FormsModule,
     MatFormFieldModule,
     TypeToNamePipe,
