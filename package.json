@@ -52,7 +52,7 @@
     "eslint": "^10.14.0",
     "happy-dom": "^21.0.4",
     "istanbul-lib-instrument": "^6.0.3",
-    "prettier": "^3.9.10",
+    "prettier": "^3.10.1",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.72.1",
     "vitest": "^4.1.12"
